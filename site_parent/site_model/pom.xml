@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  																													
+	    			       Jaguar-jCompany Developer Suite.																		
+			    		        Powerlogic 2010-2014.
+			    		    
+		Please read licensing information in your installation directory.Contact Powerlogic for more 
+		information or contribute with this project: suporte@powerlogic.com.br - www.powerlogic.com.br																								
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+
+	<!-- definição do parent do projeto -->
+	<parent>
+		<groupId>powerlogic.jaguar.app</groupId>
+		<artifactId>projeto-site</artifactId>
+		<version>1.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<!-- dados do projeto -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>powerlogic.jaguar.app</groupId>
+	<artifactId>site_model</artifactId>
+	<name>site_model</name>
+	<packaging>ejb</packaging>
+	
+	<!-- Área de definições globais  -->
+	<dependencies>
+		<dependency>
+			<groupId>powerlogic.jaguar.oss_base_model</groupId>
+			<artifactId>oss_base_model</artifactId>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>powerlogic.jaguar.app</groupId>
+			<artifactId>site_commons</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
+	
+	<!-- O pom.xml é dividido em dependências gerais e profiles.
+ 
+		 Os profiles são utilizados para importarem dependências, plugins, executar tarefas, específicas
+		 para um fim. Ex. realizar testes ou não, empacotar a aplicação para um servidor específico
+		 como Tomcat ou JBoss, dentre outras.
+	     
+	     O que é definido fora dos profiles torna-se uma dependência geral e todos utilizam e o que
+	     é definido dentro do profile somente terá efeito quando o profile for utilizado.
+	     
+	     Para utilizar um profile, deve colocar um argumento na linha de comando do maven: -P <id_profile>
+	     Se nenhum profile for definido na linha de comando do maven, é utilizado o profile que contém o
+	     argumento "<activeByDefault>" definido como "true".
+	  -->
+	
+	
+	<!-- Definição dos profiles -->
+	<profiles>
+		<!-- Para a utilização no Tomcat, utilizar o profile abaixo.
+			 Se nenhum profile for passado na execução do Maven, por padrão esse será chamado 
+		  -->
+		<profile>
+			<id>tomcat</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>powerlogic.jaguar.jcompany</groupId>
+					<artifactId>jcompany_model</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<!-- Para a utilização no JBoss, utilizar o profile abaixo.  --> 
+		<profile>
+			<id>jboss</id>
+			<dependencies>
+				<dependency>
+					<groupId>powerlogic.jaguar.jcompany</groupId>
+					<artifactId>jcompany_model</artifactId>
+					<exclusions>
+						<exclusion>
+							<groupId>xerces</groupId>
+							<artifactId>xercesImpl</artifactId>
+						</exclusion>
+						<exclusion>
+							<groupId>org.hibernate</groupId>
+							<artifactId>hibernate-entitymanager</artifactId>
+						</exclusion>
+						<exclusion>
+							<groupId>org.hibernate</groupId>
+							<artifactId>hibernate-core</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+	
+</project> 
