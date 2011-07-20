@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:tr="http://myfaces.apache.org/trinidad"
+	  xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	  xmlns:plcf="http://www.powerlogic.com.br/plcf">
+<head>
+	<!-- Exemplos de enderecamentos possiveis de CSS. Alem destes pode ser local absoluto  -->
+	<link rel="StyleSheet" href="C:\powerlogic\jcompany55\meus_projetos\rhdemofcls\src\main\webapp\plc\css\plc.geral.css" type="text/css" charset="UTF-8" />
+	<link rel="StyleSheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css" type="text/css" charset="UTF-8" />
+	<link rel="StyleSheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/black-tie/jquery-ui.css" type="text/css" charset="UTF-8" />
+</head>
+<body>
+<div id="plc-rodape" class="ui-widget ui-widget-header plc-rodape">
+<ui:composition>
+  <f:loadBundle basename="jCompanyResources" var="jCompanyResources" />
+
+	<tr:form id="rodape">
+		<h1 style="visibility:hidden;width:1px;height:1px;"> 
+			<plcf:botaoAcao	acao="logout" label="jcompany.evt.desconectar" styleClass="display:none" botaoArrayID="DESCONECTAR" id="plc-acao-desconecta1" class="plc-acao-desconecta" /> 
+		</h1>
+		<h1 style="visibility:hidden;width:1px;height:1px;"> 
+			<plcf:botaoAcao	acao="" label="jcompany.evt.home" styleClass="display:none" botaoArrayID="HOME" id="plc-acao-home" class="plc-acao-home" validaForm="false" partialSubmit="true" />
+		</h1>
+		<input type="submit" id="plc-acao-desconecta" name="plc-acao-desconecta" onclick="funcaoDesconectar(); return false;" style="display:none" />
+	</tr:form>
+	
+	
+	<div id="plc-rodape-bemvindo" class="plc-rodape-bemvindo">
+		<span class="ico iBemvindo"></span>
+		<div class="plc-rodape-bemvindo-t1">#{jCompanyResources['label.seja.bem.vindo']}</div>
+		<div class="plc-rodape-bemvindo-t2">#{sessionScope.USER_INFO['login']}.</div>
+	</div>
+	
+	<div id="plc-rodape-timeout" class="plc-rodape-timeout" title="#{jCompanyResources['label.timeout']}">
+		<span class="ico iTempologado"></span> Tempo sess&atilde;o: <em>#{plcComponenteVisual.maxInactiveInterval / 60}m</em>
+	</div>
+	<div id="plc-rodape-timeout2" class="plc-rodape-timeout" title="#{jCompanyResources['label.timeout']}">
+        <span class="ico iHoralogin"></span> Hora login: <em>#{plcComponenteVisual.horas}:#{plcComponenteVisual.minutos}</em>
+	</div>
+
+</ui:composition>
+</div>
+</body>
+</html>

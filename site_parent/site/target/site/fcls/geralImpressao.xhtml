@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:plcf="http://www.powerlogic.com.br/plcf"
+	xmlns:tr="http://myfaces.apache.org/trinidad"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">
+	
+	<f:loadBundle basename="jCompanyResources" var="msg" />
+	
+	<head>
+		<ui:insert name="plc-cabecalho">
+			<ui:include src="/WEB-INF/fcls-plc/geralHeaderPlc.xhtml" />
+		</ui:insert>
+		<link rel="StyleSheet" href="${request.contextPath}/res-plc/css/plc.impressao.css" type="text/css" charset="UTF-8" />
+	</head>
+	<body onLoad="executaImpressao(); jQuery('ul.ui-tabs-nav' ).remove(); jQuery('.plc-form-detalhe').css('border-style','double none none none'); window.print(document); " class="plc-impressao" bgcolor="#ffffff" text="#000000" link="#023264" alink="#023264" vlink="#023264">
+		
+		<script type="text/javascript">
+		//<![CDATA[
+		function trocaValElemento(el) {
+			var newVal = prompt("#{msg['jcompany.novo.titulo']}","");
+			if (newVal != "" && newVal+"" != "null") {
+				el.innerHTML = "<h2>"+newVal+"</h2>";
+			}
+		}
+		if (opener && opener.objImpressao) {
+			document.title = opener.objImpressao.titulo; 
+		}
+		//]]>
+		</script>
+		
+		<table class="plc-tabela-impressao">
+			<tr>
+				<td width="20%" >
+					
+					<img class="plc-impressao-logo" src="#{request.contextPath}/res/midia/login-logo-empresa.png" border="0" />
+					
+				</td>
+				<td width="70%" align="center">
+					<span id='titulo' onclick="trocaValElemento(this)" style="cursor:hand;pointer:hand;">
+						<script type="text/javascript">
+						//<![CDATA[
+							if (opener && opener.objImpressao) {
+								document.write("<h2>" +opener.objImpressao.titulo+ "</h2>");
+							} else {
+								document.write(document.title);
+							}
+						//]]>
+						</script>
+					</span>
+				</td>
+				<td width="10%" align="right" class="plc-impressao-emitido-em">
+					#{msg['jcompany.emitido.em']}<br/>
+					<script type="text/javascript">document.write((new Date()).toLocaleString());</script>
+				</td>
+			</tr>
+		</table>
+		<script>
+			jQuery(document).ready(function (){
+				//removendo as abas.
+				
+			});
+		</script>
+	</body>
+</html>

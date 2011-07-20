@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:plcf="http://www.powerlogic.com.br/plcf"
+	xmlns:tr="http://myfaces.apache.org/trinidad"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<head> 
+	    <link rel="StyleSheet" href="#{request.contextPath}/res-plc/css/jquery/ui/themes/ui.all.css" 			type="text/css" charset="UTF-8" />
+	    <link rel="StyleSheet" href="#{request.contextPath}/res-plc/css/itunes/jquery/jquery-ui-1.7.custom.css" type="text/css" charset="UTF-8" />	
+	    <link rel="StyleSheet" href="#{request.contextPath}/res-plc/css/plc.geral.css" 							type="text/css" charset="UTF-8" />	
+	</head>
+	<body>
+		<div id="plc-corpo" class="ui-widget ui-widget-content plc-corpo"> 
+		<div id="plc-corpo-formulario" class="plc-corpo-formulario">	
+		
+		<ui:composition template="/fcls/template/PlcGeralTemplate.xhtml">
+
+			<ui:define name="plc-corpo-acao-generico">
+			
+				<c:if test="#{sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='I' or sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='G'}">
+					<ui:include src="/WEB-INF/fcls-plc/geralAcoesIconesPlc.xhtml" />
+				</c:if>
+			
+				<div id="plc-corpo-acao-generico" class="plc-corpo-acao-generico">
+					<plcf:botaoAcao id="botaoGerarEsquema" 	  acao="gerarEsquema"   urlIcone="ico iGerarEsquema" partialSubmit="true" label="jcompany.evt.gerar.esquema" botaoArrayID="GERAR" />
+					<plcf:botaoAcao id="botaoExecutarEsquema" acao="executarEsquema" urlIcone="ico iExecutarEsquema" partialSubmit="true" label="jcompany.evt.executar.esquema" 	botaoArrayID="EXECUTAR" />
+				</div>
+			</ui:define>
+			
+			<ui:define name="plc-corpo-formulario">
+				<style type="text/css">
+					div.plc-aux{float:left;margin-left:5px;}
+					ul.plc-gerar-esquema {list-style: none}
+					ul.plc-gerar-esquema li {float: left}
+					ul.plc-gerar-esquema input {border: none}
+				</style>
+				<plcf:tabela tituloChave="jcompany.titulo.dados.esquema" > 
+					<plcf:linha>
+						<plcf:celula> 
+							<plcf:titulo tituloChave="jcompany.label.esquema.tipo">jcompany.label.esquema.tipos</plcf:titulo>
+							<tr:selectOneChoice value="#{esquema.tipo}" id="tipo" >
+								<tr:selectItem  value="U" label="Atualizar" > 
+									<label jsfc="plcf:titulo" tituloChave="jcompany.esquema.tipo.update"    /> 
+								</tr:selectItem>
+								<tr:selectItem  value="C" label="Criar">
+									 <label jsfc="plcf:titulo" tituloChave="jcompany.esquema.tipo.create"   />
+								</tr:selectItem>
+								<tr:selectItem  value="D" label="Excluir">
+									<label jsfc="plcf:titulo" tituloChave="jcompany.esquema.tipo.drop"    />				
+								</tr:selectItem>
+							</tr:selectOneChoice>	
+						</plcf:celula>
+					</plcf:linha>
+					<plcf:linha>	 
+						<plcf:celula id="celulaObjetos">
+							<ul class="plc-gerar-esquema">
+								<li><label jsfc="plcf:titulo" tituloChave="jcompany.label.esquema.objetos" for="celulaObjetos">jcompany.label.esquema.objetos</label></li>
+								<li><label jsfc="plcf:titulo" tituloChave="jcompany.esquema.obj.tabela" for="objTabela"/></li>
+								<li><tr:selectBooleanCheckbox value="#{esquema.objTabela}" id="objTabela"/></li>
+								<li><label jsfc="plcf:titulo" tituloChave="jcompany.esquema.obj.constraint" for="objConstraint"/></li>
+								<li><tr:selectBooleanCheckbox value="#{esquema.objConstraint}" id="objConstraint"/></li>
+								<li><label jsfc="plcf:titulo" tituloChave="jcompany.esquema.obj.sequence" for="objIndice"/></li>
+								<li><tr:selectBooleanCheckbox value="#{esquema.objSequence}" id="objSequence"/></li>
+								<li><label jsfc="plcf:titulo" tituloChave="jcompany.esquema.obj.indice" for="objIndice"/></li>
+								<li><tr:selectBooleanCheckbox value="#{esquema.objIndice}" id="objIndice"/></li>
+								<li><label jsfc="plcf:titulo" tituloChave="jcompany.esquema.obj.dados" for="objDados"/></li>
+								<li><tr:selectBooleanCheckbox value="#{esquema.objDados}" id="objDados"/></li>
+							</ul>
+						</plcf:celula>
+					</plcf:linha>
+					<plcf:linha>
+						<plcf:tabela>
+							<plcf:linha>
+								<plcf:celula>
+									<plcf:titulo tituloChave="jcompany.label.esquema.owner"/>  
+									<input type="text" jsfc="plcf:texto" id="owner" value="#{esquema.owner}" ajudaChave="jcompany.ajuda.esquema.owner" tamanho="32" />
+								</plcf:celula>
+								<plcf:celula>
+									<plcf:titulo tituloChave="jcompany.label.esquema.delimitador"/>  
+									<input type="text" jsfc="plcf:texto" id="delimitador" value="#{esquema.delimitador}" ajudaChave="jcompany.ajuda.esquema.delimitador" tamanho="32" />
+								</plcf:celula>
+							</plcf:linha>
+						</plcf:tabela>
+					</plcf:linha>			
+					<plcf:linha>
+						<plcf:celula columnSpan="2" >
+							<div class="plc-aux"><label jsfc="plcf:titulo" tituloChave="jcompany.label.esquema.conteudo" for="esquema" /></div>
+						</plcf:celula>
+					</plcf:linha>
+					<plcf:linha>	
+						<plcf:celula columnSpan="2" >
+							<tr:inputText value="#{esquema.esquema}" columns="100" rows="12" id="esquema"/>
+						</plcf:celula>
+					</plcf:linha>
+				</plcf:tabela>		
+			</ui:define>
+			
+		</ui:composition>
+		</div>
+		</div>
+	</body>
+</html>

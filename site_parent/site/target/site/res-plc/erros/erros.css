@@ -1,0 +1,26 @@
+body.erros{
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	background-color: #FFFFFF;
+	margin-left: 250px;
+}
+body.erros h1 {
+	font: bolder 45px/45px Georgia;
+	color: #B70C0C;
+}
+body.erros h2 {
+	font: bolder 33px/33px Georgia;
+	color: #313131;
+}
+body.erros p {
+	font: 16px/18px Georgia;
+}
+body.erros p.rodape {
+	font: 13px/15px Georgia;
+	color: #535353;
+}
+body.erros hr {
+	width: 100%;
+	height: 1px;
+	color: #B70C0C;
+}

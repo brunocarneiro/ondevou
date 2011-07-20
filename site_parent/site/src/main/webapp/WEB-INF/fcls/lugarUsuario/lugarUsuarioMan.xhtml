@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:tabela tituloChave="lugarUsuarioman.titulo"> 
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.id"/>  
+					<plcf:oid id="id" ajudaChave="ajuda.id"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.usuario"/>  
+					<plcf:vinculado id="usuario" value="#{lugarUsuario.usuario}" propSelPop="usuario" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="com.plc.site.entity.Usuario" actionSel="usuariosel" modal="S" ajudaChave="ajuda.usuario" onkeydown="selecionaPorTecla(event,this);"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.lugar"/>  
+					<plcf:vinculado id="lugar" value="#{lugarUsuario.lugar}" propSelPop="lugar" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="com.plc.site.entity.Lugar" actionSel="lugarsel" modal="S" ajudaChave="ajuda.lugar" onkeydown="selecionaPorTecla(event,this);"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.visitado"/>  
+					<plcf:caixaMarcacao id="visitado" obrigatorio="N" value="#{lugarUsuario.visitado}" ajudaChave="ajuda.visitado"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.desejado"/>  
+					<plcf:caixaMarcacao id="desejado" obrigatorio="N" value="#{lugarUsuario.desejado}" ajudaChave="ajuda.desejado"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.favorito"/>  
+					<plcf:caixaMarcacao id="favorito" obrigatorio="N" value="#{lugarUsuario.favorito}" ajudaChave="ajuda.favorito"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.comentario"/>  
+					<plcf:area id="comentario" value="#{lugarUsuario.comentario}" numLinhas="20" colunas="20" ajudaChave="ajuda.comentario"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.dica"/>  
+					<plcf:area id="dica" value="#{lugarUsuario.dica}" numLinhas="20" colunas="20" ajudaChave="ajuda.dica"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.nota"/>  
+					<plcf:texto id="nota" value="#{lugarUsuario.nota}" ajudaChave="ajuda.nota" tamanho="5"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.preco"/>  
+					<plcf:texto id="preco" value="#{lugarUsuario.preco}" ajudaChave="ajuda.preco" tamanho="5"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.notaAmbiente"/>  
+					<plcf:texto id="notaAmbiente" value="#{lugarUsuario.notaAmbiente}" ajudaChave="ajuda.notaAmbiente" tamanho="5"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.notaAtendimento"/>  
+					<plcf:texto id="notaAtendimento" value="#{lugarUsuario.notaAtendimento}" ajudaChave="ajuda.notaAtendimento" tamanho="5"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.notaComida"/>  
+					<plcf:texto id="notaComida" value="#{lugarUsuario.notaComida}" ajudaChave="ajuda.notaComida" tamanho="5"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.notaBebida"/>  
+					<plcf:texto id="notaBebida" value="#{lugarUsuario.notaBebida}" ajudaChave="ajuda.notaBebida" tamanho="5"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.notaCustoBeneficio"/>  
+					<plcf:texto id="notaCustoBeneficio" value="#{lugarUsuario.notaCustoBeneficio}" ajudaChave="ajuda.notaCustoBeneficio" tamanho="5"/> 
+				</plcf:celula> 
+			</plcf:linha> 
+		</plcf:tabela> 
+	</ui:composition> 
+</html>

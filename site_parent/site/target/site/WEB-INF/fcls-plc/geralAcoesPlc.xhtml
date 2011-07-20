@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:tr="http://myfaces.apache.org/trinidad"
+				xmlns:plcf="http://www.powerlogic.com.br/plcf"
+				xmlns:plct="http://www.powerlogic.com.br/plct"
+				xmlns:c="http://java.sun.com/jsp/jstl/core"
+				xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<div id="plc-corpo-acao-generico" class="plc-corpo-acao-generico">
+
+	<c:set var="partialSubmit" value="#{requestScope.IND_ARQ_ANEXADO=='S' || param['corpo:formulario:IND_ARQ_ANEXADO']=='S'}"  />
+
+	<c:if test="#{sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='I' or sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='G'}">
+		<ui:include src="/WEB-INF/fcls-plc/geralAcoesIconesPlc.xhtml" />
+	</c:if>
+	
+	<ui:insert name="plc-acao-demanda">	 
+		<plcf:botaoAcao id="botaoAcaoRecuperaPorDemanda" acao="findDetailOnDemand" partialSubmit="#{!partialSubmit}" limpaForm="false" validaForm="false"  botaoArrayID="RECUPERA_POR_DEMANDA" styleClass="ui-helper-hidden" />
+	</ui:insert>	
+	
+	<ui:insert name="plc-acao-clonar">	 
+		<plcf:botaoAcao id="botaoAcaoClonar_EXIBE_ALERTA_ALTERACAO" urlIcone="ico iClonar" acao="cloneEntity" limpaForm="true"  partialSubmit="#{!partialSubmit}" label="jcompany.evt.clonar" botaoArrayID="CLONAR" validaForm="false" immediate="false" blocking="true" rendered="#{requestScope.exibeClonarPlc=='S' and requestScope.exibe_jcompany_evt_clonar!='N'}" />
+	</ui:insert>
+
+	<ui:insert name="plc-acao-limpar">	 
+		<plcf:botaoAcao id="botaoAcaoLimparArgs_LIMPAR_ARGS" urlIcone="ico iLimpar" acao="clearArgs" limpaForm="true"  partialSubmit="#{!partialSubmit}" label="jcompany.evt.limpar" botaoArrayID="LIMPAR_ARGS" validaForm="false" immediate="false" blocking="true" rendered="#{requestScope.exibeLimparPlc=='S' and requestScope.exibe_jcompany_evt_limpar_args!='N'}" />
+	</ui:insert>
+		
+	<ui:insert name="plc-acao-novo">	 	
+		<plcf:botaoAcao id="botaoAcaoNovo_EXIBE_ALERTA_ALTERACAO" acao="create" urlIcone="ico iNovo" partialSubmit="#{!partialSubmit}" label="jcompany.evt.incluir" botaoArrayID="NOVO" immediate="false" validaForm="false"	   limpaForm="#{empty param['detCorrPlc']}" rendered="#{requestScope.exibeIncluirPlc=='S' and requestScope.exibe_jcompany_evt_incluir!='N'}" detalhe="#" blocking="true" />
+	</ui:insert>
+	
+	<c:if test="#{requestScope.exibeVisualizarDocumentoPlc !='N' and (sessionScope.mcPlc!='t' || sessionScope.mcPlc!='texto')}">
+		<c:if test="#{requestScope.visualizaDocumentoPlc=='S'}">
+			<plcf:botaoAcao urlIcone="ico iEditar" acao="editDocumentView"  partialSubmit="#{!partialSubmit}" label="jcompany.evt.editar.documento" id="botaoAcaoEditaDocumento"
+	       	botaoArrayID="VIS_DOCUMENTO" immediate="false" validaForm="false"   blocking="true"	/>
+		</c:if>
+		<c:if test="#{requestScope.visualizaDocumentoPlc!='S'}">
+			<plcf:botaoAcao urlIcone="ico iVisualizar"  acao="editDocumentView" id="botaoAcaoVisualizaDocumento" partialSubmit="#{!partialSubmit}" label="jcompany.evt.visualizar.documento" 
+	       	botaoArrayID="VIS_DOCUMENTO" immediate="false" validaForm="false" rendered="#{requestScope.visualizaDocumentoPlc!='S' and requestScope.exibe_jcompany_evt_visualizar_documento!='N'}" blocking="true" />
+		</c:if>
+	</c:if> 
+	
+	<ui:insert name="plc-acao-gravar">	 	           
+			<plcf:botaoAcao id="botaoAcaoGravar" urlIcone="ico iGravar" acao="save" partialSubmit="#{!partialSubmit}" alertaExcluirDetalhe="jcompany.alerta.excluir.detalhe.tabular" label="jcompany.evt.gravar" botaoArrayID="GRAVAR" rendered="#{requestScope.exibeGravarPlc=='S' and empty requestScope.estiloApresentacaoPlc and requestScope.exibe_jcompany_evt_gravar!='N'}" onclick="jQuery.plc.acao('botaoAcaoGravar')"/>
+	</ui:insert>
+	
+	<ui:insert name="plc-acao-excluir">	
+		<plcf:botaoAcao id="botaoAcaoExcluir" urlIcone="ico iExcluir" acao="delete" partialSubmit="#{!partialSubmit}" limpaForm="true" immediate="false" validaForm="false"  
+		onclick="return execExclusao();" label="jcompany.evt.excluir" botaoArrayID="EXCLUIR" rendered="#{requestScope.exibeExcluirPlc=='S' and empty requestScope.estiloApresentacaoPlc and requestScope.exibe_jcompany_evt_excluir!='N'}" alertaExcluir="jcompany.alerta.excluir"  alertaExcluirDetalhe="jcompany.alerta.excluir.detalhe" blocking="true" />
+	</ui:insert>
+	
+	<ui:insert name="plc-acao-abrir">	
+		<plcf:botaoAcao id="botaoAcaoAbrir_EXIBE_ALERTA_ALTERACAO" urlIcone="ico iAbrir" acao="open" destino="open" label="jcompany.evt.abrir" 
+		botaoArrayID="ABRIR" immediate="true" validaForm="false" limpaForm="false" rendered="#{requestScope.exibeAbrirPlc=='S' and requestScope.exibe_jcompany_evt_abrir!='N'}" partialSubmit="#{!partialSubmit}" blocking="true" />
+	</ui:insert>
+	
+	<ui:insert name="plc-acao-pesquisar">	
+		<plcf:botaoAcao id="botaoAcaoPesquisar" urlIcone="ico iPesquisar" acao="search" validaForm="#{plcControleConversacao.pesquisarValida}" partialSubmit="#{!partialSubmit}" label="jcompany.evt.pesquisar" botaoArrayID="PESQUISAR" rendered="#{requestScope.exibePesquisarPlc=='S' and requestScope.exibe_jcompany_evt_pesquisar!='N'}" blocking="true"/>
+	</ui:insert>
+	
+	<ui:insert name="plc-acao-pesquisar-detalhe">	
+		<plcf:botaoAcao id="botaoAcaoPesquisarDetalhe" urlIcone="ico iPesquisar" acao="pesquisaDetalhe" validaForm="#{plcControleConversacao.pesquisarValida}" partialSubmit="#{!partialSubmit}" label="jcompany.evt.pesquisar.detalhe" botaoArrayID="PESQUISAR" rendered="#{requestScope.detalheFiltro}" blocking="true"/>
+	</ui:insert>
+	
+	<ui:insert name="plc-acao-relatorio">	
+		<plcf:botaoAcao id="botaoAcaoGerarRelatorio" urlIcone="ico iRelatorio" acao="generateReport" label="jcompany.evt.gerar.relatorio" botaoArrayID="GERAR_RELATORIO" rendered="#{requestScope.exibeGerarRelatorioPlc=='S' and requestScope.exibe_jcompany_evt_gerar_relatorio!='N'}" blocking="true"/>
+	</ui:insert>
+	
+	<ui:insert name="plc-acao-treeview">
+		<c:if test="#{requestScope.explorerUsaPlc == 'S'}">
+			<a href="javascript:return false;" type="button" onclick="submeteUrl('#{requestScope.explorerLinkPlc}');return false;">
+				<img class="plc-icone-acao-fixo" src="#{request.contextPath}/res-plc/midia/treeview.png" />
+			</a>
+		</c:if>
+	</ui:insert>
+	<c:if test="#{sessionScope.SESSION_CACHE['formAcaoExibeTexto']!='I'}">
+		<ui:insert name="plc-acao-permalink">
+			<c:set var="linkEdicaoPlc" value="#{plcAction.plcEntityInstance.linkEdicaoPlc}"/>
+			<c:if test="#{not empty linkEdicaoPlc}">
+				<c:if test="${fn:startsWith(linkEdicaoPlc, '&amp;')}">
+					<c:set var="linkEdicaoPlc" value="#{fn:substringAfter(linkEdicaoPlc, '&amp;')}" />
+				</c:if>
+				<c:set var="linkEdicaoPlc" value="?#{linkEdicaoPlc}"/>
+			</c:if>
+			<a id="linkPermanente" href="#{request.contextPath}/f/n/#{plcURLSemBarra}#{linkEdicaoPlc}" type="button" title="Reabre com link próprio">
+				<img class="plc-icone-acao-fixo" src="#{request.contextPath}/res-plc/midia/form-permalink.png" />
+			</a>
+		</ui:insert>
+	</c:if>
+
+	<c:if test="#{sessionScope.SESSION_CACHE['formAcaoExibeTexto']!='I'}">
+		<ui:insert name="plc-acao-imprimir">	
+			<plct:imprimir estiloExibicao="somenteIcone" urlIconeBase="/res-plc/midia"/>
+		</ui:insert>
+	</c:if>
+	
+	<ui:insert name="plc-acao-ajudar">
+		<plct:ajudar/>
+	</ui:insert>
+
+	<h1 style="visibility:hidden;width:1px;height:1px;"> 
+		<plcf:botaoAcao	acao="logout" label="jcompany.evt.desconectar" styleClass="display:none" botaoArrayID="DESCONECTAR" id="plc-acao-desconecta0" class="plc-acao-desconecta" validaForm="false" />
+	</h1>
+
+	<c:if test="#{plcControleConversacao.modoPlc == 'alteracaoPlc'}">
+		<script type="text/javascript">
+			//<![CDATA[
+				configuraEventos();		
+				msgAlteracao = '#{msg["jcompany.msg.verifica.alteracao"]}';	
+			//]]>
+		</script>
+	</c:if>	
+	<script type="text/javascript" defer="defer">setTimeout(function(){plcAjax.executaScriptsInternos(getRootDocument());}, 0);</script>
+</div>
+</ui:composition>

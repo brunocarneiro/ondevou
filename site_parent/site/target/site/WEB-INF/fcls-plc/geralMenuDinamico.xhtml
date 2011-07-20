@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<ui:composition  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:plcf="http://www.powerlogic.com.br/plcf">
+    <c:if test="#{plcDominios.dominios['PlcMenuDinamicoEntity'] != null and not empty plcDominios.dominios['PlcMenuDinamicoEntity']}">
+		<li><a class="plc-menu-item-princ"><span class="ico iTI"></span>  <label jsfc="plcf:titulo" tituloChave="jcompany.m.dinamico" /></a>
+			<ul class="ui-state-hover">
+				<c:forEach items="#{plcDominios.dominios['PlcMenuDinamicoEntity']}" var="menu">
+					<li><a class="" href="#{menu.url}">#{menu.nome}</a></li>
+				</c:forEach>
+			</ul>
+		</li>
+	</c:if>	
+</ui:composition>

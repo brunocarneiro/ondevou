@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:tr="http://myfaces.apache.org/trinidad"
+				xmlns:plcf="http://www.powerlogic.com.br/plcf"
+				xmlns:plct="http://www.powerlogic.com.br/plct"
+				xmlns:c="http://java.sun.com/jsp/jstl/core"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+				
+<div id="plc-corpo-acao-generico" class="plc-corpo-acao-generico">
+
+<f:loadBundle basename="ApplicationResources" var="app" />	
+
+<!-- somente esconde a barra de botoes, que deve existir para os submits dos botoes -->
+<style type="text/css">
+.botao_menu{height:1px;width:1px;visibility:hidden;}
+</style>
+
+<c:set var="dirIcones" value="#{request.contextPath}/res-plc/midia/icoArrojado/"/>
+
+<!-- Devolução para seleção de Multiplos Registros 
+	<c:if test="#{requestScope.exibeRetornarMultiSelPlc=='S'}"> 
+	<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoMultiSel').click();" >
+	<img class="icone_acao" src="#{dirIcones}evt_assist_cancelar.gif" title="#{app['jcompany.evt.assist_anterior']}" />
+	</a>
+	</c:if>
+-->
+<!-- Workflow - Aprovar -->
+<c:if test="#{requestScope.exibeAprovarPlc=='S' and requestScope.exibe_jcompany_evt_aprovar!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoAprovar').click();" >
+<img class="icone_acao" src="#{dirIcones}evt_aprovar.gif" title="#{app['jcompany.evt.aprovar']}"/>
+</a>
+</c:if>
+<!-- Workflow - Reprovar -->
+<c:if test="#{requestScope.exibeReprovarPlc=='S' and requestScope.exibe_jcompany_evt_reprovar!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoReprovar').click();" >
+<img class="icone_acao" src="#{dirIcones}evt_reprovar.gif" title="#{app['jcompany.evt.reprovar']}"/>
+</a>
+</c:if>
+<!-- Workflow - Pesquisar Pendentes -->
+<c:if test="#{requestScope.exibePesquisarAprovarPlc=='S' and requestScope.exibe_jcompany_evt_aprovar_pesquisa!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoPesquisarPendentes').click();" >
+<img class="icone_acao" src="#{dirIcones}evt_apv_pesquisar_aprovar.gif" title="#{app['jcompany.evt.pesquisar.pendentes']}"/>
+</a>
+</c:if>		
+<!-- Workflow - Gravar Versao 
+<c:if test="#{requestScope.exibeReprovarPlc!='S' and requestScope.exibeGravarVersaoPlc=='S' and requestScope.exibe_jcompany_evt_gravar_versao!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoGravarVersao').click();" >
+<img class="icone_acao" src="#{dirIcones}evt_apv_versao_gravar.gif" title="#{app['jcompany.evt.gravar.versao']}"/>
+</a>
+</c:if>	
+-->
+<!-- Workflow - Publicar Versao 
+<c:if test="#{requestScope.exibePublicarVersaoPlc=='S' and empty requestScope.estiloApresentacaoPlc and requestScope.exibe_jcompany_evt_publicar_versao!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoPublicar').click();" >
+<img class="icone_acao" src="#{dirIcones}evt_versao_publicar.gif" title="#{app['jcompany.evt.publicar.versao']}"/>
+</a>
+</c:if>	
+-->
+<!-- Assistente - Cancelar 
+<c:if test="#{requestScope.exibeAssistAnteriorPlc=='S' or requestScope.exibeAssistProximoPlc=='S'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoCancelarAssistente').click();" >
+<img class="icone_acao" src="#{dirIcones}evt_assist_cancelar.gif" title="#{app['jcompany.evt.assistente.cancela']}"/>
+</a>
+</c:if>
+-->
+<!-- Assistente - Inicializar 
+<c:if test="#{requestScope.exibeAssistInicializarPlc=='S'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoInicializarAssistente').click();" >
+<img class="icone_acao" src="#{dirIcones}evt_assist_iniciar.gif" title="#{app['jcompany.evt.assistente.inicializa']}"/>
+</a>
+</c:if>
+-->
+<!-- Assistente - Voltar 
+<c:if test="#{requestScope.exibeAssistAnteriorPlc=='S'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoAnterior').click();" >
+<img class="icone_acao" src="#{dirIcones}evt_assist_anterior.gif" title="#{app['jcompany.evt.assistente.volta']}"/>
+</a>
+</c:if>	
+-->
+<!-- Assistente - Proximo 
+<c:if test="#{requestScope.exibeAssistProximoPlc=='S'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoProximo').click();" >
+<img class="icone_acao" src="#{dirIcones}evt_assist_proximo.gif" title="#{app['jcompany.evt.assistente.ida']}"/>
+</a>
+</c:if>		
+-->
+<!-- Limpar -->
+<c:if test="#{requestScope.exibeLimparPlc=='S' and requestScope.exibe_jcompany_evt_limpar_args!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoLimparArgs').click();" class="plc-botao">
+	<span class="ico iLimpar" title="#{app['jcompany.evt.limpar']}"/>
+</a>
+</c:if>
+<!-- Clona -->
+<c:if test="#{requestScope.exibeClonarPlc=='S' and requestScope.exibe_jcompany_evt_clonar!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoClonar_EXIBE_ALERTA_ALTERACAO').click();" class="plc-botao">
+	<span class="ico iClonar" title="#{app['jcompany.evt.clonar']}"/>
+</a>
+</c:if>
+<!-- Gravar Arquivo 
+<c:if test="#{requestScope.exibeUploadPlc=='S' and requestScope.exibe_jcompany_evt_upload!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoGravarArquivo').click();" >
+<img class="icone_acao" 
+src="#{dirIcones}evt_gravar_arquivo_gif.gif" 
+alt="#{app['jcompany.evt.desconectar']}"/>
+</a>
+</c:if>
+-->
+<!-- Incluir - Novo -->
+<c:if test="#{requestScope.exibeIncluirPlc=='S' and requestScope.exibe_jcompany_evt_incluir!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoNovo_EXIBE_ALERTA_ALTERACAO').click();" class="plc-botao">
+	<span class="ico iNovo" title="#{app['jcompany.evt.incluir']}"/>
+</a>
+</c:if>
+
+<!-- Comuta Edita/Visualiza Documento -->
+<c:if test="#{requestScope.exibeVisualizarDocumentoPlc !='N' and (sessionScope.mcPlc!='t' || sessionScope.mcPlc!='texto')}">
+<!-- Visualiza Documento -->
+<c:if test="#{requestScope.visualizaDocumentoPlc=='S' and requestScope.exibe_jcompany_evt_editar_documento!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoEditaDocumento').click();" class="plc-botao">
+	<span class="ico iEditar" alt="#{app['jcompany.evt.editar.documento']}"/>
+</a>
+</c:if>	
+<!-- Edita Documento -->
+<c:if test="#{requestScope.visualizaDocumentoPlc!='S' and requestScope.exibe_jcompany_evt_editar_documento!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoVisualizaDocumento').click();" class="plc-botao">
+	<span class="ico iVisualizar" title="#{app['jcompany.evt.visualizar.documento']}"/>
+</a>
+</c:if>	
+</c:if>	
+
+<!-- Gravar -->
+<c:if test="#{requestScope.exibeGravarPlc=='S' and empty requestScope.estiloApresentacaoPlc and requestScope.exibe_jcompany_evt_gravar!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoGravar').click();" class="plc-botao">
+	<span class="ico iGravar" title="#{app['jcompany.evt.gravar']}"/>
+</a>
+</c:if>
+<!-- Excluir -->
+<c:if test="#{requestScope.exibeExcluirPlc=='S' and empty requestScope.estiloApresentacaoPlc and requestScope.exibe_jcompany_evt_excluir!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoExcluir').click();" class="plc-botao">
+	<span class="ico iExcluir" title="#{app['jcompany.evt.excluir']}"/>
+</a>
+</c:if>		
+<!-- Abrir -->
+<c:if test="#{requestScope.exibeAbrirPlc=='S' and requestScope.exibe_jcompany_evt_abrir!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoAbrir_EXIBE_ALERTA_ALTERACAO').click();" class="plc-botao">
+	<span class="ico iAbrir" title="#{app['jcompany.evt.abrir']}"/>
+</a>
+</c:if>
+<!-- Pesquisar -->
+<c:if test="#{requestScope.exibePesquisarPlc=='S' and requestScope.exibe_jcompany_evt_pesquisar!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoPesquisar').click();" class="plc-botao">
+	<span class="ico iPesquisar" title="#{app['jcompany.evt.pesquisar']}"/>
+</a>
+</c:if>
+<!-- Gerar Relatorio -->
+<c:if test="#{requestScope.exibeGerarRelatorioPlc=='S' and requestScope.exibe_jcompany_evt_gerar_relatorio!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoGerarRelatorio').click();" class="plc-botao">
+	<span class="ico iRelatorio" title="#{app['jcompany.evt.gerar.relatorio']}"/>
+</a>
+</c:if>	
+<!-- Cancelar Popup 
+<c:if test="#{requestScope.exibeCancelarPopupPlc=='S' and requestScope.exibe_jcompany_evt_cancelar!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoCancelarPopup').click();" >
+<img class="icone_acao" 
+src="#{dirIcones}evt_cancelar.gif" 
+title="#{app['jcompany.evt.cancelar']}"/>
+</a>
+</c:if>		
+-->
+<!-- Cancelar Popup 
+<c:if test="#{requestScope.exibeCancelarPlc=='S' and requestScope.exibe_jcompany_evt_cancelar!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:botaoAcaoCancelar').click();" >
+<img class="icone_acao" 
+src="#{dirIcones}evt_cancelar.gif" 
+title="#{app['jcompany.evt.cancelar']}"/>
+</a>
+</c:if>	
+-->
+<!-- Gerar Esquema / Executar Esquema-->
+<c:if test="#{requestScope.exibeGerarEsquemaPlc=='S' and requestScope.exibe_jcompany_evt_executar.esquema!='N'}"> 
+<a href='#' onclick="document.getElementById('corpo:formulario:gerarEsquema').click();" class="plc-botao">
+	<span class="ico iGerarEsquema" title="#{app['jcompany.evt.gerar.esquema']}"/>
+</a>
+<a href='#' onclick="document.getElementById('corpo:formulario:executarEsquema').click();" class="plc-botao">
+	<span class="ico iExecutarEsquema" title="#{app['jcompany.evt.executar.esquema']}"/>
+</a>
+</c:if>	
+
+<ui:insert name="plc-acao-permalink">
+	<c:set var="linkEdicaoPlc" value="#{plcAction.plcEntityInstance.linkEdicaoPlc}"/>
+	<c:if test="#{not empty linkEdicaoPlc}">
+		<c:if test="${fn:startsWith(linkEdicaoPlc, '&amp;')}">
+			<c:set var="linkEdicaoPlc" value="#{fn:substringAfter(linkEdicaoPlc, '&amp;')}" />
+		</c:if>
+		<c:set var="linkEdicaoPlc" value="?#{linkEdicaoPlc}"/>
+	</c:if>
+	<c:set var="nomeDetalhe" value="#{plct:execOneArg(plcConfigUrlColaboracao, 'getNomeDetalhe', status.index - 1)}"/>
+	#{plct:execOneArg (plcConfigUrlColaboracao, 'exibeAba', 0)}
+	<a id="linkPermanente" href="#{request.contextPath}/f/n/#{plcURLSemBarra}?#{plcAction.plcEntityInstance.linkEdicaoPlc}" type="button" title="Reabre com link próprio">
+		<img class="plc-icone-acao-fixo" src="#{request.contextPath}/res-plc/midia/form-permalink.png" />
+	</a>
+</ui:insert>
+
+<ui:insert name="plc-acao-treeview">
+	<c:if test="#{requestScope.explorerUsaPlc == 'S'}">
+		<a href="javascript:return false;" type="button" onclick="submeteUrl('#{requestScope.explorerLinkPlc}');return false;">
+			<img class="plc-icone-acao-fixo" src="#{request.contextPath}/res-plc/midia/treeview.png" />
+		</a>
+	</c:if>
+</ui:insert>
+
+<ui:insert name="plc-acao-imprimir">	
+	<plct:imprimir estiloExibicao="somenteIcone" urlIconeBase="/res-plc/midia"/>
+</ui:insert>	
+
+</div>
+</ui:composition>

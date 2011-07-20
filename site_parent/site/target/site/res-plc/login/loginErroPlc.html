@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<!--  																													
+	    			       Jaguar-jCompany Developer Suite.																		
+			    		        Powerlogic 2010-2014.
+			    		    
+		Please read licensing information in your installation directory.Contact Powerlogic for more 
+		information or contribute with this project: suporte@powerlogic.com.br - www.powerlogic.com.br																								
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR" lang="pt-BR">
+	<head>
+		<title>Autenticação</title>
+		<script type="text/javascript">
+			var contextPath = document.location.pathname.substring(0, document.location.pathname.indexOf('/', 1));
+			var js = contextPath+"/res-plc/javascript/jquery/jquery-1.4.2.min.js";
+			var css = contextPath+"/res-plc/css/itunes/jquery/jquery-ui-1.7.custom.css";
+			var css_geral = contextPath+"/res-plc/css/plc.geral.css";
+			document.write("<script type='text/javascript' src='"+js+"'>"+"<"+"/script>");
+		</script>
+		
+		<script type="text/javascript">
+		
+			$(document).ready(function(){
+				$('#id_j_username').focus();
+			});
+			
+			function redireciona(url){
+				var win;
+				win = window.open(url,"win","");
+				history.back();
+			}
+		</script>
+
+		<script type="text/javascript">
+			document.write("<link rel='StyleSheet' href='"+css+"' type='text/css' charset='UTF-8'>"+"<"+"/link>");
+			document.write("<link rel='StyleSheet' href='"+css_geral+"' type='text/css' charset='UTF-8'>"+"<"+"/link>");
+		</script>
+
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" ></meta>
+	</head>	
+	
+	<body scroll="no" >
+		<div class="plc-login-marca">
+			<script>
+				document.write("<img src='"+contextPath+"/res/midia/login-logo-empresa.png'>"+"<"+"/img>");
+			</script>
+		</div>
+		<form method="post" action="j_security_check">
+			<div class="ui-widget ui-widget-header ui-corner-all plc-login">
+			
+				<div class="ui-widget ui-widget-header ui-corner-all plc-login-formulario">
+					<div class="ui-corner-all ui-state-error plc-msg-erro plc-login-mensagem">
+						<span class="ico iAlerta"></span>
+						<p>Usuário e senha não conferem.<br/>Tente novamente.</p>
+					</div>
+					<div class="plc-usuario">
+						<div>
+							<label for="j_username">Login:</label>
+						</div>
+						<div>
+							<input class="loginTexto" name="j_username" type="text" id="id_j_username"/>
+						</div>
+					</div>
+					<div class="plc-senha">
+						<div>
+							<label for="j_username">Senha:</label>
+						</div>
+						<div>
+							<input class="loginTexto" type="password" name="j_password"/>
+						</div>
+					</div>
+					<div>					
+						<div class="plc-login-botao">
+							<input class="plc-login-botao" name="plc-login-botao" type="submit" value="Ok" title="Ok" />
+						</div>
+					</div>	
+				</div>
+			</div>	
+		</form>
+	</body>
+		
+</html>					

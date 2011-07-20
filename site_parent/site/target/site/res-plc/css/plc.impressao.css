@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/* Estilos espec�ficos para modo de impressao */
+span.af_inputText{font-size: 20px; display:block; float:left; width: 100%;}
+span.af_outputLabel{font-weight: bold; display:block; float:left; width: 100%;}
+td.celulaFormulario span{font-size: -18px; vertical-align: middle;}
+span.af_selectOneRadio_content{padding: 0px;border-width: 0px;}
+input,textarea{padding: 0px;border-width: 0px; border-style: none;}
+a.iconeCalendario {display: none;}
+span.plc-botao {display: none}
+span.p_AFRequired img{font-size: 20px; display: none}
+span.af_inputDate{font-size: 20px;}
+span.af_selectOneRadio{font-size: 20px;}
+span.af_selectOneChoice {font-size: 20px;}
+span.plc-obrigatorio{font-size: 20px;}
+table.paginacao-css {display:none}
+div.plc-corpo-acao-generico button {display:none}
+.ui-datepicker-trigger {display:none}
+.plc-impressao{font-family:Lucida Grande,Tahoma,sans-serif}
+.plc-impressao-emitido-em{font-size:11px}
+
+.plc-form-tab {line-height:1.5;}
+
+body.plc-impressao th.cabecalho {
+  font-size:110%;  !important;
+}
+
+div.plc-form-detalhe {border-bottom:medium solid #cccccc !important;}
+span.cabecalho {font-size: 0px; !important;}
+
+table.tabelaFormulario tr {border-bottom:medium solid #cccccc !important;   }
+
+table.tabelaFormulario tr table tr {border: none !important;  }
+
+body.plc-impressao span#titulo {
+	font-size: 200%;
+	cursor: pointer;
+}
+body.plc-impressao td.celulaFormulario {
+	padding: 2px;
+}
+body.plc-impressao table.tabelaFormulario {
+	margin-top:10px;
+}
+body.plc-impressao table {
+	margin-left:5px;
+}
+body.plc-impressao span.af_selectOneRadio_content label {
+	font-weight: normal;
+	float: none;
+}
+body.plc-impressao iframe {display: none;}
+
+.plc-img-obrigatorio {display: none;}

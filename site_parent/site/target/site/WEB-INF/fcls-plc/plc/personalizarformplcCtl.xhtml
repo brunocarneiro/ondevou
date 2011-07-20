@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:plcf="http://www.powerlogic.com.br/plcf"
+    xmlns:tr="http://myfaces.apache.org/trinidad">
+	
+	<f:loadBundle basename="jCompanyResources" var="msg" />
+	
+	<input type="hidden" name="tabCorrentePlc" />
+	<fieldset class="plc-fieldset">
+		
+		<legend class="plc-fieldset-legend">#{msg['jcompany.estilo.barra.acoes']}</legend>
+		
+		<plcf:tabela>
+			<plcf:linha rendered="#{requestScope.personalizaAcoesPlc!='N'}">
+				<plcf:celula styleClass="secao">
+					<fmt:message key="jcompany.estilo.barra.acoes" />
+				</plcf:celula>
+			</plcf:linha>
+			<plcf:linha rendered="#{requestScope.personalizaAcoesPlc!='N'}">
+				<plcf:celula>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td align="center" valign="bottom">
+								<tr:selectOneChoice	valueChangeListener="#{plcAction.formAcaoExibeTexto}">
+									<tr:selectItem value="A" label="Exibe Texto e Imagem">
+										#{msg['jcompany.form.acoes.estilo.texto.imagem']}
+									</tr:selectItem>
+									<tr:selectItem value="T" label="Exibe Somente Texto">
+										#{msg['jcompany.form.acoes.estilo.texto']}
+									</tr:selectItem>
+									<tr:selectItem value="I" label="Exibe Somente Imagem">
+										#{msg['jcompany.form.acoes.estilo.imagem']}
+									</tr:selectItem>
+								</tr:selectOneChoice>
+							</td>
+						</tr>
+					</table>
+				</plcf:celula>
+			</plcf:linha>
+		</plcf:tabela>
+	</fieldset>
+</ui:composition>

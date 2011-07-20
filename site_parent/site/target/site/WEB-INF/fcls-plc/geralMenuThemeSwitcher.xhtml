@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<ui:composition  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:plcf="http://www.powerlogic.com.br/plcf"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<c:if test="#{(empty initParam['modoExecucao'] or initParam['modoExecucao']=='D') and sessionScope['modoTestePlc'] != 'S' and 
+					fn:contains(request.requestURI,'personalizarPele')}">
+
+		<li id="theme-switch"></li>
+
+		<script type="text/javascript">
+			jQuery(document).ready(function(){
+				jQuery.ajax({
+					url: plcGeral.contextPath + '/res-plc/javascript/jquery/jquery.themeswitcher.js'
+					,timeout: 1000
+					,dataType: 'script'
+					,success: function(){
+						jQuery('#theme-switch').themeswitcher({
+							onSelect: function () {
+								var href = jQuery('link[href$=/pele.css]').attr('href');
+								if (href.indexOf('/pele_limpa/') == -1){
+									href = plcGeral.contextPath + '/res-plc/css/pele_limpa/pele.css';
+									jQuery('link[href$=/pele.css]').attr('href', href);
+								}
+							}
+						});
+					}
+					,error: function(){
+						jQuery('#theme-switch').remove();
+					}
+				});
+			});
+		</script>
+	</c:if>
+</ui:composition>

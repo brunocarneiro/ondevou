@@ -1,0 +1,44 @@
+<ui:composition xmlns:c="http://java.sun.com/jsp/jstl/core"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:tr="http://myfaces.apache.org/trinidad"
+				xmlns:plcf="http://www.powerlogic.com.br/plcf">
+	
+	<c:set var="dirIcones" value="${pageContext.request.contextPath}/res-plc/midia/icoArrojado/" />
+	
+	<plcf:tabela rendered="#{empty requestScope.visualizaDocumentoPlc or (not empty plcAction.entity.arquivoAnexado and not empty plcAction.entity.arquivoAnexado.id)}" classeCSS="plc-tabela-arquivo">
+	
+		<plcf:celula>
+			
+			<plcf:botaoAcao id="modoAnexarArquivo" acao="modeFileAttach" label="#{requestScope.plcURLSemBarra}.label.anexar.arquivo" botaoArrayID="ANEXAR_ARQUIVO" immediate="true" validaForm="false" limpaForm="false"	rendered="#{requestScope.IND_ARQ_ANEXADO!='S' and empty plcAction.entity.arquivoAnexado and empty plcAction.entity.arquivoAnexado.id}" />
+			
+			<c:if test="${(sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='I' or sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='G')}">
+				<tr:goLink destination="#" onclick="document.getElementById('corpo:formulario:modoAnexarArquivo').click();"
+					rendered="#{requestScope.IND_ARQ_ANEXADO!='S' and empty plcAction.entity.arquivoAnexado and empty plcAction.entity.arquivoAnexado.id}">
+					<img class="icone_acao" src="${dirIcones}evt_anexar.gif" alt="${requestScope.plcURLSemBarra.concat('.label.arquivo.anexado.upload'}"/>
+				</tr:goLink>
+			</c:if> 
+			
+			<plcf:linha>
+				<plcf:tituloExclusao rendered="#{( not empty plcAction.entity.arquivoAnexado and not empty plcAction.entity.arquivoAnexado.id) and empty requestScope.visualizaDocumentoPlc}" />
+				<plcf:titulo tituloChave="${requestScope.plcURLSemBarra}.label.arquivo.anexado" rendered="#{requestScope.IND_ARQ_ANEXADO=='S' || param['corpo:formulario:IND_ARQ_ANEXADO']=='S' || (not empty plcAction.entity.arquivoAnexado || not empty plcAction.entity.arquivoAnexado.id) }" />
+			</plcf:linha>
+			
+			<plcf:linha>
+				<plcf:caixaMarcacao id="excluiAnexado" ajudaChave="ajuda.excluir.arquivo.anexado" value="#{plcAction.entity.arquivoAnexado.indExcPlc}" rendered="#{( not empty plcAction.entity.arquivoAnexado and not empty plcAction.entity.arquivoAnexado.id) and empty requestScope.visualizaDocumentoPlc}" />
+				<plcf:arquivoAnexado id="arquivoAnexado" tamanho="35" ajudaChave="ajuda.arquivo.anexado" obrigatorio="N" valueChangeListener="#{plcAction.uploadFile}" rendered="#{requestScope.IND_ARQ_ANEXADO=='S' || param['corpo:formulario:IND_ARQ_ANEXADO']=='S' || (not empty 	plcAction.entity.arquivoAnexado || not empty plcAction.entity.arquivoAnexado.id) }" label="" />
+				<plcf:botaoAcaoDownload id="botaoAcaoBaixarArquivo" urlIcone="ico iGravar" partialSubmit="false"	immediate="true" validaForm="false"	rendered="#{( not empty plcAction.entity.arquivoAnexado and not empty plcAction.entity.arquivoAnexado.id)and empty requestScope.visualizaDocumentoPlc}" />
+				<c:if test="${(sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='I' or sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='G')}">
+					<tr:goLink destination="#" onclick="document.getElementById('corpo:formulario:botaoAcaoBaixarArquivo').click();"
+						rendered="#{( not empty plcAction.entity.arquivoAnexado and not empty plcAction.entity.arquivoAnexado.id)and empty requestScope.visualizaDocumentoPlc}">
+						<img class="icone_acao" src="${dirIcones}evt_baixar.gif" alt="#{requestScope.plcURLSemBarra.concat('.label.arquivo.anexado.download')}"/>
+					</tr:goLink>
+				</c:if>
+			</plcf:linha>
+			
+			<plcf:escondido id="IND_ARQ_ANEXADO" value="#{requestScope.IND_ARQ_ANEXADO}" rendered="#{requestScope.IND_ARQ_ANEXADO=='S' || param['corpo:formulario:IND_ARQ_ANEXADO']=='S' || (not empty plcAction.entity.arquivoAnexado || not empty plcAction.entity.arquivoAnexado.id) }" />
+			
+		</plcf:celula>
+		
+	</plcf:tabela>
+	
+</ui:composition>

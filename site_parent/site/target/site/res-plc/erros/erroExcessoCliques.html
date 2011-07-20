@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="pt-BR">
+
+	<head>
+		<title>Em constru&ccedil;&atilde;o</title>
+		<script type="text/javascript">
+			var contextPath = document.location.pathname.substring(0, document.location.pathname.indexOf('/', 1));
+			var css_erros = contextPath+"/res-plc/erros/erros.css";
+			document.write("<link rel='StyleSheet' href='"+css_erros+"' type='text/css' charset='UTF-8'>"+"<"+"/link>");
+		</script>
+	</head>
+	<body class="erros" marginheight="0" marginwidth="0">
+		<div id="plc-erro-corpo">
+			<h1>Sua &uacute;ltima requisi&ccedil;&atilde;o ainda est&aacute; sendo processada. Aguarde alguns instantes e clique em Voltar do Navegador para continuar</h1>
+			<h2>Servi&ccedil;o temporariamente n&atilde;o dispon&iacute;vel</h2>
+			<p>Prezado usu&aacute;rio,</p>
+			<p>Este endere&ccedil;o est&aacute; correto, por&eacute;m a aplica&ccedil;&atilde;o n&atilde;o est&aacute; dispon&iacute;vel no momento.<br/>Tente acess&aacute;-la novamente em alguns instantes.</p>
+		</div>	
+		<hr size="1" width="100%" color="#b70c0c" noshade="noshade"/>	
+	</body>
+	
+	<script type="text/javascript">
+		document.body.style.backgroundImage = 'url('+contextPath+'/res-plc/erros/error_500.jpg)';
+	</script>
+</html>

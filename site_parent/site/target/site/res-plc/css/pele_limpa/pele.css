@@ -1,0 +1,158 @@
+@import url('jquery/jquery-ui-1.7.custom.css');
+
+body {
+	
+}
+#app {
+	
+}
+div.plc-topo,
+div.plc-topo-classico {
+	border-bottom: 1px solid #2B2B2B ;
+	-moz-border-radius: 10px 10px 0 0;
+	-webkit-border-radius: 10px 10px 0 0;
+	-moz-box-shadow: 0 1px 2px 0 #5D5E5F;
+	-webkit-box-shadow: 0 1px 2px 0 #5D5E5F;
+}
+div.plc-topo-aplicacao {
+	font: italic 18px "Segoe UI", Arial, sans-serif;
+}
+div.plc-topo-titulo {
+	border: 1px solid #141414;
+	font: 18px/28px "Segoe UI", Arial, sans-serif;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: inset 0 0 6px 3px #E7E9E9;
+	-webkit-box-shadow: inset 0 0 6px 3px #E7E9E9;
+}
+div.plc-topo-menu  {
+	border: none ;
+}
+/* menu */
+div.plc-menu {
+	border-bottom: 1px solid #4C4C4C ;
+	-moz-box-shadow: 0 1px 2px 0 #E0E7E9 ;
+	-webkit-box-shadow: 0 1px 2px 0 #E0E7E9 ;
+	margin-bottom: 5px;
+}
+div.plc-menu-sistema-pulldown ul li {
+	border-right: 1px solid #4C4C4C ;
+}
+div.plc-menu-sistema-pulldown ul {
+	
+}
+div.plc-menu-sistema-pulldown ul li a {
+	
+}
+div.plc-menu ul li a:hover { color: #FFFFFF; }
+
+/* 2� n�vel */
+div.plc-menu-sistema-pulldown ul ul {
+	border: 1px solid #2F2F2F;
+	border-top: none;
+	-moz-border-radius: 0 8px 8px 8px;
+	-webkit-border-radius: 0 8px 8px 8px;
+	left: 0 ;
+	padding: 10px 0;
+}
+div.plc-menu ul li li {
+	border-right: none ;
+}
+div.plc-menu ul ul li a {
+ 	border-bottom: 1px dashed #555555;
+}
+div.plc-menu ul ul li a:hover { border-bottom: 1px dashed #555555 ; }
+
+div.plc-menu-classico ul ul,
+div.plc-menu-oriental ul ul {
+	
+}
+/* rodape */
+div.plc-rodape,
+div.plc-rodape-classico {
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
+	-moz-box-shadow: 0 -1px 2px 0 #E0E7E9;
+	-webkit-box-shadow: 0 -1px 2px 0 #E0E7E9;
+}
+div.plc-rodape-timeout em,
+div.plc-rodape-bemvindo-t2 {
+	
+}
+/*  */
+div.plc-corpo {
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+/* Bot�es */
+button,
+.plc-botao {
+	border: 1px solid #AFAEAE ;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: 0 1px 3px 1px #CDCDCD;
+	-webkit-box-shadow: 0 1px 3px 1px #CDCDCD;
+}
+button div.plc-corpo-acao-t,
+.plc-botao div.plc-corpo-acao-t {
+	text-shadow: 1px 1px 1px #FFF;
+}
+button:hover,
+.plc-botao:hover {
+	background-position: 100% 50% ;
+}
+/* corpo - formulario */
+fieldset.plc-fieldset {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+legend.plc-fieldset-legend {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+div.plc-corpo input,
+div.plc-corpo input.radio,
+div.plc-corpo select,
+div.plc-corpo input.checkbox,
+div.plc-corpo textarea {
+	font: 11px Tahoma, sans-serif;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: inset 0 0 7px 0 #F5F5F5;
+	-webkit-box-shadow: inset 0 0 7px 0 #F5F5F5;
+}
+
+/* login - logout */
+div.plc-login-formulario {
+	border: 1px solid #898989;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: 0 0 7px 0 #979899;
+	-webkit-box-shadow: 0 0 7px 0 #979899;
+}
+div.plc-login-formulario label {
+
+}
+div.plc-login input {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: inset 0 0 7px 0 #F5F5F5;
+	-webkit-box-shadow: inset 0 0 7px 0 #F5F5F5;
+}
+div.plc-login-botao input {
+	border: 1px solid #AFAEAE ;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: 0 1px 3px 1px #CDCDCD;
+	-webkit-box-shadow: 0 1px 3px 1px #CDCDCD;
+}
+div.plc-login-botao input:hover {
+	background-position: 100% 50% ;
+}
+/* Mensagens */
+div.plc-msg-sucesso {
+}
+div.plc-msg-advertencia { }
+div.plc-msg-erro {
+
+}

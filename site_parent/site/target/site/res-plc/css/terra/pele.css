@@ -1,0 +1,209 @@
+@import url('jquery/jquery-ui-1.7.custom.css');
+
+body {
+	background: #241F1B url(bg_body.jpg) repeat !important;
+	font-family: Tahoma, Arial, sans-serif;
+	color: #1F1511;
+}
+#app {
+	background: #D8D1CB url(bg_app.jpg) repeat !important;
+	border: 1px solid #433828;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: 0 0 7px 0 #261E1A;
+	-webkit-box-shadow: 0 0 7px 0 #261E1A;
+}
+div.plc-topo,
+div.plc-topo-classico {
+	background: #6B5C45 url(topo.png) repeat 0 50%;
+	border-bottom: 1px solid #433828 !important;
+	-moz-border-radius: 10px 10px 0 0;
+	-webkit-border-radius: 10px 10px 0 0;
+	-moz-box-shadow: 0 1px 2px 0 #A69279;
+	-webkit-box-shadow: 0 1px 2px 0 #A69279;
+}
+div.plc-topo-aplicacao {
+	font: italic 18px "Segoe UI", Arial, sans-serif;
+	color: #D9D3CD;
+	text-shadow: 1px 1px 1px #444031;
+}
+div.plc-topo-titulo {
+	background: #A58F6D !important;
+	border: 1px solid #564834 !important;
+	font: 18px/28px "Segoe UI", Arial, sans-serif;
+	text-shadow: 1px 1px 1px #71624F;
+	color: #F5E1C3;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: inset 0 0 6px 3px #8E795B;
+	-webkit-box-shadow: inset 0 0 6px 3px #8E795B;
+}
+div.plc-topo-menu  {
+	background: #968873 !important;
+	border: 1px solid #554835 !important;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: inset 0 0 6px 3px #817361;
+	-webkit-box-shadow: inset 0 0 6px 3px #817361;
+}
+/* menu */
+div.plc-menu {
+	background: #BEA787 url(bg_menu.png) repeat 0 50%;
+	border-bottom: 1px solid #A99273 !important;
+	-moz-box-shadow: 0 1px 2px 0 #A19C9A !important;
+	-webkit-box-shadow: 0 1px 2px 0 #A19C9A !important;
+	margin-bottom: 5px;
+}
+div.plc-menu-sistema-pulldown ul li {
+	border-right: 1px solid #A99273 !important;
+}
+div.plc-menu-sistema-pulldown ul li.ui-state-hover {
+	background: #DCC29D;
+	color: #342918 !important;
+}
+div.plc-menu ul li a {
+	color: #342918;
+}
+div.plc-menu ul li a:hover { color: #0A0C0C; }
+/* 2º nível */
+div.plc-menu-sistema-pulldown ul ul {
+	background: #DCC5A2;
+	border: none !important;
+	-moz-border-radius: 0 8px 8px 8px;
+	-webkit-border-radius: 0 8px 8px 8px;
+	-moz-box-shadow: 0 1px 3px 0 #BBB5AD !important;
+	-webkit-box-shadow: 0 1px 3px 0 #BBB5AD !important;
+	padding-bottom: 10px;
+}
+div.plc-menu ul li li {
+	border-right: none !important;
+}
+div.plc-menu ul ul li a {
+ 	background: none;
+ 	border-bottom: 1px dashed #BA9B23;
+}
+div.plc-menu ul ul li a:hover { background: #EED6B4; border-bottom: 1px dashed #BA9B23 !important; color: #0A0C0D; }
+
+div.plc-menu-classico,
+div.plc-menu-oriental{ border-bottom: none !important; }
+div.plc-menu-classico ul,
+div.plc-menu-oriental ul { background: #BEA787; }
+div.plc-menu-classico ul ul,
+div.plc-menu-oriental ul ul { background: #D0BB9D; }
+div.plc-menu-classico ul ul ul.ui-state-hover,
+div.plc-menu-oriental ul ul ul.ui-state-hover { background: #DFCFB9 !important; }
+
+/* rodape */
+div.plc-rodape,
+div.plc-rodape-classico {
+	background: #6B5C45 url(topo.png) repeat 0 50%;
+	border-top: 1px solid #423626 !important;
+	color: #DCD5CF !important;
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
+}
+/*  */
+div.plc-corpo {
+	background: #D8D1CB url(bg_app.jpg) repeat !important;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+/* Botões */
+button,
+.plc-botao {
+	background: #ADADAD url(bg_botao.png) repeat-x 0 50% !important;
+	border: 1px solid #666565 !important;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: 0 1px 3px 1px #A79A9A;
+	-webkit-box-shadow: 0 1px 3px 1px #A79A9A;
+}
+button div.plc-corpo-acao-t,
+.plc-botao div.plc-corpo-acao-t {
+	text-shadow: 1px 1px 1px #D8D8D8;
+	color: #434343;
+}
+button:hover,
+.plc-botao:hover {
+	background-position: 100% 50% !important;
+	border-color: #666565 !important;
+}
+/* corpo - formulario */
+fieldset.plc-fieldset {
+	background: #C9BAAD url(bg_content.jpg) repeat;
+	border-color: #887A73 #FFECDD #FFECDD #887A73 !important;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+legend.plc-fieldset-legend {
+	background: #655A56;
+	text-shadow: -1px -1px 1px #3E3532;
+	color: #C2B9B6;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+div.plc-corpo input,
+div.plc-corpo input.radio,
+div.plc-corpo select,
+div.plc-corpo input.checkbox,
+div.plc-corpo textarea {
+	border-color: #806D63 #D1BAAF #D1BAAF #806D63 !important;
+	font: 11px Tahoma, sans-serif;
+	color: #362D29;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: inset 0 0 7px 0 #e0d1c9;
+	-webkit-box-shadow: inset 0 0 7px 0 #e0d1c9;
+}
+
+/* Mensagens */
+div.plc-msg-sucesso {
+	background: #B9EFFF !important;
+	border-color: #B9EFFF !important;
+	color: #031929 !important;
+	opacity:0.80;
+	-moz-opacity: 0.80;
+	filter: alpha(opacity=80);
+}
+div.plc-msg-advertencia { }
+div.plc-msg-erro {
+	background: #FFC0C0;
+	color: #390000;
+	opacity:0.80;
+	-moz-opacity: 0.80;
+	filter: alpha(opacity=80);
+}
+/* login - logout */
+div.plc-login-formulario {
+	background: #F2F5F6;background: #C9BAAD url(bg_content.jpg) repeat;
+	border: 1px solid;
+	border-color: #887A73 #FFECDD #FFECDD #887A73;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: 0 0 7px 0 #261E1A;
+	-webkit-box-shadow: 0 0 7px 0 #261E1A;
+	color: #1F1511;
+}
+div.plc-login input {
+	border-color: #806D63 #D1BAAF #D1BAAF #806D63 !important;
+	font: 11px Tahoma, sans-serif;
+	color: #362D29;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: inset 0 0 7px 0 #e0d1c9;
+	-webkit-box-shadow: inset 0 0 7px 0 #e0d1c9;
+}
+div.plc-login-botao input {
+	background: #ADADAD url(bg_botao.png) repeat-x 0 50% !important;
+	border: 1px solid #666565 !important;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: 0 1px 3px 1px #A79A9A;
+	-webkit-box-shadow: 0 1px 3px 1px #A79A9A;
+	text-shadow: 1px 1px 1px #D8D8D8;
+	color: #434343;
+}
+div.plc-login-botao input:hover {
+	background-position: 100% 50% !important;
+	border-color: #666565 !important;
+}

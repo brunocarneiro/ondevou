@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:plcf="http://www.powerlogic.com.br/plcf"
+	xmlns:plct="http://www.powerlogic.com.br/plct"
+	xmlns:tr="http://myfaces.apache.org/trinidad"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">
+	
+	Realiza a renderizacao de formulario tipo Mestre-Detalhe em ergonomia de "caixas verticais" (Vertical Box ou VBox), onde
+	cada seção do formulário é ordenada uma abaixo da outra, de acordo com uma numeração.
+	
+	<ui:composition template="/fcls/template/PlcGeralTemplate.xhtml">
+		<ui:define name="plc-corpo-formulario">
+	 		
+	 		<script type="text/javascript">
+				
+	 			function retraiExpande (componente, detalhe){
+					if (jQuery(componente).hasClass('iMinimizar')){
+						jQuery(componente).removeClass('iMinimizar').addClass('iMaximizar');
+						jQuery('#' + detalhe + ' > fieldset > *').not('legend').hide();
+						jQuery('button[id=corpo:formulario:novoComponente' + detalhe + ']').hide();
+					} else {
+						jQuery(componente).removeClass('iMaximizar').addClass('iMinimizar');
+						jQuery('#' + detalhe + ' > fieldset > *').not('legend').show();
+						jQuery('button[id=corpo:formulario:novoComponente' + detalhe + ']').show();
+					}
+		 		}
+				
+				function recuperaPorDemanda (){
+					plcGeral.formSubmit('${requestScope.plcURLComBarra}','#{msg["jcompany.evt.recupera.por.demanda"]}');		
+				}
+				
+	 		</script>
+	 		
+		 	<div id="container">
+		 		<c:set var="sufixo" value="Mdt"/>
+				<c:if test="#{requestScope.logicaPlc=='SUBDETALHE'}">
+					<c:set var="sufixo" value="Mds"/>
+				</c:if>
+				<c:if test="#{requestScope.logicaPlc=='MANTEM_DETALHE'}">
+					<c:set var="sufixo" value="Mad"/>
+					<c:if test="#{requestScope.nomeSubdetalhe != null and requestScope.nomeSubdetalhe != ''}">
+						<c:set var="sufixo" value="Mas"/>
+					</c:if>
+				</c:if>
+				<c:if test="#{requestScope.logicaPlc=='MANTEM_SUBDETALHE'}">
+						<c:set var="sufixo" value="Mas"/>
+				</c:if>
+				
+				<c:if test="#{plct:execOneArg (plcConfigUrlColaboracao, 'exibeAba', 0)}">
+					<div id="#{plcAliasPrefixoAction}Mestre">
+						<ui:include src="#{requestScope.dirBaseFacelets}/#{plcAliasPrefixoAction}#{sufixo}.xhtml" />
+					</div>
+				</c:if>
+				<c:forEach begin="1" end="#{plcConfigUrlColaboracao.numComponentes}" varStatus="status">
+					<c:if test="#{plct:execOneArg (plcConfigUrlColaboracao, 'exibeAba', status.index)}">
+						<div id="#{plcAliasPrefixoAction}Mestre#{status.index + 1}">
+							<ui:include src="#{requestScope.dirBaseFacelets}/#{plcAliasPrefixoAction}#{sufixo}#{status.index + 1}.xhtml" />
+						</div>	
+					</c:if>	
+				</c:forEach>
+				<c:forEach begin="1" end="#{plcConfigUrlColaboracao.numDetalhes}" varStatus="status">
+					<c:if test="#{plct:execOneArg (plcConfigUrlColaboracao, 'exibeAba', plcConfigUrlColaboracao.numComponentes + status.index)}">
+						<div id="#{plcAliasPrefixoAction}Det#{status.index != 1 ? status.index : ''}">
+							<span class="plc-corpo-acao-detalhe-sem-tab">
+								<div class="plc-corpo-acao">
+										<c:if test="#{empty requestScope.visualizaDocumentoPlc}">
+											
+												<c:set var="nomeDetalhe" value="#{plct:execOneArg (plcConfigUrlColaboracao, 'getNomeDetalhe', status.index - 1)}"/>
+												<c:set var="detalhesPorDemanda" value="#{plct:exec (plcControleConversacao, 'getDetalhesPorDemanda')}"/>
+												<c:set var="isPorDemanda" value="#{plct:execOneArgOneType (detalhesPorDemanda, 'containsKey', nomeDetalhe, 'java.lang.Object')}"/>
+												<c:set var="botaoDetalhe" value="exibe_jcompany_evt_incluir_detalhe_#{nomeDetalhe}"/>
+											
+												<span id="portlet#{plcAliasPrefixoAction}Det#{status.index != 1 ? status.index : ''}"
+													class="ico iMinimizar" 
+													onclick="jQuery('#detCorrPlc').val('#{nomeDetalhe}'); retraiExpande (this, '#{plcAliasPrefixoAction}Det#{status.index != 1 ? status.index : ''}'); #{isPorDemanda?'recuperaPorDemanda()':''}"/>
+												
+												<script type="text/javascript">
+												
+													jQuery(function(){
+														var portlet = jQuery('#portlet#{plcAliasPrefixoAction}Det#{status.index != 1 ? status.index : ''}');
+														var legend = jQuery('##{plcAliasPrefixoAction}Det#{status.index != 1 ? status.index : ''} > fieldset > legend');
+														legend.prepend (portlet);
+														if (#{isPorDemanda}){
+															legend.append('...');
+															jQuery('##{plcAliasPrefixoAction}Det#{status.index != 1 ? status.index : ''} > fieldset > *').not('legend').hide();
+														}
+														
+													});
+												
+												</script>
+										
+											<div class="plc-corpo-acao-generico" id="novoComponente#{nomeDetalhe}">
+											
+																						
+											
+											<plcf:botaoAcao acao="create" label="jcompany.evt.incluir.detalhe" botaoArrayID="NOVO" id="novoComponente#{plcAliasPrefixoAction}Det#{status.index != 1 ? status.index : ''}" idPlc="#{nomeDetalhe}"
+											     partialSubmit="#{requestScope.ajaxUsa}"  urlIcone="ico iNovo"											     
+											     immediate="false" validaForm="false" rendered="#{(((requestScope[botaoDetalhe] != 'N') and (requestScope['exibe_jcompany_evt_incluir_detalhe'] != 'N')) or ((requestScope[botaoDetalhe] == 'S') and (requestScope['exibe_jcompany_evt_incluir_detalhe'] != 'N')) or ((requestScope[botaoDetalhe] == 'S') and (requestScope['exibe_jcompany_evt_incluir_detalhe'] == 'N')))}"  
+											     detalhe="#{nomeDetalhe}"/>
+												 
+												 
+											</div>
+										</c:if>
+								</div>
+							</span>
+							
+							<ui:include src="#{requestScope.dirBaseFacelets}/#{plcAliasPrefixoAction}Det#{status.index != 1 ? status.index : ''}.xhtml" />
+							
+							<plct:paginacaoDetalhe nomeDetalhe="#{nomeDetalhe}" />
+						</div>	
+					</c:if>			
+				</c:forEach>
+			</div>
+			
+		</ui:define>
+	</ui:composition>
+	
+</html>

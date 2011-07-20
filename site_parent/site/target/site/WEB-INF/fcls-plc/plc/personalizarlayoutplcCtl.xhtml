@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:plcf="http://www.powerlogic.com.br/plcf"
+	xmlns:tr="http://myfaces.apache.org/trinidad">
+	<body>
+		<ui:composition>
+			
+			<f:loadBundle basename="jCompanyResources" var="msg"/>
+			
+			<input type="hidden" name="tabCorrentePlc" />
+			
+			<tr:commandButton id="trocaLayoutRequest" partialSubmit="false" action="#{plcAction.trocaLayoutRequest}" styleClass="ui-helper-hidden"/>
+			
+			<script type="text/javascript">
+				function trocaLayout(layoutPlc){
+					submitForm('corpo:formulario', 1, {source:'corpo:formulario:trocaLayoutRequest', layoutPlc: layoutPlc});
+				}
+			</script>
+			
+			<fieldset class="plc-fieldset">
+				<legend class="plc-fieldset-legend">#{msg['jcompany.trocarlayout.titulo']}</legend>
+					<div>
+						<c:forEach var="layoutAuxPlc" items="${applicationScope.layoutListaPlc}" varStatus="i">
+							<c:if test="${layoutAuxPlc == 'sistema' or layoutAuxPlc == 'sistema_reduzido' or layoutAuxPlc == 'classico' or layoutAuxPlc == 'classico_reduzido' or layoutAuxPlc == 'oriental' or layoutAuxPlc == 'oriental_reduzido'}">
+								<div class="plc-leiaute" id="id-${layoutAuxPlc}" >
+									<div>
+										<plcf:selectPreferencia group="pele" plcPreferencia="#{layoutAuxPlc}" onclick="trocaLayout('#{layoutAuxPlc}')"/>
+									</div>
+									<div>
+										<label jsfc="plcf:titulo" tituloChave="jcompany.layout.#{layoutAuxPlc}" for="id-${layoutAuxPlc}"/>
+									</div>
+									<img src="#{request.contextPath}/res-plc/midia/layout-#{layoutAuxPlc}.png" width="233px;" height="177px;" alt="#{layoutAuxPlc}" />
+								</div>
+							</c:if>
+						</c:forEach> 
+					</div>
+				</fieldset>
+		</ui:composition>
+	</body>
+</html>

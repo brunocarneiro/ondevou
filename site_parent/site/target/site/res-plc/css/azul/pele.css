@@ -1,0 +1,198 @@
+@import url('jquery/jquery-ui-1.7.custom.css');
+
+body {
+	background: #EFF1F2 url(bg-body.png) repeat !important;
+	font-family: Tahoma, Arial, sans-serif;
+	color: #454E55;
+}
+#app {
+	background: #FFFFFF;
+	border: 1px solid #B3C3C8;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: 0 0 7px 0 #D6DBDE;
+	-webkit-box-shadow: 0 0 7px 0 #D6DBDE;
+}
+div.plc-topo,
+div.plc-topo-classico {
+	background: #8B9DA9;
+	border-bottom: 1px solid #829099 !important;
+	-moz-border-radius: 10px 10px 0 0;
+	-webkit-border-radius: 10px 10px 0 0;
+	-moz-box-shadow: 0 1px 2px 0 #cbd9de;
+	-webkit-box-shadow: 0 1px 2px 0 #cbd9de;
+}
+div.plc-topo-aplicacao {
+	font: italic 18px "Segoe UI", Arial, sans-serif;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #5C7280;
+}
+div.plc-topo-titulo {
+	background: #F6FAFB;
+	border: 1px solid #7A8D99;
+	font: 18px/28px "Segoe UI", Arial, sans-serif;
+	color: #70757A;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: inset 0 0 6px 3px #EEF3F5;
+	-webkit-box-shadow: inset 0 0 6px 3px #EEF3F5;
+}
+div.plc-topo-menu  {
+	background: none !important;
+	border: none !important;
+}
+/* menu */
+div.plc-menu {
+	background: #DDE8EB;
+	border-bottom: 1px solid #BFD0D6 !important;
+	-moz-box-shadow: 0 1px 2px 0 #F6F7F8 !important;
+	-webkit-box-shadow: 0 1px 2px 0 #F6F7F8 !important;
+	margin-bottom: 5px;
+}
+div.plc-menu-sistema-pulldown ul li {
+	border-right: 1px solid #B7BFC1 !important;
+}
+div.plc-menu-sistema-pulldown ul li.ui-state-hover {
+	background: #CFE5EB;
+	color: #475B61 !important;
+}
+div.plc-menu ul li a {
+	color: #475B61;
+}
+div.plc-menu ul li a:hover { color: #373C3E; }
+/* 2� n�vel */
+div.plc-menu-sistema-pulldown ul ul {
+	background: #CFE5EB;
+	border: none !important;
+	-moz-border-radius: 0 8px 8px 8px;
+	-webkit-border-radius: 0 8px 8px 8px;
+	padding-bottom: 10px;
+}
+div.plc-menu ul li li {
+	border-right: none !important;
+}
+div.plc-menu ul ul li a {
+ 	background: none;
+ 	border-bottom: 1px dashed #C2CED1;
+}
+div.plc-menu ul ul li a:hover { background: #DCEFF4; border-bottom: 1px dashed #C2CED1 !important; }
+
+div.plc-menu-classico,
+div.plc-menu-oriental{ border-bottom: none !important; }
+div.plc-menu-classico ul,
+div.plc-menu-oriental ul { background: #DDE8EB; }
+div.plc-menu-classico ul ul,
+div.plc-menu-oriental ul ul { background: #CFDFE4; }
+div.plc-menu-classico ul ul ul.ui-state-hover,
+div.plc-menu-oriental ul ul ul.ui-state-hover { background: #C2D4D9 !important; }
+
+/* rodape */
+div.plc-rodape,
+div.plc-rodape-classico {
+	background: #7B8C97;
+	border-top: 1px solid #657783 !important;
+	color: #222526 !important;
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
+}
+/*  */
+div.plc-corpo {
+	background: #FFF;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+/* Bot�es */
+button,
+.plc-botao {
+	background: #BED2D8 url(bg_botao.png) repeat-x 0 50% !important;
+	border: 1px solid #B1C0CB !important;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: 0 1px 3px 1px #EFEFF3;
+	-webkit-box-shadow: 0 1px 3px 1px #EFEFF3;
+}
+button div.plc-corpo-acao-t,
+.plc-botao div.plc-corpo-acao-t {
+	text-shadow: 1px 1px 1px #F5FFFF;
+	color: #4C555B;
+}
+button:hover,
+.plc-botao:hover {
+	background-position: 100% 50% !important;
+	border-color: #9EB5BC !important;
+}
+/* login - logout */
+div.plc-login-formulario {
+	background: #F2F5F6;
+	border: 1px solid #B3C3C8;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: 0 0 7px 0 #D6DBDE;
+	-webkit-box-shadow: 0 0 7px 0 #D6DBDE;
+}
+div.plc-login input {
+	border-color: #879198 #D4DFEA #D4DFEA #879198 !important;
+	font: 11px Tahoma, sans-serif;
+	color: #6A7075;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: inset 0 0 7px 0 #e1e3e8;
+	-webkit-box-shadow: inset 0 0 7px 0 #e1e3e8;
+}
+div.plc-login-botao input {
+	background: #BED2D8 url(bg_botao.png) repeat-x 0 50% !important;
+	border: 1px solid #B1C0CB !important;
+	text-shadow: 1px 1px 1px #F5FFFF;
+	color: #4C555B;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: 0 1px 3px 1px #EFEFF3;
+	-webkit-box-shadow: 0 1px 3px 1px #EFEFF3;
+}
+div.plc-login-botao input:hover {
+	background-position: 100% 50% !important;
+	border-color: #9EB5BC !important;	
+}
+/* corpo - formulario */
+fieldset.plc-fieldset {
+	background: #F2F5F6;
+	border-color: #B3C3C8 !important;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+legend.plc-fieldset-legend {
+	background: #D4DFE3;
+	text-shadow: 1px 1px 1px #E2ECF2;
+	color: #3C4951;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+div.plc-corpo input,
+div.plc-corpo input.radio,
+div.plc-corpo select,
+div.plc-corpo input.checkbox,
+div.plc-corpo textarea {
+	border-color: #879198 #D4DFEA #D4DFEA #879198 !important;
+	font: 11px Tahoma, sans-serif;
+	color: #6A7075;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: inset 0 0 7px 0 #e1e3e8;
+	-webkit-box-shadow: inset 0 0 7px 0 #e1e3e8;
+}
+/*  */
+legend input {
+	background: none !important;
+	border: none;
+}
+/* Mensagens */
+div.plc-msg-sucesso {
+	background: #DCF6FF !important;
+	border-color: #DCF6FF !important;
+	color: #3E3E3E !important;
+}
+div.plc-msg-advertencia { }
+div.plc-msg-erro {
+	background: #FFE8E8;
+	color: #510909;
+}

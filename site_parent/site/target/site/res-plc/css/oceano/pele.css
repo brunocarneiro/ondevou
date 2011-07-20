@@ -1,0 +1,218 @@
+@import url('jquery/jquery-ui-1.7.custom.css');
+
+body {
+	background: #4F8AB4 url(bg_body.jpg) repeat !important;
+	font-family: Tahoma, Arial, sans-serif;
+	color: #2F5569;
+}
+#app {
+	background: #D6ECFF url(bg_app.jpg) repeat !important;
+	border: 1px solid #3A7196;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: 0 0 7px 0px #1a3cba;
+	-webkit-box-shadow: 0 0 7px 0px #1a3cba;
+}
+div.plc-topo,
+div.plc-topo-classico {
+	background: #1D73B4 url(bg_topo.jpg) repeat !important;
+	border-bottom: 1px solid #1F6AAF !important;
+	-moz-border-radius: 10px 10px 0 0;
+	-webkit-border-radius: 10px 10px 0 0;
+	-moz-box-shadow: 0 1px 2px 0px #9CD6ED;
+	-moz-box-shadow: 0 1px 2px 0px #9CD6ED;
+}
+div.plc-topo-aplicacao {
+	font: italic 18px "Segoe UI", Arial;
+	text-shadow: -1px -1px 0 #246DA0;
+	color: #FFFFFF;
+}
+div.plc-topo-titulo {
+	background: #BDE4F4 !important;
+	border: 1px solid #1A70AD;
+	font: 18px/28px "Segoe UI", Arial;
+	text-shadow: 1px 1px 0 #CBF6FF;
+	color: #203649;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: inset 0 0 6px 2px #A4CEE8;
+	-webkit-box-shadow: inset 0 0 6px 2px #A4CEE8;
+}
+div.plc-topo-menu {
+	background: #BDE4F4 !important;
+	border: 1px solid #1A70AD;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: inset 0 0 6px 2px #A4CEE8;
+	-webkit-box-shadow: inset 0 0 6px 2px #A4CEE8;
+}
+/* menu */
+div.plc-menu {
+	background: #B4EBFF !important;
+	border-bottom: 1px solid #9CD6ED !important;
+	-moz-box-shadow: 0 1px 2px 0 #CAE6F4 !important;
+	-webkit-box-shadow: 0 1px 2px 0 #CAE6F4 !important;
+	margin-bottom: 5px;
+}
+div.plc-menu-sistema-pulldown ul li {
+	border-right: 1px solid #9CD6ED !important;
+}
+div.plc-menu-sistema-pulldown ul li.ui-state-hover {
+	background: #B3F3FF;
+	color: #203C49 !important;
+	text-shadow: 1px 1px 0 #C8FFFF;
+}
+div.plc-menu-sistema-pulldown ul li a {
+	color: #203C49;
+	text-shadow: 1px 1px 0 #C8FFFF;
+}
+div.plc-menu ul li a:hover { color: #274C52; }
+/* 2º nível */
+div.plc-menu-sistema-pulldown ul ul {
+	background: #B3F3FF;
+	border: 1px solid #9CD6ED;
+	border-top: 0;
+	left: -1px !important;
+	-moz-border-radius: 0 8px 8px 8px;
+	-webkit-border-radius: 0 8px 8px 8px;
+	padding: 0 0 10px;
+}
+div.plc-menu ul li li {
+	border-right: none !important;
+}
+div.plc-menu ul ul li a {
+ 	background: none;
+ 	border-bottom: 1px dashed #7ABFCF;
+}
+div.plc-menu ul ul li a:hover { background: #80E4FA; border-bottom: 1px dashed #7ABFCF !important; }
+
+div.plc-menu-classico ul,
+div.plc-menu-oriental ul { background-color: #B4EBFF; }
+div.plc-menu-classico ul ul,
+div.plc-menu-oriental ul ul { background: #caf1ff; }
+div.plc-menu-classico ul ul ul.ui-state-hover,
+div.plc-menu-oriental ul ul ul.ui-state-hover { background-color: #dff7ff !important; }
+
+
+div.plc-menu-classico a:hover,
+div.plc-menu-oriental a:hover {
+	background-color: #80E4FA;
+	color: #274C52 !important;
+}
+/* rodape */
+div.plc-rodape,
+div.plc-rodape-classico {
+	background: #1D73B4 url(bg_topo.jpg) repeat !important;
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
+	color: #FFF;
+	text-shadow: -1px -1px 0 #0c4c76;
+}
+div.plc-rodape-timeout em,
+div.plc-rodape-bemvindo-t2 {
+	color: #FFF !important;
+}
+/*  */
+div.plc-corpo {
+	background: #D6ECFF url(bg_app.jpg) repeat !important;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+/* Botões */
+button,
+.plc-botao {
+	background: #8DE2FF url(bg_botao.jpg) repeat-x 0 50% !important;
+	border: 1px solid #62B2CE !important;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: 0 1px 3px 0 #B7BCC9;
+	-webkit-box-shadow: 0 1px 3px 0 #B7BCC9;
+}
+button div.plc-corpo-acao-t,
+.plc-botao div.plc-corpo-acao-t {
+	font-weight: bold !important;
+	text-shadow: 1px 1px 1px #C2F1FF;
+	color: #075464;
+}
+button:hover,
+.plc-botao:hover {
+	background-position: 250px 50% !important;
+	border-color: #60B2CE !important;
+}
+/* corpo - formulario */
+fieldset.plc-fieldset {
+	background: #ebfcff url(bg_content.jpg) repeat !important;
+	border-color: #9FCCE2 !important;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+legend.plc-fieldset-legend {
+	background: #7FDAF4;
+	text-shadow: 1px 1px 0 #ADE7F8;
+	font-weight: bold;
+	color: #2D4863;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+div.plc-corpo input,
+div.plc-corpo input.radio,
+div.plc-corpo select,
+div.plc-corpo input.checkbox,
+div.plc-corpo textarea {
+	border-color: #7F929E #CCE5EF #CCE5EF #7F929E !important;
+	font: 11px Tahoma, Arial, sans-serif;
+	color: #362D29;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: inset 0 0 7px 1px #EBEDEF;
+	-webkit-box-shadow: inset 0 0 7px 1px #EBEDEF;
+}
+
+/* login - logout */
+div.plc-login-formulario {
+	background: #D6ECFF url(bg_app.jpg) repeat !important;
+	border: 1px solid #3A7196;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: 0 0 7px 0px #1a3cba;
+	-webkit-box-shadow: 0 0 7px 0px #1a3cba;
+}
+div.plc-login input {
+	border-color: #7F929E #CCE5EF #CCE5EF #7F929E !important;
+	font: 11px Tahoma, Arial, sans-serif;
+	color: #362D29;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: inset 0 0 7px 1px #EBEDEF;
+	-webkit-box-shadow: inset 0 0 7px 1px #EBEDEF;
+}
+div.plc-login-botao input {
+	background: #8DE2FF url(bg_botao.jpg) repeat-x 0 50% !important;
+	border: 1px solid #62B2CE !important;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-box-shadow: 0 1px 3px 0 #B7BCC9;
+	-webkit-box-shadow: 0 1px 3px 0 #B7BCC9;
+	font-weight: bold !important;
+	text-shadow: 1px 1px 1px #C2F1FF;
+	color: #075464;
+}
+div.plc-login-botao input:hover {
+	background-position: 250px 50% !important;
+	border-color: #60B2CE !important;
+}
+
+/* Mensagens */
+div.plc-msg-sucesso {
+	background: #A3E7FF !important;
+	border: 1px solid #A3E7FF !important;
+	font-weight: bold !important;
+	color: #334654 !important;
+}
+div.plc-msg-advertencia { }
+div.plc-msg-erro {
+	background: #FECECE !important;
+	border: 1px solid #FECECE !important;
+	font-weight: bold !important;
+	color: #663233 !important;
+}

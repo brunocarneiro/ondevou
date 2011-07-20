@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:plcf="http://www.powerlogic.com.br/plcf"
+	xmlns:tr="http://myfaces.apache.org/trinidad"
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">
+
+<ui:composition template="/fcls/template/PlcGeralTemplate.xhtml">
+	<ui:define name="plc-corpo-formulario">
+		<plcf:tabela tituloChave="menuDinamicoPlc.titulo">
+			<plcf:linha>
+				<plcf:celula />
+				<plcf:celula rendered="#{empty requestScope.visualizaDocumentoPlc}">
+					<plcf:tituloExclusao />
+				</plcf:celula>
+				<plcf:celula>
+					<plcf:titulo tituloChave="label.id" />
+				</plcf:celula>
+				<plcf:celula>
+					<plcf:titulo tituloChave="label.nome" />
+				</plcf:celula>
+				<plcf:celula>
+					<plcf:titulo tituloChave="label.url" />
+				</plcf:celula>
+			</plcf:linha>
+			<plcf:iteracao id="plcLogicaItens" value="#{plcLogicaItens.itensPlc}">
+				<plcf:linha>
+					<plcf:celula styleClass="celulaFormularioContador">
+						<plcf:contador />
+					</plcf:celula>
+					<plcf:celula styleClass="celulaFormularioCaixaMarcacao"
+						rendered="#{empty requestScope.visualizaDocumentoPlc}">
+						<plcf:caixaExclusao id="indExcPlc" />
+					</plcf:celula>
+					<plcf:celula>
+						<plcf:oid id="plcMenuDinamico_id" />
+					</plcf:celula>
+					<plcf:celula>
+						<plcf:texto id="nome" value="#{item.nome}" ajudaChave="ajuda.nome"
+							tamanho="30" />
+					</plcf:celula>
+					<plcf:celula>
+						<plcf:texto id="url" value="#{item.url}" ajudaChave="ajuda.url"
+							tamanho="80" tamanhoMaximo="250" />
+					</plcf:celula>
+				</plcf:linha>
+			</plcf:iteracao>
+		</plcf:tabela>
+	</ui:define>
+</ui:composition>
+</html>

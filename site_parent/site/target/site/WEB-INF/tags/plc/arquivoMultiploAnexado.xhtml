@@ -1,0 +1,48 @@
+<ui:composition xmlns:c="http://java.sun.com/jsp/jstl/core"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:tr="http://myfaces.apache.org/trinidad"
+				xmlns:plcf="http://www.powerlogic.com.br/plcf">
+	<tr:panelGroupLayout id="multiplosArquivosAnexados" partialTriggers="uploadArquivo botaoAcaoBaixarArquivo">
+		<ui:insert name="plc-corpo-anexo">
+			<c:set var="dirIcones" value="${pageContext.request.contextPath}/res-plc/midia/icoArrojado/" scope="view"/>
+			
+			<plcf:tabela classeCSS="plc-tabela-arquivo"> 
+				<plcf:linha>
+					<plcf:celula>
+						<plcf:titulo tituloChave="${requestScope.plcURLSemBarra}.label.arquivo.anexado" />
+						<plcf:arquivoAnexado id="uploadArquivo" valueChangeListener="#{plcAction.uploadFile}" label="" />						
+						<plcf:botaoAcao id="botaoAcaoAnexarArquivo"  partialSubmit="false" urlIcone="ico iUpload" label="${requestScope.plcURLSemBarra}.label.arquivo.anexado.upload" validaForm="false" inlineStyle="vertical-align:bottom; width:90px;"  />
+						<c:if test="${sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='I' or sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='G'}">
+							<a href="#" onclick="document.getElementById('corpo:formulario:botaoAcaoAnexarArquivo').click();" >
+								<img class="icone_acao" src="${dirIcones}evt_anexar.gif" alt="${requestScope.plcURLSemBarra}.label.arquivo.anexado.upload"/>
+							</a>
+						</c:if>
+						<input type="hidden" name="posicaoArquivo" />
+					</plcf:celula>
+				</plcf:linha>
+				<plcf:linha>
+					<plcf:celula>
+						<tr:iterator id="colecaoMultiplosArquivos" value="#{plcAction.entity[requestScope.nomeColecaoMultiplosArquivos]}" var="item" varStatus="i">
+							<plcf:linha>
+							<plcf:celula>
+								<plcf:caixaMarcacao id="excluiArquivo" value="#{item.indExcPlc}"   disabled="#{empty item.id}"/>
+							</plcf:celula>
+							<plcf:celula>
+								<plcf:texto id="nomeArquivo" value="#{item.name}" disabled="true" tamanhoMaximo="28"/>
+							</plcf:celula>
+							<plcf:celula>
+								<plcf:botaoAcao id="botaoAcaoBaixarArquivo" urlIcone="ico iGravar" label="${requestScope.plcURLSemBarra}.label.arquivo.anexado.download" acao="downloadFile" validaForm="false" onclick="jQuery('[name=posicaoArquivo]').val(#{i.index});"/>
+								<c:if test="${sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='I' or sessionScope.SESSION_CACHE['formAcaoExibeTexto']=='G'}">
+									<tr:goLink destination="#" onclick="document.getElementById('corpo:formulario:colecaoMultiplosArquivos:#{i.index}:botaoAcaoBaixarArquivo').click();">
+										<img class="icone_acao" src="${dirIcones}evt_baixar.gif" alt="${requestScope.plcURLSemBarra}.label.arquivo.anexado.download"/>
+									</tr:goLink>
+								</c:if>
+							</plcf:celula>	
+							</plcf:linha>
+						</tr:iterator>
+					</plcf:celula>
+				</plcf:linha>
+			</plcf:tabela>
+		</ui:insert>
+	</tr:panelGroupLayout>
+</ui:composition> 

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.14" id="1">
+    <property name="author">Powerlogic</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 1.0.1 Build &lt;20051130-1157></property>
+    <property name="units">cm</property>
+    <text-property name="title">jCompany BIRT General Framework</text-property>
+    <property name="comments">Copyright (c) 2008 Powerlogic</property>
+    <html-property name="description">Contém estilos de base para todos os componentes de relatórios corporativos.</html-property>
+    <property name="theme">defaultTheme</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="BancoLocal" id="70">
+            <property name="odaDriverClass">org.apache.derby.jdbc.ClientDriver</property>
+            <property name="odaURL">jdbc:derby://localhost:1527/bancolocal</property>
+            <property name="odaUser">APP</property>
+            <encrypted-property name="odaPassword">QVBQ</encrypted-property>
+            <property name="odaJndiName">java:comp/env/jdbc/###POOL###</property>
+        </oda-data-source>
+    </data-sources>
+    <themes>
+        <theme name="jCompanyDefaultTheme" id="103">
+            <styles>
+                <style name="tabela1ValorTextoPlc" id="109">
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                    <structure name="dateTimeFormat">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                    <property name="textAlign">left</property>
+                </style>
+                <style name="masterCabecalhoDataCriacaoPlc" id="11">
+                    <property name="fontFamily">"@Arial Unicode MS"</property>
+                    <property name="fontSize">x-small</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="paddingTop">8px</property>
+                    <property name="paddingLeft">4px</property>
+                    <property name="paddingBottom">0px</property>
+                    <property name="paddingRight">10px</property>
+                    <property name="textAlign">left</property>
+                </style>
+                <style name="masterCabecalhoGridPlc" id="105">
+                    <property name="borderBottomColor">#C0C0C0</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                </style>
+                <style name="masterCabecalhoSubtituloPlc" id="9">
+                    <property name="fontSize">smaller</property>
+                    <property name="fontWeight">lighter</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="textAlign">center</property>
+                </style>
+                <style name="masterCabecalhoTituloPlc" id="6">
+                    <property name="fontFamily">"@Arial Unicode MS"</property>
+                    <property name="fontSize">xx-large</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="textAlign">center</property>
+                </style>
+                <style name="gridCelulaPlc" id="18">
+                    <property name="marginTop">5px</property>
+                </style>
+                <style name="gridLinhaEspacoTopoPlc" id="17">
+                    <property name="marginTop">5px</property>
+                    <property name="marginBottom">0px</property>
+                    <property name="lineHeight">1.5cm</property>
+                    <property name="verticalAlign">middle</property>
+                </style>
+                <style name="cabecalho1ValorComBordaPlc" id="8">
+                    <property name="fontFamily">"@Arial Unicode MS"</property>
+                    <property name="fontWeight">bolder</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">1px</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">1px</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">1px</property>
+                    <property name="marginTop">0px</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0px</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">0px</property>
+                    <property name="paddingLeft">1px</property>
+                    <property name="paddingBottom">0px</property>
+                    <property name="paddingRight">1px</property>
+                    <property name="lineHeight">20px</property>
+                </style>
+                <style name="tabela1ValorDataPlc" id="22">
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                    <structure name="dateTimeFormat">
+                        <property name="category">Medium Date</property>
+                        <property name="pattern">Medium Date</property>
+                    </structure>
+                    <property name="textAlign">center</property>
+                </style>
+                <style name="masterRodapeContadorPaginaPlc" id="13">
+                    <property name="backgroundPositionY">bottom</property>
+                    <property name="fontFamily">"@Arial Unicode MS"</property>
+                    <property name="fontSize">x-small</property>
+                    <property name="fontWeight">bolder</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderTopColor">#C0C0C0</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">1px</property>
+                    <property name="marginTop">10px</property>
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                    <property name="textAlign">right</property>
+                    <property name="verticalAlign">bottom</property>
+                </style>
+                <style name="tabela1ValorDataHoraPlc" id="21">
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                    <structure name="dateTimeFormat">
+                        <property name="category">Custom</property>
+                        <property name="pattern">dd/MM/yyyy HH:mm:SS</property>
+                    </structure>
+                    <property name="textAlign">center</property>
+                </style>
+                <style name="tabela1ValorNumeroPlc" id="20">
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">10px</property>
+                    <structure name="numberFormat">
+                        <property name="category">General Number</property>
+                        <property name="pattern">General Number</property>
+                    </structure>
+                    <property name="textAlign">right</property>
+                </style>
+                <style name="rodape1TotalPlc" id="7">
+                    <property name="backgroundRepeat">repeat-x</property>
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="fontSize">larger</property>
+                    <property name="fontWeight">bold</property>
+                    <property name="marginTop">10px</property>
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                    <property name="verticalAlign">middle</property>
+                </style>
+                <style name="tabela1RotuloNumeroPlc" id="19">
+                    <property name="backgroundColor">#E8E8E8</property>
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="fontWeight">bolder</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="paddingTop">8px</property>
+                    <property name="paddingLeft">2px</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">2px</property>
+                    <property name="textAlign">center</property>
+                </style>
+                <style name="rodape1RotuloPlc" id="5">
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="fontSize">larger</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="marginTop">10px</property>
+                    <property name="textAlign">right</property>
+                </style>
+                <style name="cabecalho1RotuloAlinhadoDireitaPlc" id="16">
+                    <property name="fontFamily">"@Arial Unicode MS"</property>
+                    <property name="paddingLeft">2pt</property>
+                    <property name="paddingRight">2pt</property>
+                    <structure name="stringFormat">
+                        <property name="category">Custom</property>
+                    </structure>
+                    <property name="textAlign">right</property>
+                </style>
+                <style name="tabela1RotuloGeralPlc" id="111">
+                    <property name="backgroundColor">#E8E8E8</property>
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="fontWeight">bolder</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="paddingTop">8px</property>
+                    <property name="paddingLeft">2px</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">2px</property>
+                    <property name="textAlign">left</property>
+                </style>
+                <style name="tabela1ValorDinheiroPlc" id="112">
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">10px</property>
+                    <structure name="numberFormat">
+                        <property name="category">Custom</property>
+                        <property name="pattern">R$ ###,##0.00</property>
+                    </structure>
+                    <property name="textAlign">right</property>
+                </style>
+            </styles>
+        </theme>
+        <theme name="defaultTheme" id="106">
+            <styles>
+                <style name="grid" id="15">
+                    <property name="borderTopColor">#C0C0C0</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="borderTopWidth">1px</property>
+                    <property name="marginTop">0px</property>
+                    <property name="verticalAlign">middle</property>
+                </style>
+                <style name="label" id="10">
+                    <property name="backgroundColor">#E8E8E8</property>
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="fontWeight">bolder</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="paddingTop">8px</property>
+                    <property name="paddingLeft">2px</property>
+                    <property name="paddingBottom">0px</property>
+                    <property name="paddingRight">2px</property>
+                    <property name="display">block</property>
+                </style>
+                <style name="data" id="12">
+                    <property name="paddingTop">3px</property>
+                    <property name="paddingLeft">3px</property>
+                    <property name="paddingBottom">3px</property>
+                    <property name="paddingRight">3px</property>
+                    <property name="verticalAlign">top</property>
+                </style>
+                <style name="table" id="14">
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="borderTopColor">#C0C0C0</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="borderTopWidth">1px</property>
+                    <property name="marginTop">0px</property>
+                    <property name="paddingTop">0pt</property>
+                </style>
+                <style name="table-header-cell" id="113">
+                    <property name="verticalAlign">bottom</property>
+                </style>
+            </styles>
+        </theme>
+    </themes>
+    <page-setup>
+        <simple-master-page name="default" id="29"/>
+    </page-setup>
+    <list-property name="images">
+        <structure>
+            <property name="name">marca_empresa.gif</property>
+            <property name="data">
+                R0lGODlhvAAzAOZ/AMAvJAAAAL+/v4CAgEBAQN+WkDk5OTQ0NMQ8Mj4+PsI1KhUVFe/LyNBjWtyMhfPW
+                1NJpYU5OTtRxamBgYBEREZ+fnwcHB+/v76+vryIiIsPDwx4eHo+Pj1paWn19fYWFhSoqKjAwMCYmJt/f
+                3+Ojnv///+CZlNZ4cVRUVERERBgYGM5dVcxVTM/Pz8dHPslORc1ZUS4uLsZDObOzs+q7t9FmXshLQcpR
+                SHBwcNNvZ9V0bHp6elBQUEpKSg0NDVJSUtmDfCAgIHV1dUJCQt6TjUdHR+euqt+XkVhYWBoaGs9gWNBk
+                XEZGRoKCghwcHGVlZeCYk2lpaTIyMpGRkdJrYwkJCV5eXm5uboiIiCQkJCgoKMdFO4GBgffm5MhJP9PT
+                08M4LcVANth/eMtVTKKioueyrvvy8SwsLMpQRuGemd+YkkFBQdZ3cMnJyclMQtd8deDg4MExJ+GbltRw
+                aPHQzs5cU8tUS9h9dgICAsxXTuy/vO3DwMdJP7e3t/DOy////yH5BAEAAH8ALAAAAAC8ADMAAAf/gH+C
+                g4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goYYabaWmpl8lqiWirZhddHQPs3RdroSwsg+xtpcb
+                Tx4eO8PEQlE4HzOqt8yQJhBE0URAJM1/UBAFBUQFbGmYG1FNXAPl5uYeQkIX1u2KJlQFUFAm1NZQVCb6
+                Jiffvk/EhqkLKPAKK3cICT2TRkRMtWZQljiY6ECCP0tJJqhTh6NDChQ4NqqL8CWhyT8malB08OYhsyM2
+                VshccUMOpiQdrujEYaXDBBE9dO5EUeFkQhMNgFA84fJWmSVQo5bBpAJFlKtReGD5IyBLB6xRImw1tGqV
+                ybIHIZUtZEIJkLdA/3Q0JYSWkdlNdRWp+PGk7xOxgpLw9dtj7KASGqZcmcD4Axk4hQR84ECZAxbIgkZg
+                qUyZDCEymyt/KFSiD4fFjK9w6JNWkGTOHDR84cB4wodUg0ysEAOEt0XSD4w0FCOGiJEHrQd1MdL7jZEu
+                JfaQmD596h8GaaiTSMOgkBnpb4gXJ4Ec0YIIVtJPKCxIRYQJ6osYLo2CR4f7+HkQ2IH5DwYRKOCXwBSD
+                VBACfh2gkAIhGTCRXxGEzBBBD0ggeF8EKVSQ1gAgBIjfBB8hGMEOB5lQxxsovpHDRX88IAYEOpwgo4w6
+                UAEEHa2VsYIEM+pQwxE5sDEjFXMIckQeM57QgP9NgpRAQg05JCkjGznMsUdyfyzQQwdIVJjCWCoUweV9
+                Q4xVAgdb4ocEChXe9wMBLQjSwgY/4MfEDoM0YYCFIRx0gXv49WDFIFgk0CaXbKrZAw6DcOihmodeyIEg
+                JsAQo5AQXOTHCjFOqYOQU9ZAwyAM3NBpj58mSaSRSM645CBv1ADqCWykOuUSoxaywEco9LrGWLv22msC
+                Y8FhgLAoRGBACEwg24MBg1DQbK898DDIE8ciKwVmAjgRgbAJjPbHCCJ82+sPQ8SQAA/IHiCAIANoYW6v
+                yhowb31SUJqHBDr0W8NFSuTQr78sKDHHwDrU0QsQlg4swRJjKMHvwFAayQL/wiswWcYYE+sgQQNjLNGx
+                BHWYUQgFBESgcgThCrJAyisbMNYOQ/Cw8gFOpBAEEytHAAIGghhgr8pFaDFIDwn0HMEBGgjCQQY9rCzF
+                DIIIEULPQ2iRQgZDR8BDAkLAC9TKPYRQBAhnRL1yBpSOkcPbOTTgjx52wJ0DBF7U4MUKdi9BhCAQwNA3
+                GkvwwTfcS+RgZN1w18GkTHPArUQeS8jQgN0w6HFyAj10/qy4FBjg+eeCoLCG50xsALQQondeRAxNCPKE
+                2Z1vPYIgBHA++gFU//GEFkV0zoQIt/9RhBSjx+BZBRkE37m98GaQgucJ4HlB6J4XwTZKN0BAxfdK+GNC
+                /x7efw+DA3/oYUP5VDRQ5B8Q5PE9FRCMobn67AdsJBrzUwEDkwhYwfwg4AZbiKF78/vfyQyQggam4ACg
+                Y6ADpSAuFCTAgWtIwruacAAHpgB2guBCFobQwCGI4F1ZuqAHZSaID2JwA4MoQggcaMJ3CWADJGzgAXoA
+                ryAQwIEHGIsPOlhCGF6DcDVIYh3Ex4IkJpEFJriOCxrgRIMBbgxOXAIausMAFyzBiXVQ3B+O8AIn1oAF
+                AIRBFr1gpBd8MYl5YFK0DpC7BBAgBKCjYwLsiEdB8MAAucudBv/QhBAEMgEgiB1XkmDHPWohdhdgZB3t
+                aAA8/cEChqRkBGJ4hj3mLv8LNnRCIwmAPHhtAJB2pKAgfCCFQzpBEFBwQwNm2QAFosQOtGyAHaLIgC0o
+                gZYreB8EbpDLF3DRl7SEARWMJEta2oFJYMhDLl3AzF/O8pmF8EEIhCa0M4hLm9w0AAjExYMDhFMFGwRB
+                OEWgyBEswJxCA8ETuHLKcBrgANYaATiFFoIoxFAL4cyADZMQzhjw8A8DSAI8DRCDb8YgnEmAZUxmMgYm
+                mQANM1kBGngpgzrMRHCAw+hMbMDFjs6EBcsc495mggZo2iGjMoDlSmXS0myC4AA4PYAWRnO9GOT0ACIQ
+                VwRCkFMpLGCDWvhpBhT5Bx/cFKcggBAGNvBTnEohBSX/EAAFfIrToA4iBVn46QZsqIKfRhVeKpBCTscp
+                iCo8FacqMJILYEBXGNSEUi+oKwxewMsw5KGuLBBjDdygVxdwMQx6vUFK1TDXuvJVEGBAQx3qGtMxNpau
+                jyWED0QQgs6GAASXiUIGPNvZLAgVBJ6NwVEJyVnPBoGp2vMsCHxAyCCQ1rNJKMEAFnAGz471q6PtbAwG
+                KYAFxMCzIoAQQlVw3M569Q9VyAAIpguCBRhpC2NggXZrihIbaFe7NuirHb57A8F6V7tjMOx1wpDd7UJA
+                EGrYAgvyAN4o/gEML6CvdsNw3fnWtxDRpe50M5AE6QoYBKoTRAREIGAKbNDA090A/1MnkIQzTFcEFBiB
+                ECAs4A1cYAILQNt0VVC8P6RgAwJGJ1dCbGEQNA9eIaZuBsSFBx/Y2MYWMJIMbsDjG7jBoi7o8Q1cwEsE
+                oKHHL0hpDYLcYxlwEQFCdsN7x7jjHhNZEAqwgZD5S+UXePkFW7DvIKqwARGY+cxoPnMWMsCOP/QgA2p2
+                8B+4UOYzJ4ELg+DAAtB8VCYEIc1mHusaVKDmIBAiBUlAczgG8IREn3kDTIAXBRQtLgFY+tIoPEIYvvwC
+                L1h0C5wO83UQ8AI0eNkGSpYBp508ak57Ycpq2PSXZWBfBbiA0wiArwLAwGteH6EQFnBCBoZN7GIPOwgq
+                YGoPNv9QbB+8iwsFJvYC8OwaHzB72AtoQhGubWwnCAAPKiD2BpTbwnAXewMqiDaxk7AghFIgCOtmKiI0
+                bYN620DUKJGBvW1A61F7wd4umHIN9G3vMDx531uAdRj23e8/KIDg9c61Iyyggg1Y3OJOUIHGVbCABUiY
+                EEVIwsU34Ow5V/zi0x7EBaogcourAAkUaPnIN+CEDvhA5ioI21c9PvOeo7vdA/CBEy6e7EUcAQEuSLoL
+                Gg6FMCjdBWGAwnXA8HQZCNzpSkcAF6mudBnUAL5IV3oYai2Dp0u8ERZYwMY1HoMiNPAJXMBAm2Oo9o1X
+                4dkUWDsFqO2yunM8AXlf+9oJEHj/jVOAQF8tvMY7znjGUwDoPvB7to2OABlYXgZjh2XlL48AqTMADJfH
+                /JSXsHnLa33qoQ/D1/+ghtLLAAG1DkPowfAIPFjg9rjneyLWgPvb4+FdA+j97QdACN4L//jI7z0KBWH8
+                3hPRgw1kFEJt33viK+IIcVCA9rX/a9Znf/txUMN1vr/9JQhiCeRXQBy4mH4FmH+M6Y9D99sfB0Ew4Aj4
+                z393CBGA/vs/ANanCATwf/0HfAQIgISAAwdIgEGwgP83d38wgAT4LheAaZYWJwh1gAE4bwDQgR7YfUfg
+                gR94HSLYgQ0gCA1QggDARSp4gmOkgt2nggBgJDBYCAu4gYgg/4H/Z4AEuIEc4ID+p4BASAGFoIP+Z0MH
+                SADwooFGV4MvWIK/xgAtiIIqyIIl6IIhCIWCIIM0qIX8x4SLYIQFmIE9SAgCAIQFiIZKSAhiGABISIBr
+                OABgmAhZKIIgWINSeIVUWIJWKIJY6IRc+IR2aINzmAhtyIP/t4EXoIZ/gIbSNwiHyBVJuIRleH1OWIcj
+                mId+uIci2Ice+IdeGIiY2IHdNwg3yAiRKIeVOAgN6ICM0ooLWBRseIBv+H9xWIiHMIoAcIdaqImfyIke
+                6Ikm2IWD+Aei6ISmiIuHkIq42Ib+Nyk8AITLhzu0KIlwSImJ2IReqItROIV/kIJ8SIJ6KP+II2iMKkiM
+                5ZiMq2iI1aiK2UgI7tiOQGgIkXiG10iG70iHl4iH3giOnSiOm0iOpLiF5yiQu0iI64gI0UiAPCAAsPiM
+                hVABQMgO9niAhlYIC2mLApCR/mct+Oh/OGgI3CgIJKCCXsAAc6CC7+OPHlgNJTmOI/kHCKCCDsAAXqCC
+                c3GKiyCRaPh/GDgIFUmARDguDriGhMCTPdl/k/KR/ReShRCTXSCDUvkQLCmVv2iQ3XcHVqmCD4CQ+agI
+                IZCUAWCUXziJgkABOlkIYZmUFNBm8diU2liMf+AAW+mBCGAyc1mXAQmVM6mXLliWX5kILbCWQBgCEMiK
+                C/iIziiLhTD/mD0ZBD/5lghoiV74B2aQkluJAF0pCGbAAno5jFhJKn1plSyAl2xIAKiZmozJCBXgjASw
+                moWAA6k5m4zZmrOJmj9pCAaygCHAARBom7S5CGWQS7NkHaQyB6PpgSxwBKbJmXeQnCxAl+M4nMRpnJZ5
+                BJ6pktbpCS1wabnZDt15gQjRBQxQnvunCOZpMtIZkJBgngzQC0YRn/JJKvmXf1U5kKEgm6o5CQMwjYfw
+                iIcwmHf0nQCKCLAZGU4JCRiAmiGAAf35BwV6CAeKjlupOa3woH/AAQPADhegoSNwAS1AGYLQob6JUDaE
+                oRcwABUQJxioof5pmH9wASEwLhUIonIy/wBAA6IiKqMCcDsueqPl4B8q2pgDUKJ/UAEDUGLjsoYg+qAY
+                6KBxMgItgKPjEgICwA4a2ma6KINs5AoPOgEcgAHWAqYYgAEC0KATUBQ8UAEVYC392QIEIABw8gcNuqAR
+                KAgVIKc/KQCPiAMCMAAEkKRKOAJWOgGWhqYVMAJB8KB5CieE+qfEZ6Y4sJSuIQBtmqE4gAEz2ihA0yjv
+                ooQVYKgEkKINGQIj4JBJSqYeuaUl6AWbeaHvsqgDYGhG+adcQXxrqIT9+aB/aqt3uoYcQABBsHy+aqIY
+                qqsTMADJaqu2apTBOqy8Gqk8EAIb2AITgJp3aqKeCo+fGoHlEKcP+v+gayirF0mdxDlLd3AE5+ml72Kl
+                lpattxqvuWqiYeofHMCnuHOnGqqtI7qpdJqiKKSELtqjzIqrTkN8uwo0f9oCPFCBG2iqd9qwELqnE6By
+                4voHPGCmVxqu3Uqnlzaf3JqhyaqEOMADk1qwEMoYjNKfhDoAEBuo+nGnYuqy09iagFoUxxqjgXqyxGer
+                E5CpM2ulIxCo1Dq0A8ADG7izSrigslkIjHG0SNqtG6msvaqt1BqiIwuyg/ChmXGlchInF3A7Yfu1mcGh
+                XhujPWotGNgCLcC1hHCqxeO2ewq2Yls8PfoHbMu1pzq2e6ukNYqBp3oIcEujeDuid6u3ZssOe6sWtaFw
+                rXPKuJAbuZI7uZRbuZZ7uYoQCAA7
+            </property>
+        </structure>
+    </list-property>
+</library>
