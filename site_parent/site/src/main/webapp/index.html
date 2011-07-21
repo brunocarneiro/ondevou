@@ -12,29 +12,34 @@
 <body class="r-user c-overview  lang-pt">
 	<script>
 
+	//template	
 	jQuery(function(){
 
-		$.ajax({url:'http://localhost:8080/site/soa/service/'+getHash()[0]+'('+getParam('id')+')',
+		$.ajax({url:'http://localhost:8080/site/soa/service/api.'+getHash()[0]+'('+getParam('id')+')',
 			success: function(result){
-
-					$.ajax({url:'http://localhost:8080/site/mvp/'+getHash()[0]+'Template.html'+getHash()[1],
-						success: function(template){
-								
-								var parseado = Mustache.to_html(template, result).replace(/^\s*/mg, '');
-								$('body').append(parseado);
-							}
-	
-						}
-	
-					);
+					var parseado = Mustache.to_html(jQuery("#body").val(), result).replace(/^\s*/mg, '');
+					$('body').append(parseado);
 				}
-
 			}
-
 		);
-		
-
 	});
+
+
+	//ajax nos links
+	jQuery(function (){
+		jQuery('a').each(function(){
+			$(this).click(function(){
+				$.ajax({url:'http://localhost:8080/site/soa/service/api.'+$(this).attr('href').replace('#','') +'('+getParam('id')+')',
+					success: function(result){
+							var parseado = Mustache.to_html(jQuery("#body").val(), result).replace(/^\s*/mg, '');
+							$('body').append(parseado);
+						}
+					}
+				);
+			});
+		});
+	});
+	
 
 	function getParam(name)
 	{
@@ -56,6 +61,115 @@
 		return retorno;
 	}
 
+	
+
 </script>
+
+
+
+
+
+
+<textarea id="body" style="visibility: hidden;" >
+<div id="page" class="            ">
+<div class="fiflufi">
+
+<div id="header" class="clearit">
+<div id="headerWrapper">
+
+<div id="LastAd_skin" class="LastAd">
+<div align="center"></div>
+</div>
+
+<div id="LastAd_beacon" class="LastAd">
+<div align="center"></div>
+</div>
+
+<div id="LastAd_leaderboard">
+<div align="center"></div>
+</div>
+<div id="content">
+<div><!-- This containing div fixes an IE bug where the absolutely positioned element disappears randomly. Don’t ask me why. -->
+<div id="secondaryNavigation">
+<ul>
+	{{#template}}{{#menu_esquerdo}}
+	<li><a href="{{url}}">{{nome}}</a></li>
+	{{/menu_esquerdo}}{{/template}}
+</ul>
+</div>
+</div>
+<div>
+<div class="leftColWrapper">
+
+<div id="userBadge" class="clearit user vcard" id="hcard-brunoac88">
+<div class="badgeAvatar"><span class="userImage">
+	<img class="photo" src="{{#usuario}}{{urlFoto}}{{/usuario}}" />
+</div>
+<div class="badgeHead">
+	<h1>{{#usuario}}{{nome}} {{sobrenome}}{{/usuario}}</h1>
+</div>
+<div class="badgeInfo">
+<a href="/settings" style="float: right;">
+	<small>Editar &raquo;</small>
+</a>
+<p class="userInfo adr">
+	23, {{#usuario}}{{#sexo}}{{lookup}}{{/sexo}}{{/usuario}}, 
+	<span class="country-name">Brasil</span>
+</p>
+<div class="userData"><span class="userPlays" title="Média de 12 faixas por dia">
+	<strong><span class="count"><span class="flip">6</span><span class="flip">5</span></span>&nbsp;opiniões</strong>
+<small>desde 11 Nov 2007</small></span>
+<p class="userActivity"><a href="/user/brunoac88/library/loved"
+	title="">1 Lugar preferido</a> | <a href="/user/brunoac88/grapevine"
+	title="">0 Posts</a> | <a href="/user/brunoac88/playlists" title="">1
+Lista</a> | <span class="shoutCount" title="Há 3 mensagens"> <a
+	href="#shoutbox" id="shoutBoxLink" class="icon"> <img
+	class="icon comment_icon" width="13" height="11"
+	src="http://cdn.last.fm/flatness/clear.gif" /><span>3 mensagens</span>
+</a> </span></p>
+</div>
+<!--.userData--></div>
+<!--.badgeInfo--></div>
+
+<div class="module moduletracks" id="recentTracks">
+<h2 class="heading"><span class="h2Wrapper"><a
+	href="/user/brunoac88/tracks" title="">Últimos Lugares</a></span></h2>
+<div id="recentTracksButtons" class="moduleButtons"><a
+	class="mEdit icon" href="#"><img class="icon settings_icon"
+	width="9" height="9" src="http://cdn.last.fm/flatness/clear.gif" /><span>Configurações</span></a>
+| <a href="http://ws.audioscrobbler.com/1.0/user/brunoac88/recenttracks.rss">
+	<img class="icon feed_small_icon" width="10" height="10" src="http://cdn.last.fm/flatness/clear.gif" />
+ </a>
+</div>
+<div class="module-body">
+<div class="recentTracksContainer">
+<table class="tracklist withimages" id="recentTracks">
+	<tbody>
+		{{#usuario}}{{#lugarUsuario}}
+			<tr class="first" id="r9_1085130_1023730413" data-track-id="1085130">
+				<td class="imageCell imageSmall "><a
+					href="profileLugar.html?id={{#lugar}}{{id}}{{/lugar}}"><img height="34"
+					width="34" alt=""
+					src="{{#lugar}}{{urlFoto}}{{/lugar}}" /></a></td>
+	
+				<td class="playbuttonCell ">
+				<div></div>
+				</td>
+				<td class="subjectCell "><a href="profileLugar.html?id={{#lugar}}{{id}}{{/lugar}}">{{#lugar}}{{nome}}{{/lugar}}</a> – <a
+					href="profileLugar.html?id={{#lugar}}{{id}}{{/lugar}}">{{dica}}</a>
+				</td>
+				<td class="lovedCell"></td>
+				<td class="smallmultibuttonCell ">
+					<a href="profileLugar.html?id={{#lugar}}{{id}}{{/lugar}}" class="             mRemoveFromLibrary         mSend        mAddTags       mAddToPlaylist
+	                     mLove                                     lfmButton lfmMultiButton lfmButtonFortrack lfmSmallButton lfmSmallMultiButton lfmMultiButtonFull
+	"
+					forcelink="1"><span></span></a></td>
+				<td class="dateCell "><span class="date">1 hora atrás</span></td>
+	
+			</tr>
+		{{/lugarUsuario}}{{/usuario}}
+	</tbody>
+</table>
+</textarea>
 </body>
 </html>
