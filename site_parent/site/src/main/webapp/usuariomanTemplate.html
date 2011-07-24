@@ -1,33 +1,10 @@
-<div id="page" class="            ">
-<div class="sic" id="library">
-<div id="LastAd_skin" class="LastAd">
-<div align="center"></div>
-</div>
-<div id="LastAd_beacon" class="LastAd">
-<div align="center"></div>
-</div>
-<div id="LastAd_leaderboard" class="LastAd">
-<div align="center"></div>
-</div>
-<div id="content">
+
 <div><!-- This containing div fixes an IE bug where the absolutely positioned element disappears randomly. Don’t ask me why. -->
-<div id="secondaryNavigation">
-<ul>
-	<li><a href="#usuario?id={{#usuarioman}}{{id}}{{/usuarioman}}">Profile</a></li>
-	<li class=" current  first "><a href="/user/brunoac88/library">Lugares</a></li>
-	<li><a href="/user/brunoac88/charts">Amigos</a></li>
-	<li><a href="/user/brunoac88/events">Sugestoẽs</a></li>
-	<li><a href="/user/brunoac88/friends">Notícias</a></li>
-	<li><a href="/user/brunoac88/neighbours">Vizinhos</a></li>
-	<li><a href="/user/brunoac88/groups">Eventos</a></li>
-	<li><a href="/user/brunoac88/journal">Promoções</a></li>
-</ul>
-</div>
 <div id="libraryPagehead" class="pagehead clearit">
 <p><a href="/user/brunoac88"
 	title="Bruno Carneiro, 23, Masculino, Brasil"><span
 	class="userImage"><img height="34" width="34" alt=""
-	src="{{#usuarioman}}{{urlFoto}}{{/usuarioman}}" /></span>{{#usuarioman}}{{lookup}}{{/usuarioman}}</a></p>
+	src="{{#data}}{{urlFoto}}{{/data}}" /></span>{{#data}}{{lookup}}{{/data}}</a></p>
 
 <h1><a href="/user/brunoac88/library" title="">Meus Lugares</a></h1>
 </div>
@@ -100,7 +77,7 @@
 
 
 <ul class="    libraryItems artistsLarge">
-	{{#usuarioman}}{{#lugarUsuario}}
+	{{#data}}{{#lugarUsuario}}
 	<li class=" first" id="r6_1053512"><a href="profileLugar.html?id={{#lugar}}{{id}}{{/lugar}}"><span
 		class="pictureFrame"><span class="image">
 		<img height="126" width="126" alt="" src="{{#lugar}}{{urlFoto}}}{{/lugar}}" />
@@ -115,7 +92,7 @@
 		title="Excluir este artista da biblioteca" class="remove"><img
 		class="transparent_png dismiss_dark_icon" width="13" height="13"
 		src="{{#lugar}}{{urlFoto}}}{{/lugar}}" /></a></li>
-	{{/lugarUsuario}}{{/usuarioman}}
+	{{/lugarUsuario}}{{/data}}
 </ul>
 
 </div>
@@ -145,9 +122,5 @@
 <div id="LastAd_lowerleaderboard" class="LastAd">
 <div align="center"></div>
 </div>
-</div>
-<!-- content --></div>
-</div>
-
 </div>
 </div>

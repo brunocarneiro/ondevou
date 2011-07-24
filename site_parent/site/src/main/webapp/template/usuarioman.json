@@ -1,0 +1,36 @@
+{
+	"menu_esquerdo":[
+			{
+				"nome":"Teste",
+				"url":"#usuario"
+			},
+			{
+				"nome":"Lugares",
+				"url":"#usuarioman"
+			},
+			{
+				"nome":"Amigos",
+				"url":""
+			},
+			{
+				"nome":"Sugestões",
+				"url":""
+			},
+			{
+				"nome":"Notícias",
+				"url":""
+			},
+			{
+				"nome":"Vizinhos",
+				"url":""
+			},
+			{
+				"nome":"Eventos",
+				"url":""
+			},
+			{
+				"nome":"Promoções",
+				"url":""
+			}
+		]
+}
