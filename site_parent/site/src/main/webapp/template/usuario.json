@@ -2,35 +2,43 @@
 	"menu_esquerdo":[
 			{
 				"nome":"Profile",
-				"url":"#usuario"
+				"url":"#usuario",
+				"s_class":"current"
 			},
 			{
 				"nome":"Lugares",
-				"url":"#usuarioman"
+				"url":"#usuarioman",
+				"s_class":""
 			},
 			{
 				"nome":"Amigos",
-				"url":""
+				"url":"",
+				"s_class":""
 			},
 			{
 				"nome":"Sugestões",
-				"url":""
+				"url":"",
+				"s_class":""
 			},
 			{
 				"nome":"Notícias",
-				"url":""
+				"url":"",
+				"s_class":""
 			},
 			{
 				"nome":"Vizinhos",
-				"url":""
+				"url":"",
+				"s_class":""
 			},
 			{
 				"nome":"Eventos",
-				"url":""
+				"url":"",
+				"s_class":""
 			},
 			{
 				"nome":"Promoções",
-				"url":""
+				"url":"",
+				"s_class":""
 			}
 		]
 }

@@ -1,52 +1,14 @@
-<div id="fauxHeaderContainer" class="clearit"/>
-<div id="page" class="            ">
-<div class="fiflufi">
-
-<div id="LastAd_skin" class="LastAd">
-<div align="center"></div>
-</div>
-
-<div id="LastAd_beacon" class="LastAd">
-<div align="center"></div>
-</div>
-
-
-<div id="LastAd_leaderboard" class="LastAd">
-<div align="center"></div>
-</div>
-<div id="content">
-<div><!-- This containing div fixes an IE bug where the absolutely positioned element disappears randomly. Don't ask me why. -->
-<div id="secondaryNavigation">
-<ul>
-	<li class=" current  first "><a href="/music/Queen">Local</a></li>
-	<li><a href="/music/Queen/+wiki">Historia</a></li>
-	<li><a href="/music/Queen/+images">Fotos</a></li>
-	<li><a href="/music/Queen/+videos">Videos</a></li>
-	<li><a href="/music/Queen/+albums">Opinioes</a></li>
-	<li><a href="/music/Queen/+events">Eventos</a></li>
-	<li><a href="/music/Queen/+news">Notícias</a></li>
-	<li><a href="/music/Queen/+charts">Curtidores</a></li>
-	<li><a href="/music/Queen/+tags">Tags</a></li>
-	<li><a href="/music/Queen/+listeners">Mapa</a></li>
-	<li class="last"><a href="/music/Queen/+groups">Promocoes</a></li>
-</ul>
-</div>
-</div>
-
-<div class="leftCol">
 <div class="leftColWrapper">
-
-
 <div id="catalogueHead" class="catalogueHead clearit artistHead">
 <div id="artistImages">
 <div class="images"><a href="/music/Queen/+images/13462535"
 	id="firstImage" class="clearit"><img id="catalogueImage"
 	width="252" alt=""
-	src="{{#lugar}}{{urlFoto}}{{/lugar}}" /></a>
+	src="{{#data}}{{urlFoto}}{{/data}}" /></a>
 <span class="moduleOptions"> <a href="/music/Queen/+images">Ver
 todas as 275 imagens</a> </span></div>
 
-<h1>{{#lugar}}{{nome}}{{/lugar}}</h1>
+<h1>{{#data}}{{nome}}{{/data}}</h1>
 
 <p class="stats">92.759.886 opinioes (641.584 curtidores) <br /></p>
 <div class="buttons">
@@ -59,12 +21,12 @@ todas as 275 imagens</a> </span></div>
 "><strong>Adicionar
 tags</strong></a></div>
 
-<p class="origin"><strong>{{#lugar}}{{#endereco}}{{logradouro}},{{ bairro}}, {{ cidade}}{{/endereco}}{{/lugar}}</strong></p>
+<p class="origin"><strong>{{#data}}{{#endereco}}{{logradouro}},{{ bairro}}, {{ cidade}}{{/endereco}}{{/data}}</strong></p>
 
 <div class="wiki">
 
 <div id="wikiAbstract">
-	{{#lugar}}{{resenha}}{{/lugar}}
+	{{#data}}{{resenha}}{{/data}}
 </div>
 
 </div>
@@ -79,9 +41,9 @@ tags</strong></a></div>
 
 <div class="tags">
 <p>Tags:
-{{#lugar}}
+{{#data}}
 	{{tags}}
-{{/lugar}}
+{{/data}}
 </p>
 </div>
 
@@ -153,25 +115,22 @@ mais</a></span></div>
 <div class="module-body chart chartweek current">
 <table class="candyStriped chart" odd="1">
 	<tbody>
-		{{#lugar}}{{#lugarUsuario}}
+		{{#data}}{{#lugarUsuario}}
 		<tr class="first odd" data-track-id="12198">
 			<td class="positionCell">1</td>
 			<td class="playbuttonCell">&nbsp;</td>
 			<td class="subjectCell" title="Bohemian Rhapsody, 10.608 ouvintes">
-			<div>{{#usuario}}{{lookup}}{{/usuario}}</div>
+			<div><a href="#usuario?id={{#usuario}}{{id}}{{/usuario}}">{{#usuario}}{{lookup}}{{/usuario}}</a></div>
 			</td>
 			<td class="lovedCell"></td>
 			<td class="chartbarCell">
 			<div style="width: 100%;" class="chartbar"><span>{{ nota}}</span></div>
 			</td>
 		</tr>
-		{{/lugarUsuario}}{{/lugar}}
+		{{/lugarUsuario}}{{/data}}
 	</tbody>
 </table>
 
 </div>
 </div>
 <hr />
-</div>
-<!--#content--></div>
-</div>
