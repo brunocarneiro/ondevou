@@ -30,8 +30,13 @@
 					$.ajax({
 						url:'http://localhost:8080/site/'+getHash()[0]+'Template.html',
 						success: function(html){
-								
-								var parseado = Mustache.to_html(jQuery("#body").val(), result).replace(/^\s*/mg, '');
+								var parseado="";
+								try{
+									parseado = Mustache.to_html(jQuery("#body").val(), result).replace(/^\s*/mg, '');
+								}
+								catch(err){
+									parseado=html;
+								}
 								$('#bodyInsert').html("");
 								$('#bodyInsert').append(parseado);
 								parseado=Mustache.to_html(html, result).replace(/^\s*/mg, '');

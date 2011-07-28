@@ -1,0 +1,56 @@
+
+<div class="leftColWrapper">
+
+	<a id="register"  text="Autenticar" href="http://localhost:8080/site/foursquare/auth">Autenticar</a>
+	<a id="import">Importar Lugares dos meus Checkins</a>
+	
+</div>
+<script>
+$(function(){
+	$("#register").hide();
+	$("#import").hide();
+	$.ajax({
+		url:"http://localhost:8080/site/foursquare/verify?id="+getParam('id')[0],
+		success: function(result){
+			result=$.parseJSON(result);
+			bruno=result;
+			if(result && result.response){
+				$(".leftColWrapper").append("Vc esta autenicado<br/>");
+				$("#import").click(function(){
+
+					$.ajax({url:'http://localhost:8080/site/foursquare/checkins'+getParam('id',getHash())[0]});
+				});
+				$("#import").show();
+			}
+			else{
+				$("#register").attr("href",$("#register").attr("href")+getParam('id',getHash())[0]);
+				$("#register").show();
+			}
+		}
+	});
+
+});
+
+function getParam(name,url)
+{
+	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+	var regexS = "[\\?&]" + name + "=([^&#]*)";
+	var regex = new RegExp(regexS);
+	var results = regex.exec(url||window.location);
+	if(url!=null || url !=undefined)
+	 return results;
+	if(results == null || results=="")
+	  return "";
+	else
+	  return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function getHash(){
+	
+	var hash = window.location.hash;
+	var retorno = hash.replace("#","").split('?');
+	retorno[1]='?'+retorno[1];
+	return retorno;
+}
+
+</script>
