@@ -67,17 +67,14 @@ public class Lugar  implements Serializable {
 	@Embedded
 	private Endereco endereco;
 
-	@NotNull
 	@Size(max = 5000)
 	@Column
 	private String resenha;
 
-	@NotNull
 	@Size(max = 20)
 	@Column
 	private String twitter;
 
-	@NotNull
 	@Size(max = 15)
 	@Column
 	private String telefone;
@@ -86,7 +83,6 @@ public class Lugar  implements Serializable {
 
 //  private EstiloLugar estilo;
 	
-	@NotNull
 	@Size(max = 2000)
 	@Column
 	private String urlFoto;
@@ -100,13 +96,10 @@ public class Lugar  implements Serializable {
 	@Column(length=5)
 	private int versao;
 	
-	@NotNull
 	@Column(length=11)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltAlteracao = new Date();
 	
-	@NotNull
-	@Size(max = 5)
 	@Column
 	private String usuarioUltAlteracao = "";
 	

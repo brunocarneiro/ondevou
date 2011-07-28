@@ -3,7 +3,7 @@
 			{
 				"nome":"Profile",
 				"url":"#usuario",
-				"s_class":"current"
+				"s_class":""
 			},
 			{
 				"nome":"Lugares",
@@ -43,7 +43,7 @@
 			{
 				"nome":"FourSquare",
 				"url":"#foursquare",
-				"s_class":""
+				"s_class":"current"
 			}
 		]
 }

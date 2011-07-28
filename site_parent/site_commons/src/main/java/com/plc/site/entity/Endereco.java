@@ -63,6 +63,12 @@ public class Endereco  implements Serializable {
 	@Column
 	private String estado;
 	
+	@Column
+	private Double longitude;
+	
+	@Column
+	private Double latitude;
+	
 
 	public Endereco() {
 	}
@@ -126,5 +132,19 @@ public class Endereco  implements Serializable {
 	public String toString() {
 		return getLogradouro();
 	}
+	public Double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	public Double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
 
+	
+	
 }

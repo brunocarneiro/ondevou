@@ -1,35 +1,39 @@
 package com.plc.site.entity;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import com.powerlogic.jcompany.domain.validation.PlcUnifiedValidation;
-import javax.persistence.EnumType;
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
-import javax.persistence.TemporalType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.Transient;
-import javax.persistence.Version;
-import javax.persistence.Embedded;
-import javax.validation.constraints.Size;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Access;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.AccessType;
-import com.powerlogic.jcompany.commons.config.stereotypes.SPlcEntity;
-import javax.persistence.Entity;
-import java.util.List;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.ForeignKey;
 import org.hibernate.validator.constraints.Email;
+
+import com.powerlogic.jcompany.commons.config.stereotypes.SPlcEntity;
+import com.powerlogic.jcompany.domain.validation.PlcUnifiedValidation;
 
 /**
  * @author Bruno Carneiro
@@ -67,8 +71,6 @@ public class Usuario  implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltAlteracao = new Date();
 	
-	@NotNull
-	@Size(max = 5)
 	@Column
 	private String usuarioUltAlteracao = "";
 
@@ -144,6 +146,15 @@ public class Usuario  implements Serializable {
 	@Column
 	private String profissao;
 	
+	@Column
+	private String facebookId;
+	
+	@Column
+	private String foursquareId;
+	
+	@Column
+	private String twitterId;
+	
 	@OneToMany (targetEntity = AgendaDia.class, fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="usuario")
 	@ForeignKey(name="FK_AGENDADIA_USUARIO")
 	private List<AgendaDia> agendaDia;
@@ -155,6 +166,7 @@ public class Usuario  implements Serializable {
 	@OneToMany (targetEntity = LugarUsuario.class, fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="usuario")
 	@ForeignKey(name="FK_LUGAR_USUARIO")
     private List<LugarUsuario>  lugarUsuario;
+	
 
 	@Transient
     private List<LugarVisitado>  lugaresVisitados;
@@ -356,7 +368,30 @@ public class Usuario  implements Serializable {
 	public void setLugaresDesejados(List<LugarDesejado> lugaresDesejados) {
 		this.lugaresDesejados = lugaresDesejados;
 	}
-	
-	
+
+	public String getFacebookId() {
+		return facebookId;
+	}
+
+	public void setFacebookId(String facebookId) {
+		this.facebookId = facebookId;
+	}
+
+	public String getFoursquareId() {
+		return foursquareId;
+	}
+
+	public void setFoursquareId(String foursquareId) {
+		this.foursquareId = foursquareId;
+	}
+
+	public String getTwitterId() {
+		return twitterId;
+	}
+
+	public void setTwitterId(String twitterId) {
+		this.twitterId = twitterId;
+	}
+
 
 }
