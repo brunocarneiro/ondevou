@@ -79,6 +79,9 @@ public class Lugar  implements Serializable {
 	@Column
 	private String telefone;
 	
+	@Column
+	private String fourSquareId;
+	
 	//  private TipoLugar tipoLugar;
 
 //  private EstiloLugar estilo;
@@ -116,8 +119,20 @@ public class Lugar  implements Serializable {
 //  private List<AgendaDia> myAgendaDia;
 //  private List<LugarDesejado>  myLugarDesejado;
 	
+	
 	@Column
 	private String tags;
+
+	private transient boolean selected;
+	
+	
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 
 	public Lugar() {
 	}
@@ -237,6 +252,14 @@ public class Lugar  implements Serializable {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	public String getFourSquareId() {
+		return fourSquareId;
+	}
+
+	public void setFourSquareId(String fourSquareId) {
+		this.fourSquareId = fourSquareId;
 	}
 	
 	

@@ -231,28 +231,20 @@
   <load-on-startup>1</load-on-startup>
  </servlet>
  <!-- Integracao FourSquare -->
- <servlet>
-  <servlet-name>CheckinsWS</servlet-name>
-  <servlet-class>com.griggy.rest.CheckinsWS</servlet-class>
-  <load-on-startup>1</load-on-startup>
- </servlet>
+
  <servlet>
   <servlet-name>FourSquareVerifyServlet</servlet-name>
   <servlet-class>com.griggy.rest.foursquare.FourSquareVerifyServlet</servlet-class>
   <load-on-startup>1</load-on-startup>
  </servlet>
-  <servlet>
+ <servlet>
   <servlet-name>FourSquareAuthenticationServlet</servlet-name>
   <servlet-class>com.griggy.rest.foursquare.FourSquareAuthenticationServlet</servlet-class>
   <load-on-startup>1</load-on-startup>
  </servlet>
-  <servlet-mapping>
+ <servlet-mapping>
   <servlet-name>FourSquareAuthenticationServlet</servlet-name>
   <url-pattern>/foursquare/auth</url-pattern>
- </servlet-mapping>
- <servlet-mapping>
-  <servlet-name>CheckinsWS</servlet-name>
-  <url-pattern>/foursquare/checkins</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>FourSquareVerifyServlet</servlet-name>

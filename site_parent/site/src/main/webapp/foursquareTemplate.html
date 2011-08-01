@@ -1,4 +1,15 @@
-
+<link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css"> 
+<script src="http://jqueryui.com/external/jquery.bgiframe-2.1.2.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.core.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.widget.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.mouse.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.draggable.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.position.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.resizable.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.dialog.js"></script> 
+<script src="foursquareTemplate.js"></script> 
+<script src="form2js/form2object.js"></script>
+<script src="form2js/jquerytoObject.js"></script>
 <div class="leftColWrapper">
 
 	<a id="register"  text="Autenticar" href="http://localhost:8080/site/foursquare/auth">Autenticar</a>
@@ -6,9 +17,45 @@
 	
 </div>
 <script>
+var lugares;
 $(function(){
+	//serializeJSON
+	(function( $ ){
+		$.fn.serializeJSON=function() {
+		var json = {};
+		var selectedElements=[]
+		
+		jQuery.each($('input[type=checkbox]:checked'), function(){
+		var cont=0;
+		esse=$(this);
+		var parent = esse.parent();
+		var fsId = $('input[name="fsId"]',parent);
+		for(var i=0;i<lugares.lugares.length;i++){
+			var lugar = lugares.lugares[i];
+			if(lugar.fourSquareId==fsId.val()){
+				alert(fsId.val());
+				selectedElements[cont]=lugar;
+			}
+		cont++;
+		}
+		json['selectedPlaces']=selectedElements;
+		ss=selectedElements;
+		});
+		return json;
+		};
+		})( jQuery );
+	
 	$("#register").hide();
 	$("#import").hide();
+	$("#importar").live('click',function(){
+		$.ajax({
+			type:'POST',
+			data: "selectedPlaces="+JSON.stringify($('form').serializeJSON()["selectedPlaces"])+"&id=1",
+			url: 'http://localhost:8080/site/soa/foursquare/selectedPlaces'
+		});
+
+	});
+
 	$.ajax({
 		url:"http://localhost:8080/site/foursquare/verify?id="+getParam('id')[0],
 		success: function(result){
@@ -18,7 +65,17 @@ $(function(){
 				$(".leftColWrapper").append("Vc esta autenicado<br/>");
 				$("#import").click(function(){
 
-					$.ajax({url:'http://localhost:8080/site/foursquare/checkins'+getParam('id',getHash())[0]});
+					$.ajax({url:'http://localhost:8080/site/soa/foursquare/import'+getParam('id',getHash())[0],
+						dataType:"json",
+						success: function(data){
+
+							var html = Mustache.to_html(getDialogTemplate(), data);
+							lugares=data;
+							$(html).dialog({width:400,height:500});
+	
+						}
+			
+					});
 				});
 				$("#import").show();
 			}
@@ -52,5 +109,6 @@ function getHash(){
 	retorno[1]='?'+retorno[1];
 	return retorno;
 }
+
 
 </script>

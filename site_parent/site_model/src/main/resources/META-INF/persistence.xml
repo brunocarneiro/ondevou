@@ -12,8 +12,6 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<non-jta-data-source>java:comp/env/jdbc/site</non-jta-data-source>
 
-		
-
 		<class>com.plc.site.entity.TipoLugar</class>
 	
 		<class>com.plc.site.entity.Endereco</class>
