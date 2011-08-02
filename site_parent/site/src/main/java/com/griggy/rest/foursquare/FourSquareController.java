@@ -1,21 +1,12 @@
-package com.griggy.rest;
-
-import java.util.Arrays;
-import java.util.List;
+package com.griggy.rest.foursquare;
 
 import javax.inject.Inject;
 import javax.ws.rs.QueryParam;
 
-import com.plc.site.entity.Usuario;
-import com.powerlogic.jcompany.commons.PlcException;
+import com.griggy.rest.BaseController;
 import com.powerlogic.jcompany.controller.rest.api.qualifiers.QPlcControllerName;
 import com.powerlogic.jcompany.controller.rest.api.qualifiers.QPlcControllerQualifier;
 import com.powerlogic.jcompany.controller.rest.api.stereotypes.SPlcController;
-
-import fi.foyt.foursquare.api.FoursquareApi;
-import fi.foyt.foursquare.api.FoursquareApiException;
-import fi.foyt.foursquare.api.Result;
-import fi.foyt.foursquare.api.entities.CompleteUser;
 
 @SPlcController
 @QPlcControllerName("api")

@@ -19,12 +19,10 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -50,7 +48,7 @@ import com.powerlogic.jcompany.domain.validation.PlcUnifiedValidation;
 	@NamedQuery(name="Usuario.queryMan", query="from Usuario"),
 	@NamedQuery(name="Usuario.querySel", query="select id as id, nome as nome, sobrenome as sobrenome, email as email, senha as senha, twitter as twitter, urlFoto as urlFoto, endereco.logradouro as endereco_logradouro, endereco.cep as endereco_cep, endereco.numero as endereco_numero, endereco.complemento as endereco_complemento, endereco.bairro as endereco_bairro, endereco.cidade as endereco_cidade, endereco.estado as endereco_estado, estadoCivil as estadoCivil, dataNascimento as dataNascimento, sexo as sexo, orientacaoSexual as orientacaoSexual, profissao as profissao from Usuario order by nome asc"),
 	@NamedQuery(name="Usuario.querySelLookup", query="select id as id, nome as nome from Usuario where id = ? order by id asc"),
-	@NamedQuery(name="Usuario.querySelFourSquare", query="select id as id, nome as nome, foursquareId as foursquareId from Usuario where id = ? order by id asc")
+	@NamedQuery(name="Usuario.querySelFourSquare", query="select id as id, nome as nome, foursquareId as foursquareId, fourSquareLastDate as fourSquareLastDate from Usuario where id = ? order by id asc")
 })
 public class Usuario  implements Serializable {
 
@@ -169,18 +167,29 @@ public class Usuario  implements Serializable {
     private List<LugarUsuario>  lugarUsuario;
 	
 
-	@Transient
-    private List<LugarVisitado>  lugaresVisitados;
-   
-	@Transient
-    private List<LugarFavorito>  lugaresFavoritos;
-  
-	@Transient
-    private List<LugarDesejado> lugaresDesejados;
+	
+	@Column(length=11)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fourSquareLastDate;
 
+	
 	public Usuario() {
 	}
 	
+	
+	
+	public Date getFourSquareLastDate() {
+		return fourSquareLastDate;
+	}
+
+
+
+	public void setFourSquareLastDate(Date fourSquareLastDate) {
+		this.fourSquareLastDate = fourSquareLastDate;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -344,30 +353,6 @@ public class Usuario  implements Serializable {
 
 	public void setLugarUsuario(List<LugarUsuario> lugarUsuario) {
 		this.lugarUsuario = lugarUsuario;
-	}
-
-	public List<LugarVisitado> getLugaresVisitados() {
-		return lugaresVisitados;
-	}
-
-	public void setLugaresVisitados(List<LugarVisitado> lugaresVisitados) {
-		this.lugaresVisitados = lugaresVisitados;
-	}
-
-	public List<LugarFavorito> getLugaresFavoritos() {
-		return lugaresFavoritos;
-	}
-
-	public void setLugaresFavoritos(List<LugarFavorito> lugaresFavoritos) {
-		this.lugaresFavoritos = lugaresFavoritos;
-	}
-
-	public List<LugarDesejado> getLugaresDesejados() {
-		return lugaresDesejados;
-	}
-
-	public void setLugaresDesejados(List<LugarDesejado> lugaresDesejados) {
-		this.lugaresDesejados = lugaresDesejados;
 	}
 
 	public String getFacebookId() {

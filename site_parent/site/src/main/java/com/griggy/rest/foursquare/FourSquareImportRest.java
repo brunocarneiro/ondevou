@@ -1,6 +1,7 @@
-package com.griggy.rest;
+package com.griggy.rest.foursquare;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,17 +13,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 
+import net.sf.json.JSONArray;
+
 import org.jboss.resteasy.annotations.cache.NoCache;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import com.griggy.rest.foursquare.FourSquareSelectedVenues;
 import com.plc.site.entity.Endereco;
 import com.plc.site.entity.Lugar;
 import com.plc.site.entity.LugarUsuario;
 import com.plc.site.entity.Usuario;
 import com.powerlogic.jcompany.commons.PlcBaseContextVO;
+import com.powerlogic.jcompany.commons.PlcBaseContextVO.Mode;
 import com.powerlogic.jcompany.commons.PlcException;
 import com.powerlogic.jcompany.commons.config.qualifiers.QPlcDefaultLiteral;
 import com.powerlogic.jcompany.commons.facade.IPlcFacade;
@@ -33,8 +33,12 @@ import fi.foyt.foursquare.api.entities.Checkin;
 import fi.foyt.foursquare.api.entities.Location;
 import fi.foyt.foursquare.api.io.DefaultIOHandler;
 
+/**
+ * @author Bruno Carneiro
+ */
+
 @Path("/foursquare")
-public class CheckinsWS{
+public class FourSquareImportRest{
 	
 	@GET
 	@Path("/import")
@@ -59,6 +63,11 @@ public class CheckinsWS{
 	}
 
 
+	/**
+	 * Grava os locais - LugarUsuario
+	 * @param selectedPlaces
+	 * @param idUsuario
+	 */
 	@POST
 	@Path("/selectedPlaces")
 	public void selectPlaces(@FormParam("selectedPlaces") String selectedPlaces,  @FormParam("id") String idUsuario) {
@@ -67,7 +76,7 @@ public class CheckinsWS{
 			JSONArray array = JSONArray.fromObject(selectedPlaces);
 			List<Lugar> lugares = JSONArray.toList(array, Lugar.class);
 			Usuario u = getUsuario(idUsuario);
-			
+			u.setFourSquareLastDate(new Date());
 			facade.saveTabular(PlcCDIUtil.getInstance().getInstanceByType(PlcBaseContextVO.class, QPlcDefaultLiteral.INSTANCE), Lugar.class,lugares);
 			List<LugarUsuario> lugaresUsuarios = new ArrayList<LugarUsuario>();
 			for(Lugar l : lugares){
@@ -77,6 +86,9 @@ public class CheckinsWS{
 				lugaresUsuarios.add(lugarUsuario);
 			}
 			facade.saveTabular(PlcCDIUtil.getInstance().getInstanceByType(PlcBaseContextVO.class, QPlcDefaultLiteral.INSTANCE), LugarUsuario.class,lugaresUsuarios);
+			PlcBaseContextVO context = PlcCDIUtil.getInstance().getInstanceByType(PlcBaseContextVO.class, QPlcDefaultLiteral.INSTANCE);
+			context.setMode(Mode.ALTERACAO);
+			facade.saveObject(context, u);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -90,8 +102,12 @@ public class CheckinsWS{
 		}
 		try{
 			FoursquareApi foursquareApi = new FoursquareApi("4BNX2IEMCJ2YJLLJQAZTZKOAD1B05KXDSSNHOGAQ4PCW31XW", "N1GINQDOQ3LRCBGYNK5EL2CZX1KUBIWQFG3MNQXXZUWN4YAV", "http://localhost:8080/site/foursquare/checkins", u.getFoursquareId(), new DefaultIOHandler());
-			// finally we need to authenticate that authorization code
-			Checkin[] checkins = foursquareApi.usersCheckins("self", 5000, null, null, null).getResult().getItems();
+			Long time=null;
+			if(u.getFourSquareLastDate()!=null)
+				time=u.getFourSquareLastDate().getTime()/1000;
+			
+			//recupera a partir da ultima data de atualizacao
+			Checkin[] checkins = foursquareApi.usersCheckins("self", null, null, time, null).getResult().getItems();
 			List<Lugar> lugares = new ArrayList<Lugar>();
 			for(Checkin checkin : checkins){
 				Lugar l = new Lugar();
