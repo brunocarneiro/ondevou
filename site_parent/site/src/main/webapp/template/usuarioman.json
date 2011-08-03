@@ -39,6 +39,11 @@
 				"nome":"Promoções",
 				"url":"",
 				"s_class":""
+			},
+			{
+				"nome":"FourSquare",
+				"url":"#foursquare",
+				"s_class":""
 			}
 		]
 }
