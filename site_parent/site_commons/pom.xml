@@ -40,6 +40,13 @@
 	     argumento "<activeByDefault>" definido como "true".
   	-->
 	
+	<dependencies>
+		<dependency>
+			<groupId>com.visural.common</groupId>
+			<artifactId>visural-common</artifactId>
+			<version>0.4.3</version>
+		</dependency>
+	</dependencies>
 	
 	<!-- Definição dos profiles -->
 	<profiles>

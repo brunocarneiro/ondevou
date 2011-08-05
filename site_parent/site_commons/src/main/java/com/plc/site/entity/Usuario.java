@@ -45,101 +45,79 @@ import com.powerlogic.jcompany.domain.validation.PlcUnifiedValidation;
 
 @PlcUnifiedValidation
 @NamedQueries({
-	@NamedQuery(name="Usuario.queryMan", query="from Usuario"),
-	@NamedQuery(name="Usuario.querySel", query="select id as id, nome as nome, sobrenome as sobrenome, email as email, senha as senha, twitter as twitter, urlFoto as urlFoto, endereco.logradouro as endereco_logradouro, endereco.cep as endereco_cep, endereco.numero as endereco_numero, endereco.complemento as endereco_complemento, endereco.bairro as endereco_bairro, endereco.cidade as endereco_cidade, endereco.estado as endereco_estado, estadoCivil as estadoCivil, dataNascimento as dataNascimento, sexo as sexo, orientacaoSexual as orientacaoSexual, profissao as profissao from Usuario order by nome asc"),
-	@NamedQuery(name="Usuario.querySelLookup", query="select id as id, nome as nome from Usuario where id = ? order by id asc"),
-	@NamedQuery(name="Usuario.querySelFourSquare", query="select id as id, nome as nome, foursquareId as foursquareId, fourSquareLastDate as fourSquareLastDate from Usuario where id = ? order by id asc")
+	@NamedQuery(name="Usuario.queryMan", 			query="from Usuario"),
+	@NamedQuery(name="Usuario.querySel", 			query="select id as id, nome as nome, sobrenome as sobrenome, email as email, senha as senha, twitter as twitter, urlFoto as urlFoto, endereco.logradouro as endereco_logradouro, endereco.cep as endereco_cep, endereco.numero as endereco_numero, endereco.complemento as endereco_complemento, endereco.bairro as endereco_bairro, endereco.cidade as endereco_cidade, endereco.estado as endereco_estado, estadoCivil as estadoCivil, dataNascimento as dataNascimento, sexo as sexo, orientacaoSexual as orientacaoSexual, profissao as profissao from Usuario order by nome asc"),
+	@NamedQuery(name="Usuario.querySelLookup", 		query="select id as id, nome as nome from Usuario where id = ? order by id asc"),
+	@NamedQuery(name="Usuario.querySelFourSquare", 	query="select id as id, nome as nome, foursquareId as foursquareId, fourSquareLastDate as fourSquareLastDate from Usuario where id = ? order by id asc")
 })
 public class Usuario  implements Serializable {
 
-
-
+	public Usuario() {
 	
+	}
+
 	@Id 
  	@GeneratedValue(strategy=GenerationType.AUTO, generator = "SE_USUARIO")
 	@Column(nullable=false,length=5)
 	private Long id;
 	
-	@Version
-	@NotNull
-	@Column(length=5)
-	private int versao;
-	
-	@NotNull
-	@Column(length=11)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUltAlteracao = new Date();
-	
-	@Column
-	private String usuarioUltAlteracao = "";
-
-
-  
 	@NotNull
 	@Size(max = 100)
 	@Column
 	private String nome;
-
   
 	@NotNull
 	@Size(max = 100)
 	@Column
 	private String sobrenome;
 
-  
 	@NotNull
 	@Size(max = 255)
 	@Column
 	@Email
 	private String email;
 
-  
 	@NotNull
 	@Size(max = 100)
 	@Column
 	private String senha;
 
-  
 	@NotNull
 	@Size(max = 30)
 	@Column
 	private String twitter;
 
-  
 	@NotNull
 	@Size(max = 2000)
 	@Column
 	private String urlFoto;
 
-  
 	@Embedded
 	private Endereco endereco;
 
-  
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	@Column(length=1)
 	private EstadoCivil estadoCivil;
 
-  
 	@NotNull
 	@Column(length=11)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataNascimento;
 
-  
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	@Column(length=1)
 	private Sexo sexo;
 
-  
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	@Column(length=1)
 	private OrientacaoSexual orientacaoSexual;
 
-  
+	@Embedded
+	private UsuarioFacebook usuarioFacebook;
+	
 	@NotNull
 	@Size(max = 5)
 	@Column
@@ -166,30 +144,24 @@ public class Usuario  implements Serializable {
 	@ForeignKey(name="FK_LUGAR_USUARIO")
     private List<LugarUsuario>  lugarUsuario;
 	
-
-	
 	@Column(length=11)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fourSquareLastDate;
-
 	
-	public Usuario() {
-	}
+
+	@Version
+	@NotNull
+	@Column(length=5)
+	private int versao;
 	
+	@NotNull
+	@Column(length=11)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltAlteracao = new Date();
 	
+	@Column
+	private String usuarioUltAlteracao = "";
 	
-	public Date getFourSquareLastDate() {
-		return fourSquareLastDate;
-	}
-
-
-
-	public void setFourSquareLastDate(Date fourSquareLastDate) {
-		this.fourSquareLastDate = fourSquareLastDate;
-	}
-
-
-
 	public Long getId() {
 		return id;
 	}
@@ -379,5 +351,22 @@ public class Usuario  implements Serializable {
 		this.twitterId = twitterId;
 	}
 
+	public Date getFourSquareLastDate() {
+		return fourSquareLastDate;
+	}
+
+	public void setFourSquareLastDate(Date fourSquareLastDate) {
+		this.fourSquareLastDate = fourSquareLastDate;
+	}
+
+	public UsuarioFacebook getUsuarioFacebook() {
+		return usuarioFacebook;
+	}
+
+	public void setUsuarioFacebook(UsuarioFacebook usuarioFacebook) {
+		this.usuarioFacebook = usuarioFacebook;
+	}
+
+	
 
 }
