@@ -3,25 +3,43 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
  <display-name>site</display-name>
  <distributable/>
+ 
  <!-- [INSERT FRAGMENT HERE] 
 
 		Parâmetro para restaurar visualizações não encontradas na sessão.Pode
 		ter comportamentos adversos considerando que é uma nova visualização.
 		Evita que ocorra ViewExpiredException.
-	-->
+ -->
+ <context-param>
+  <param-name>idKey</param-name>
+  <param-value>197840106937231</param-value>
+ </context-param>
+
+ <context-param>
+  <param-name>apiKey</param-name>
+  <param-value>82aef1882452ebecc02fdb1af1c28edd</param-value>
+ </context-param>
+
+ <context-param>
+  <param-name>secretApi</param-name>
+  <param-value>0aae0dc76bd55d505f34f4bde3d5c0e4</param-value>
+ </context-param>
+ 
  <context-param>
   <param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
   <param-value>true</param-value>
  </context-param>
+ 
  <!-- Parametros para verificação de esquema no startup 
-
-		<context-param> <description>D-Desenvolvimento, T-Teste,
-		P-Producao.</description> <param-name>modoExecucao</param-name>
-		<param-value>P</param-value> </context-param> <context-param>
-		<description>Ativa/Desativa a verificação de Esquema automática no
-		Startup</description> <param-name>verificaEsquema</param-name>
-		<param-value>S</param-value> </context-param>
-	-->
+ <context-param> 
+  <description>D-Desenvolvimento, T-Teste, P-Producao.</description> 
+  <param-name>modoExecucao</param-name>
+  <param-value>P</param-value> </context-param> <context-param>
+  <description>Ativa/Desativa a verificação de Esquema automática no Startup</description> <param-name>verificaEsquema</param-name>
+  <param-value>S</param-value>
+ </context-param>
+ -->
+ 
  <context-param>
   <param-name>com.sun.faces.expressionFactory</param-name>
   <param-value>org.apache.el.ExpressionFactoryImpl</param-value>
@@ -136,6 +154,12 @@
   <filter-name>PlcTrinidadFilter</filter-name>
   <filter-class>com.powerlogic.jcompany.controller.jsf.filter.PlcTrinidadFilter</filter-class>
  </filter>
+ <filter>
+  <description>Filtro para Logging no Facebook</description>
+  <filter-name>FacebookUserFilter</filter-name>
+  <filter-class>com.plc.site.controller.filter.FacebookUserFilter</filter-class>
+ </filter>
+ 
  <filter-mapping>
   <filter-name>PlcClienteFilter</filter-name>
   <url-pattern>/res-plc/css/*</url-pattern>
@@ -170,29 +194,22 @@
  </filter-mapping>
  <filter-mapping>
   <filter-name>PlcTrinidadFilter</filter-name>
-  <!--
-			This assumes that the FacesServlet has been registered under the name
-			"faces"
-		-->
+  <!-- This assumes that the FacesServlet has been registered under the name "faces" -->
   <servlet-name>FacesServlet</servlet-name>
  </filter-mapping>
- <!-- Listerner Reasteasy: auto complete e rest 
-
-		Verificar: Se for instalado depois do Listener Weld, acontece estouro
-		de memoria!
-	-->
+ <filter-mapping>
+  <filter-name>FacebookUserFilter</filter-name>
+  <url-pattern>/facebook/*</url-pattern>
+ </filter-mapping>
+ 
+ <!-- Listerner Reasteasy: auto complete e rest Verificar: Se for instalado depois do Listener Weld, acontece estouro de memoria! -->
  <listener>
   <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
  </listener>
  <listener>
   <listener-class>org.jboss.weld.el.WeldELContextListener</listener-class>
  </listener>
- <!-- Listener JCDI / Weld (RI) 
-
-		Deve vir antes de AppServletContextListener para que o "bootstrap" da
-		aplicação jCompany possa usar JCDI
-	
- Parametros para auto complete e rest -->
+ <!-- Listener JCDI / Weld (RI) Deve vir antes de AppServletContextListener para que o "bootstrap" da aplicação jCompany possa usar JCDI Parametros para auto complete e rest -->
  <listener>
   <listener-class>com.powerlogic.jcompany.controller.listener.PlcWeldListener</listener-class>
  </listener>
@@ -230,6 +247,12 @@
   <servlet-class>com.powerlogic.jcompany.controller.servlet.PlcLog4jConfigurationServlet</servlet-class>
   <load-on-startup>1</load-on-startup>
  </servlet>
+ 
+ <!-- Integracao Facebook -->
+ <servlet>
+  <servlet-name>FacebookServlet</servlet-name>
+  <servlet-class>com.plc.site.controller.servlet.FacebookServlet</servlet-class>
+ </servlet>
  <!-- Integracao FourSquare -->
 
  <servlet>
@@ -242,6 +265,11 @@
   <servlet-class>com.griggy.rest.foursquare.FourSquareAuthenticationServlet</servlet-class>
   <load-on-startup>1</load-on-startup>
  </servlet>
+ 
+ <servlet-mapping>
+  <servlet-name>FacebookServlet</servlet-name>
+  <url-pattern>/facebook</url-pattern>
+ </servlet-mapping>
  <servlet-mapping>
   <servlet-name>FourSquareAuthenticationServlet</servlet-name>
   <url-pattern>/foursquare/auth</url-pattern>

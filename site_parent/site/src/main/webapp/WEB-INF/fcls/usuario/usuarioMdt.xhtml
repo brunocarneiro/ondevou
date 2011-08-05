@@ -15,10 +15,14 @@
 					<plcf:titulo tituloChave="label.id"/>  
 					<plcf:oid id="id" ajudaChave="ajuda.id"/> 
 				</plcf:celula>  
+			</plcf:linha>
+			<plcf:linha>   
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.nome"/>  
 					<plcf:texto id="nome" value="#{usuario.nome}" ajudaChave="ajuda.nome"/> 
 				</plcf:celula>  
+			</plcf:linha>
+			<plcf:linha>   				
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.sobrenome"/>  
 					<plcf:texto id="sobrenome" value="#{usuario.sobrenome}" ajudaChave="ajuda.sobrenome"/> 
@@ -29,10 +33,14 @@
 					<plcf:titulo tituloChave="label.email"/>  
 					<plcf:texto id="email" value="#{usuario.email}" ajudaChave="ajuda.email" tamanho="30"/> 
 				</plcf:celula>  
+			</plcf:linha>
+			<plcf:linha>   				
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.senha"/>  
 					<plcf:texto id="senha" value="#{usuario.senha}" ajudaChave="ajuda.senha"/> 
 				</plcf:celula>  
+			</plcf:linha>
+			<plcf:linha>   				
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.twitter"/>  
 					<plcf:texto id="twitter" value="#{usuario.twitter}" ajudaChave="ajuda.twitter"/> 
@@ -41,7 +49,7 @@
 			<plcf:linha> 
 				<plcf:celula columnSpan="3"> 
 					<plcf:titulo tituloChave="label.urlFoto"/>  
-					<plcf:texto id="urlFoto" value="#{usuario.urlFoto}" ajudaChave="ajuda.urlFoto" tamanho="300"/> 
+					<plcf:texto id="urlFoto" value="#{usuario.urlFoto}" ajudaChave="ajuda.urlFoto" tamanho="200"/> 
 				</plcf:celula> 
 			</plcf:linha>  
 			<plcf:linha> 
@@ -49,10 +57,14 @@
 					<plcf:titulo tituloChave="label.estadoCivil"/>  
 					<plcf:comboEstatico id="estadoCivil" value="#{usuario.estadoCivil}" dominio="EstadoCivil" exibeBranco="S" ajudaChave="ajuda.estadoCivil"/> 
 				</plcf:celula>  
+			</plcf:linha>
+			<plcf:linha>   				
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.dataNascimento"/>  
 					<plcf:data id="dataNascimento" value="#{usuario.dataNascimento}" ajudaChave="ajuda.dataNascimento"/> 
 				</plcf:celula>  
+			</plcf:linha>
+			<plcf:linha>   				
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.sexo"/>  
 					<plcf:comboEstatico id="sexo" value="#{usuario.sexo}" dominio="Sexo" exibeBranco="S" ajudaChave="ajuda.sexo"/> 
@@ -63,6 +75,8 @@
 					<plcf:titulo tituloChave="label.orientacaoSexual"/>  
 					<plcf:comboEstatico id="orientacaoSexual" value="#{usuario.orientacaoSexual}" dominio="OrientacaoSexual" exibeBranco="S" ajudaChave="ajuda.orientacaoSexual"/> 
 				</plcf:celula>  
+			</plcf:linha>
+			<plcf:linha>   				
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.profissao"/>  
 					<plcf:texto id="profissao" value="#{usuario.profissao}" ajudaChave="ajuda.profissao"/> 

@@ -2,10 +2,10 @@
  * for more information or contribute with this project: suporte@powerlogic.com.br - www.powerlogic.com.br        */ 
 package com.plc.site.controller.jsf;
 
-import org.apache.log4j.Logger;
-
 import javax.enterprise.inject.Specializes;
 import javax.inject.Inject;
+
+import org.apache.log4j.Logger;
 
 import com.powerlogic.jcompany.commons.config.stereotypes.SPlcMB;
 import com.powerlogic.jcompany.controller.jsf.PlcBaseMB;
