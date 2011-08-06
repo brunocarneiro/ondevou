@@ -1,58 +1,75 @@
+
 <div title='Minha Opiniao'>
-	<span>Lugar</span><br/>
-	<input id="lugar" /><br/>
-	<span>Comentario</span><br/>
-	<textarea id="comentario" /><br/>
-	<span>Favorito</span><br/>
-	<input type="checkbox" id="favorito" /><br/>
-	<span>Visitado</span><br/>
-	<input type="checkbox" id="visitado" /><br/>
-	<span>Desejado</span><br/>
-	<input type="checkbox" id="desejado" /><br/>
-	<span>Nota Geral</span><br/>
-	<input id="nota" /><br/>
-	<span>Preço</span><br/>
-	<input id="preco" /><br/>
-	<span>Nota Ambiente</span><br/>
-	<div id="notaAmbiente">
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-	</div> <br/>
-	
-	<span>Nota Atendimento</span><br/>
-	<div id="notaAtendimento">
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-	</div> <br/>
-	<span>Nota Comida</span><br/>
-	<div id="notaComida">
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-	</div> <br/>
-	<span>Nota Bebida</span><br/>
-	<div id="notaBebida">
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-	</div> <br/>
-	<span>Nota Custo Benefício</span><br/>
-	<div id="notaCustoBeneficio">
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-		<input type="radio"/>
-	</div> 
+	<div id="msg"></div>
+	<form id="lugarUsuario">
+			<span>Lugar</span><br/>
+			<input name="lugar_id" id="lugar" /><br/>
+			<span>Comentario</span><br/>
+			<textarea name="comentario" id="comentario" /><br/>
+			<span>Favorito</span><br/>
+			<input name="favorito" type="checkbox" id="favorito" /><br/>
+			<span>Visitado</span><br/>
+			<input name=visitado" type="checkbox" id="visitado" /><br/>
+			<span>Desejado</span><br/>
+			<input name="desejado" type="checkbox" id="desejado" /><br/>
+			<span>Nota Geral</span><br/>
+			<div id="notaGeral">
+				<input name="notaGeral" type="radio" value="1"/>
+				<input name="notaGeral" type="radio" value="2"/>
+				<input name="notaGeral" type="radio" value="3"/>
+				<input name="notaGeral" type="radio" value="4"/>
+				<input name="notaGeral" type="radio" value="5"/>
+			</div><br/>
+			<span>Preço</span><br/>
+			<div id="preco">
+				<input name="preco" type="radio" value="1"/>
+				<input name="preco" type="radio" value="2"/>
+				<input name="preco" type="radio" value="3"/>
+				<input name="preco" type="radio" value="4"/>
+				<input name="preco" type="radio" value="5"/>
+			</div><br/>
+			<span>Nota Ambiente</span><br/>
+			<div id="notaAmbiente">
+				<input name="notaAmbiente" type="radio" value="1"/>
+				<input name="notaAmbiente" type="radio" value="2"/>
+				<input name="notaAmbiente" type="radio" value="3"/>
+				<input name="notaAmbiente" type="radio" value="4"/>
+				<input name="notaAmbiente" type="radio" value="5"/>
+			</div><br/>
+			
+			<span>Nota Atendimento</span><br/>
+			<div id="notaAtendimento">
+				<input name="notaAtendimento" type="radio" value="1"/>
+				<input name="notaAtendimento" type="radio" value="2"/>
+				<input name="notaAtendimento" type="radio" value="3"/>
+				<input name="notaAtendimento" type="radio" value="4"/>
+				<input name="notaAtendimento" type="radio" value="5"/>
+			</div> <br/>
+			<span>Nota Comida</span><br/>
+			<div id="notaComida">
+				<input name="notaComida" type="radio" value="1"/>
+				<input name="notaComida" type="radio" value="2"/>
+				<input name="notaComida" type="radio" value="3"/>
+				<input name="notaComida" type="radio" value="4"/>
+				<input name="notaComida" type="radio" value="5"/>
+			</div> <br/>
+			<span>Nota Bebida</span><br/>
+			<div id="notaBebida">
+				<input name="notaBebida" type="radio" value="1"/>
+				<input name="notaBebida" type="radio" value="2"/>
+				<input name="notaBebida" type="radio" value="3"/>
+				<input name="notaBebida" type="radio" value="4"/>
+				<input name="notaBebida" type="radio" value="5"/>
+			</div> <br/>
+			<span>Nota Custo Benefício</span><br/>
+			<div id="notaCustoBeneficio">
+				<input name="notaCustoBeneficio" type="radio" value="1"/>
+				<input name="notaCustoBeneficio" type="radio" value="2"/>
+				<input name="notaCustoBeneficio" type="radio" value="3"/>
+				<input name="notaCustoBeneficio" type="radio" value="4"/>
+				<input name="notaCustoBeneficio" type="radio" value="5"/>
+			</div><br/> 
+		<br/>
+		<a href="#" id="enviarOpiniao">Enviar Minha Opinião</a>
+	</form>
 </div>
-<button>Enviar Minha Opinião</button>
