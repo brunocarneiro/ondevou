@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,16 +108,17 @@ public class FacebookUserFilter implements Filter {
                         }
                     }
                 }
-                if (accessToken != null && expires != null) {
+                if (accessToken != null) {
                 	usuario.setFacebookId(accessToken);
-                	usuario.setUsuarioUltAlteracao("app_foursquare_integration");
+                	usuario.setUsuarioUltAlteracao("app_facebook_integration");
     				contextVO.setMode(Mode.ALTERACAO);
     				
-                	authFacebookLogin(usuario, accessToken, expires);
+                	authFacebookLogin(usuario, accessToken);
 
                 	facade.saveObject(contextVO, usuario);
+                	req.getSession().setAttribute("usuario", usuario);
                     
-                    res.sendRedirect("http://localhost:8080/site");
+                    res.sendRedirect("http://localhost:8080/site/facebook.html");
                 } else {
                     throw new RuntimeException("Access token and expires not found");
                 }
@@ -130,8 +132,13 @@ public class FacebookUserFilter implements Filter {
         		long id = 14;
         		usuario = (Usuario) facade.findObject(contextVO, Usuario.class, id)[0];
         		req.getSession().setAttribute("usuario", usuario);
-        		Facebook facebook = new Facebook(idKey, apiKey, secretKey);
-        		res.sendRedirect(facebook.getLoginRedirectURL());
+        		
+        		if(StringUtils.isBlank(usuario.getFacebookId()) || validaAccessToken(usuario.getFacebookId()) ) {
+        			Facebook facebook = new Facebook(idKey, apiKey, secretKey);
+        			res.sendRedirect(facebook.getLoginRedirectURL());
+        		} else {
+        			filterChain.doFilter(request, response);
+        		}
         		
         	} else {
         		filterChain.doFilter(request, response);
@@ -152,8 +159,13 @@ public class FacebookUserFilter implements Filter {
 	public void destroy() {
 
 	}
+	
+	private boolean validaAccessToken(String accessToken) {
+		
+		return false;
+	}
 
-    private void authFacebookLogin(Usuario usuario, String accessToken, int expires) {
+    private void authFacebookLogin(Usuario usuario, String accessToken) {
     	
         try {
             JSONObject resp = new JSONObject(IOUtil.urlToString(new URL("https://graph.facebook.com/me?access_token=" + accessToken)));
@@ -162,7 +174,7 @@ public class FacebookUserFilter implements Filter {
             if(usuarioFacebook == null) {
             	usuarioFacebook = new UsuarioFacebook();
             }
-            usuarioFacebook.setIdFacebook(resp.getString("id"));
+            //usuarioFacebook.setIdFacebook(resp.getString("id"));
             usuarioFacebook.setFirstName(resp.getString("first_name"));
             usuarioFacebook.setLastName(resp.getString("last_name"));
             usuarioFacebook.setEmailFacebook(resp.getString("email"));
