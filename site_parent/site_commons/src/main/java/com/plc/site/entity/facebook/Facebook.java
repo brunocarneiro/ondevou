@@ -20,8 +20,8 @@ public class Facebook {
     private static final String redirect_uri = "http://localhost:8080/site/facebook";
     
     /// set this to the list of extended permissions you want
-    private static final String[] perms = new String[] {"publish_stream", "email"};
-
+    private static final String[] perms = new String[] {"publish_stream", "email", "offline_access", "create_event", "read_stream", "read_insights" };
+    
 
     public String getIdKey() {
         return idKey;
