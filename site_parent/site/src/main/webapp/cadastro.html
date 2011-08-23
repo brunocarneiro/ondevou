@@ -1,0 +1,39 @@
+<html>
+    <head>
+      <title>Cadastro utilizando Login do Facebook</title>
+    </head>
+    <body>
+    
+	<div align="center">    
+		<script src="http://connect.facebook.net/en_US/all.js"></script>
+		<div id="fb-root"></div>
+		<script>
+			FB.init({ 
+			   appId:'197840106937231', cookie:true, status:true, xfbml:true 
+			});
+		</script>
+		
+		<fb:registration fields="[
+										{'name':'name'},
+										{'name':'email'},
+										{'name':'location'},
+										{'name':'gender'},
+										{'name':'birthday'},
+										{'name':'password'},
+										{'name':'like',       'description':'Do you like this plugin?', 'type':'checkbox',  'default':'checked'},
+										
+										{'name':'twitter',      'description':'Twitter',             'type':'text'},
+										
+										
+										{'name':'phone',      'description':'Phone Number',             'type':'text'},
+										
+										{'name':'sexo',    'description':'sexo',             'type':'select',    'options':{'M':'Masculino','F':'Feminino'}},
+										{'name':'anniversary','description':'Anniversary',              'type':'date'}
+										
+									]" 
+							redirect-uri="http://localhost:8080/site/facebook"/>
+	</div>
+
+
+    </body>
+</html>
