@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import javax.persistence.Access;
 import javax.persistence.Embeddable;
 import javax.persistence.AccessType;
+import javax.persistence.Transient;
 
 @Embeddable
 @Access(AccessType.FIELD)
@@ -24,6 +25,9 @@ public class UsuarioFacebook  implements Serializable {
 	public UsuarioFacebook() {
 		
 	}
+	
+	@Transient
+	private String accessToken;
 	
 	@NotNull
 	@Size(max = 5)
@@ -45,6 +49,16 @@ public class UsuarioFacebook  implements Serializable {
 	@Column
 	private String emailFacebook;
 	
+ 
+	
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
 	public String getIdFacebook() {
 		return idFacebook;
 	}
@@ -76,10 +90,11 @@ public class UsuarioFacebook  implements Serializable {
 	public void setEmailFacebook(String email) {
 		this.emailFacebook=email;
 	}
-
+	
 	@Override
 	public String toString() {
 		return getIdFacebook();
 	}
 
+	
 }
