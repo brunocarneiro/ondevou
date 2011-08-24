@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.plc.site.commons.AppUserProfileVO;
+import com.plc.site.entity.EstadoCivil;
 import com.plc.site.entity.OrientacaoSexual;
 import com.plc.site.entity.Sexo;
 import com.plc.site.entity.Usuario;
@@ -79,12 +80,127 @@ public class FacebookUserFilter implements Filter {
 		}
 	}
 	
-	private String validateSignature(String signed_request, String appSecret) throws Exception {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+		
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
 
-		if (signed_request == null)
+        String signedRequest = getSignedRequest(req);
+        
+        AppUserProfileVO appUserProfile = PlcCDIUtil.getInstance().getInstanceByType(AppUserProfileVO.class, QPlcDefaultLiteral.INSTANCE);
+        
+		if(appUserProfile == null || (appUserProfile != null && !appUserProfile.isValid())) {
+
+			String code = req.getParameter("code");
+			
+			if (StringUtil.isNotBlankStr(code)) {
+	        	Facebook facebook = new Facebook(idKey, apiKey, secretKey);
+	            String authURL = facebook.getAuthURL(code);
+	            URL url = new URL(authURL);
+	            try {
+	                String result = readURL(url);
+	                String accessToken = null;
+	                Integer expires = null;
+	                String[] pairs = result.split("&");
+	                for (String pair : pairs) {
+	                    String[] kv = pair.split("=");
+	                    if (kv.length != 2) {
+	                        throw new RuntimeException("Unexpected auth response");
+	                    } else {
+	                        if (kv[0].equals("access_token")) {
+	                            accessToken = kv[1];
+	                        }
+	                        if (kv[0].equals("expires")) {
+	                            expires = Integer.valueOf(kv[1]);
+	                        }
+	                    }
+	                }
+	                if (accessToken != null) {
+	                	Boolean valid = false;
+	                	try {
+	                		valid = criaUsuarioFacebook(appUserProfile, accessToken);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						if(valid) {
+							res.sendRedirect("http://localhost:8080/site/cadastro.html");
+						} else {
+							res.sendRedirect("http://localhost:8080/site/login.html");
+						}
+	                    
+	                } else {
+	                    throw new RuntimeException("Access token and expires not found");
+	                }
+	            } catch (IOException e) {
+	                throw new RuntimeException(e);
+	            }
+	                	
+		
+			} else if(StringUtil.isNotBlankStr(signedRequest)) {
+				try {
+					criaUsuarioAplicacao(appUserProfile, signedRequest);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				if(req.getParameter("paginaLogin") != null && req.getParameter("paginaLogin").equals("true")) {
+					Facebook facebook = new Facebook(idKey, apiKey, secretKey);
+					res.sendRedirect(facebook.getLoginRedirectURL());					
+				} else {
+					res.sendRedirect("http://localhost:8080/site/login.html");	
+				}
+
+			}
+			
+		} else {
+			filterChain.doFilter(request, response);
+        }
+    }
+
+	private String getSignedRequest(HttpServletRequest req) {
+		
+		String signedRequest = null;
+		
+		String cryptSignedRequest = req.getParameter("signed_request");
+        
+        if(cryptSignedRequest == null) {
+            System.out.println("ERROR: Unable to retrieve signed_request parameter");
+            return null;
+        }
+        
+        	
+        try {
+			signedRequest = validateSignature(cryptSignedRequest, secretKey);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return signedRequest;
+	}
+
+    private String readURL(URL url) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        InputStream is = url.openStream();
+        int r;
+        while ((r = is.read()) != -1) {
+            baos.write(r);
+        }
+        return new String(baos.toByteArray());
+    }
+
+	public void destroy() {
+
+	}
+	
+	private String validateSignature(String cryptSignedRequest, String appSecret) throws Exception {
+
+		if (cryptSignedRequest == null)
 			throw new Exception("Invalid signature.");
 
-		String[] parts = signed_request.split("\\.");
+		String[] parts = cryptSignedRequest.split("\\.");
 		if (parts.length != 2)
 			throw new Exception("Invalid signature.");
 
@@ -106,147 +222,63 @@ public class FacebookUserFilter implements Filter {
 			throw new Exception("Failed to perform crypt operation.", e);
 		}
 	}
-
 	
-
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+	private Boolean criaUsuarioFacebook(AppUserProfileVO appUserProfile, String accessToken) throws Exception {
 		
-        HttpServletRequest req = (HttpServletRequest) request;
-        
-        HttpServletResponse res = (HttpServletResponse) response;
-        
-        String signedReq = req.getParameter("signed_request");
-        
-        if(signedReq == null) {
-            System.out.println("ERROR: Unable to retrieve signed_request parameter");
-            
-        }
-        
-        String msg = null;
-        	
-        try {
-			msg = validateSignature(signedReq, secretKey);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		if(accessToken != null) {
+			UsuarioFacebook usuarioFacebook = null;
+			usuarioFacebook = new UsuarioFacebook();
+			JSONObject resp = new JSONObject(IOUtil.urlToString(new URL("https://graph.facebook.com/me?access_token=" + accessToken)));
+			usuarioFacebook.setAccessToken(accessToken);
+			usuarioFacebook.setIdFacebook(resp.getString("id"));
+			usuarioFacebook.setFirstName(resp.getString("first_name"));
+			usuarioFacebook.setLastName(resp.getString("last_name"));
+			usuarioFacebook.setEmailFacebook(resp.getString("email"));
+			appUserProfile.setUsuarioFacebook(usuarioFacebook);
+			return true;
+		} else {
+			return false;
 		}
 		
-		JSONObject payloadObject = null;
-		if(StringUtil.isNotBlankStr(msg)) {
+	}
+	
+    private Boolean criaUsuarioAplicacao(AppUserProfileVO appUserProfile, String signedRequest) throws Exception {
+    	
+    	Usuario usuario = null;
+    	UsuarioFacebook usuarioFacebook = null;
+
+    	JSONObject payloadObject = null;
+    	if(StringUtil.isNotBlankStr(signedRequest)) {
 			try {
-				payloadObject = new JSONObject(msg);
+				payloadObject = new JSONObject(signedRequest);
 			}
 			catch (JSONException e) {
 				System.out.println("ERROR: Unable to perform JSON decode");
+				return false;
 			}
 		}
-        
-        AppUserProfileVO appUserProfile = PlcCDIUtil.getInstance().getInstanceByType(AppUserProfileVO.class, QPlcDefaultLiteral.INSTANCE);
-        
-		if(appUserProfile == null || (appUserProfile != null && !appUserProfile.isValid())) {
-			Boolean retorno = false;
-			if(!appUserProfile.isValid()) {
-				try {
-					retorno = authFacebookLogin(appUserProfile, null, payloadObject);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else {
-				String code = req.getParameter("code");
-				if (StringUtil.isNotBlankStr(code)) {
-		        	Facebook facebook = new Facebook(idKey, apiKey, secretKey);
-		            String authURL = facebook.getAuthURL(code);
-		            URL url = new URL(authURL);
-		            try {
-		                String result = readURL(url);
-		                String accessToken = null;
-		                Integer expires = null;
-		                String[] pairs = result.split("&");
-		                for (String pair : pairs) {
-		                    String[] kv = pair.split("=");
-		                    if (kv.length != 2) {
-		                        throw new RuntimeException("Unexpected auth response");
-		                    } else {
-		                        if (kv[0].equals("access_token")) {
-		                            accessToken = kv[1];
-		                        }
-		                        if (kv[0].equals("expires")) {
-		                            expires = Integer.valueOf(kv[1]);
-		                        }
-		                    }
-		                }
-		                if (accessToken != null) {
-		                	
-		                	try {
-								retorno = authFacebookLogin(appUserProfile, accessToken, payloadObject);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							if(retorno) {
-								res.sendRedirect("http://localhost:8080/site/login.html");
-							} else {
-								res.sendRedirect("http://localhost:8080/site/cadastro.html");
-							}
-		                    
-		                } else {
-		                    throw new RuntimeException("Access token and expires not found");
-		                }
-		            } catch (IOException e) {
-		                throw new RuntimeException(e);
-		            }
-		                	
-			
-				} else {
-					Facebook facebook = new Facebook(idKey, apiKey, secretKey);
-					res.sendRedirect(facebook.getLoginRedirectURL());
-				}
-			
-	            
-
-	    				
-
-			}
-			
-		} else {
-			filterChain.doFilter(request, response);
-        }
-    }
-
-    private String readURL(URL url) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        InputStream is = url.openStream();
-        int r;
-        while ((r = is.read()) != -1) {
-            baos.write(r);
-        }
-        return new String(baos.toByteArray());
-    }
-
-	public void destroy() {
-
-	}
-	
-    private boolean authFacebookLogin(AppUserProfileVO appUserProfile, String accessToken, JSONObject payloadObject) throws Exception {
     	
-		IAppFacade facade = PlcCDIUtil.getInstance().getInstanceByType(IAppFacade.class, QPlcDefaultLiteral.INSTANCE);
+    	
+    	IAppFacade facade = PlcCDIUtil.getInstance().getInstanceByType(IAppFacade.class, QPlcDefaultLiteral.INSTANCE);
 		
 		PlcBaseContextVO contextVO = PlcCDIUtil.getInstance().getInstanceByType(PlcBaseContextVO.class, QPlcDefaultLiteral.INSTANCE);
 		
-		Usuario usuario = null;
-		UsuarioFacebook usuarioFacebook = null;
+		if(appUserProfile.getUsuarioFacebook() == null) {
+			return false;
+		} else{
+			usuarioFacebook = appUserProfile.getUsuarioFacebook();
+		}
 		
 		//busca os dados do usuario do facebook
-		
-		List<Usuario> listaRetorno = facade.findByField(contextVO, Usuario.class, "queryUsuarioSistema", "idFacebook");
+		List<Usuario> listaRetorno = facade.findByField(contextVO, Usuario.class, "queryUsuarioSistema", usuarioFacebook.getIdFacebook());
 		if (listaRetorno != null && listaRetorno.size() >= 1) {
 			usuario = listaRetorno.get(0); 
 		}
 
 		if (usuario == null) {
-			if(appUserProfile.getUsuarioFacebook() != null) {
-				usuarioFacebook = appUserProfile.getUsuarioFacebook();
+			
+			if(usuarioFacebook != null) {
+				
 				// Dados Formulário Especifico
 	            String facebookId = "" + payloadObject.get("user_id"); //Retrieve user ID
 	            String oauthToken = "" + payloadObject.get("oauth_token"); //Retrieve oauth token
@@ -269,29 +301,15 @@ public class FacebookUserFilter implements Filter {
 	            usuario.setSexo(Sexo.M);
 	            usuario.setOrientacaoSexual(OrientacaoSexual.H);
 	            usuario.setUsuarioFacebook(usuarioFacebook);
-	    
+	            usuario.setEstadoCivil(EstadoCivil.S);
 	            appUserProfile.setValid(true);
 	            
 	            usuario.setUsuarioUltAlteracao("app_facebook_integration");
 	            facade.saveObject(contextVO, usuario);
-	            
-			} else {
-				usuarioFacebook = new UsuarioFacebook();
-				
-				JSONObject resp = null;
-				
-				resp = new JSONObject(IOUtil.urlToString(new URL("https://graph.facebook.com/me?access_token=" + accessToken)));
-				
-				usuarioFacebook.setAccessToken(accessToken);
-				usuarioFacebook.setIdFacebook(resp.getString("id"));
-				usuarioFacebook.setFirstName(resp.getString("first_name"));
-				usuarioFacebook.setLastName(resp.getString("last_name"));
-				usuarioFacebook.setEmailFacebook(resp.getString("email"));
-				appUserProfile.setUsuarioFacebook(usuarioFacebook);
-				return false;
 			}
             
 		} else {
+			// atualiza usuario no profile
 			appUserProfile.setValid(true);
 			appUserProfile.setUsuarioFacebook(usuario.getUsuarioFacebook());
 		}
