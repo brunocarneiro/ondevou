@@ -101,25 +101,21 @@ public class Usuario  implements Serializable {
 	@Column(length=1)
 	private EstadoCivil estadoCivil;
 
-	@NotNull
 	@Column(length=11)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataNascimento;
 
 	@Enumerated(EnumType.STRING)
-	@NotNull
 	@Column(length=1)
 	private Sexo sexo;
 
 	@Enumerated(EnumType.STRING)
-	@NotNull
 	@Column(length=1)
 	private OrientacaoSexual orientacaoSexual;
 
 	@Embedded
 	private UsuarioFacebook usuarioFacebook;
 	
-	@NotNull
 	@Size(max = 5)
 	@Column
 	private String profissao;
@@ -149,7 +145,6 @@ public class Usuario  implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fourSquareLastDate;
 	
-
 	@Version
 	@NotNull
 	@Column(length=5)
