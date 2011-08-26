@@ -44,12 +44,16 @@ import com.powerlogic.jcompany.domain.validation.PlcUnifiedValidation;
 @Access(AccessType.FIELD)
 
 @PlcUnifiedValidation
+
+// TODO: Revisar todas as namedQueries, verificando a necessidade de buscar todos os campos...
+
 @NamedQueries({
 	
 	@NamedQuery(name="Usuario.queryMan", 			query="from Usuario"),
-	@NamedQuery(name="Usuario.queryUsuarioSistema", query="from Usuario where usuarioFacebook.idFacebook = ?"),
 	@NamedQuery(name="Usuario.querySel", 			query="select id as id, nome as nome, sobrenome as sobrenome, email as email, senha as senha, twitter as twitter, urlFoto as urlFoto, endereco.logradouro as endereco_logradouro, endereco.cep as endereco_cep, endereco.numero as endereco_numero, endereco.complemento as endereco_complemento, endereco.bairro as endereco_bairro, endereco.cidade as endereco_cidade, endereco.estado as endereco_estado, estadoCivil as estadoCivil, dataNascimento as dataNascimento, sexo as sexo, orientacaoSexual as orientacaoSexual, profissao as profissao from Usuario order by nome asc"),
 	@NamedQuery(name="Usuario.querySelLookup", 		query="select id as id, nome as nome from Usuario where id = ? order by id asc"),
+	@NamedQuery(name="Usuario.querySelFacebook", 	query="from Usuario where usuarioFacebook.idFacebook = ?"),
+	@NamedQuery(name="Usuario.querySelAccessToken", query="from Usuario where usuarioFacebook.accessToken = ?"),
 	@NamedQuery(name="Usuario.querySelFourSquare", 	query="select id as id, nome as nome, foursquareId as foursquareId, fourSquareLastDate as fourSquareLastDate from Usuario where id = ? order by id asc")
 })
 public class Usuario  implements Serializable {

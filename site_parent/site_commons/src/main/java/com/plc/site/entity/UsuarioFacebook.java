@@ -26,7 +26,9 @@ public class UsuarioFacebook  implements Serializable {
 		
 	}
 	
-	@Transient
+	@NotNull
+	@Size(max = 1000)
+	@Column
 	private String accessToken;
 	
 	@NotNull
