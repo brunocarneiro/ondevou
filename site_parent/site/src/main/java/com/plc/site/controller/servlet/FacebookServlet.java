@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.plc.site.commons.AppUserProfileVO;
-import com.plc.site.entity.Usuario;
 import com.plc.site.facade.IFacebookFacade;
 import com.powerlogic.jcompany.commons.config.qualifiers.QPlcDefaultLiteral;
 import com.powerlogic.jcompany.commons.util.cdi.PlcCDIUtil;
@@ -30,67 +29,20 @@ public class FacebookServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
-		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-		
-		FacebookClient facebookClient = new DefaultFacebookClient(usuario.getFacebookId());
-
-		// HTML
-	    response.setContentType("text/html");  
-	    PrintWriter out = response.getWriter();  
-		out.println("<HTML>");  
-		out.println("<BODY>");  
-		out.println("<H1>Dados Facebook para Aonde Vou!!!!!!</h1>");  
-		  
-		
-		facade.fetchSingleObject(facebookClient, out);
-		
-		facade.fetchMultipleObjet(facebookClient, out);
-		
-		facade.fetchConnections(facebookClient, out);
-		
-		facade.searching(facebookClient, out);
-
-		facade.executeFQLQueries(facebookClient, out);
-
-		facade.metadataManyCalls(facebookClient, out);
-		
-		facade.passingParameters(facebookClient, out);
-		
-		facade.selectingSpecificFields(facebookClient, out);
-		
-		//facade.fetchInsights(facebookClient, out);
-		
-		//facade.dataAsJSONObject(facebookClient, out);
-
-		//facade.publishingSimpleMessage(facebookClient, out);
-		
-		//facade.publishingImage(facebookClient, out);		
-		
-		//facade.publishingCheckIn(facebookClient, out);
-		
-		//facade.deleteObject(facebookClient, out);		
-		
-		
-		// The Batch API is great if you have multiple operations you'd like to
-		// perform in one server trip. Let's build a batch with three GET requests and
-		// one POST request here:
-
-		//facade.batchRequest(facebookClient, out);
-		
-		//facade.includingBinaryAttachment(facebookClient);
-		
-	     out.println("</body>");  
-	     out.println("</html>");
+		imprimirDados(response);
 	}
 	
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		imprimirDados(response);
+	}
+
+	
+	private void imprimirDados(HttpServletResponse response) throws IOException {
 		
 		AppUserProfileVO appUserProfile = PlcCDIUtil.getInstance().getInstanceByType(AppUserProfileVO.class, QPlcDefaultLiteral.INSTANCE);
-		 
-		FacebookClient facebookClient = new DefaultFacebookClient(appUserProfile.getUsuarioFacebook().getIdFacebook());
+		FacebookClient facebookClient = new DefaultFacebookClient(appUserProfile.getUsuario().getUsuarioFacebook().getAccessToken());
 
 		// HTML
 	    response.setContentType("text/html");  

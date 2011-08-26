@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR" lang="pt-BR">
+	<head>
+		<title>Autenticação</title>
+		<script type="text/javascript">
+			var contextPath = document.location.pathname.substring(0, document.location.pathname.indexOf('/', 1));
+			var js = contextPath+"/res-plc/javascript/jquery/jquery-1.4.2.min.js";
+			var css = contextPath+"/res-plc/css/itunes/jquery/jquery-ui-1.7.custom.css";
+			var css_geral = contextPath+"/res-plc/css/plc.geral.css";
+			document.write("<script type='text/javascript' src='"+js+"'>"+"<"+"/script>");
+		</script>
+		<script type="text/javascript">
+		
+			$(document).ready(function(){
+				$('#id_j_username').focus();
+			});
+			
+			function redireciona(url){
+				var win;
+				win = window.open(url,"win","");
+				history.back();
+			}
+		</script>
+
+		<script type="text/javascript">
+			document.write("<link rel='StyleSheet' href='"+css+"' type='text/css' charset='UTF-8'>"+"<"+"/link>");
+			document.write("<link rel='StyleSheet' href='"+css_geral+"' type='text/css' charset='UTF-8'>"+"<"+"/link>");
+		</script>
+		<script src="http://connect.facebook.net/en_US/all.js"></script>
+
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" ></meta>
+	</head>	
+	
+	<body scroll="no">
+		<div align="right" class="ui-widget ui-widget-header ui-corner-all" >
+			<form method="post" action="j_security_check">
+
+				<table cellspacing="0" align="center" >
+					<tbody>
+							<tr>
+								<td><label for="j_username">Login</label></td>
+								<td><label for="j_password">Password</label></td>
+							</tr>
+							<tr>
+								<td><input type="text"  name="j_username" id="id_j_username" tabindex="1"></td>
+								<td><input type="password" name="j_password" id="id_j_password" tabindex="2"></td>
+								<td><label for="id_ok"><input value="Log In" tabindex="4" type="submit" id="id_ok"></label></td>
+							</tr>	
+							<tr>
+								<td>
+								<div>
+									<input id="persist_box" type="checkbox" name="persistent" value="1" tabindex="3">
+									<label for="persist_box">Keep me logged in</label>
+								</div>
+								<input type="hidden" name="default_persistent" value="0"></td>
+								<td class="login_form_label_field">
+									<a href="http://www.facebook.com/recover.php" rel="nofollow">Forgot your password?</a>
+								</td>
+							</tr>
+					</tbody>
+				</table>
+	
+				<div align="right" >
+					<tr>
+						<td>
+							<a class="fb_button fb_button_small" href="http://localhost:8080/site/facebook?paginaLogin=true"  align="center">
+							<span class="fb_button_text"  align="center">Sign up with Facebook</span>
+							</a>
+						</td>
+					</tr>
+				</div>
+			 
+			</form>
+		</div>
+	</body>
+		
+</html>
