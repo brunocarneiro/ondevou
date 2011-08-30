@@ -133,6 +133,7 @@ public class FacebookUserFilter implements Filter {
 				}
 			} else {
 				if(req.getParameter("paginaLogin") != null && req.getParameter("paginaLogin").equals("true")) {
+					//TODO COLOCAR ISSO EM APPLICATION SCOPE
 					Facebook facebook = new Facebook(idKey, apiKey, secretKey);
 					res.sendRedirect(facebook.getLoginRedirectURL());					
 				} else {

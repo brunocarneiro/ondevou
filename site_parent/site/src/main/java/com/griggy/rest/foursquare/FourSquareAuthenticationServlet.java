@@ -28,7 +28,7 @@ public class FourSquareAuthenticationServlet extends HttpServlet{
 		IPlcFacade facade = PlcCDIUtil.getInstance().getInstanceByType(IPlcFacade.class, QPlcDefaultLiteral.INSTANCE);
 		PlcBaseContextVO contextVO = PlcCDIUtil.getInstance().getInstanceByType(PlcBaseContextVO.class, QPlcDefaultLiteral.INSTANCE);
 		Usuario u;
-
+		//TODO COLOCAR ISSO EM APPLICATION SCOPE
 		FoursquareApi foursquareApi = new FoursquareApi("4BNX2IEMCJ2YJLLJQAZTZKOAD1B05KXDSSNHOGAQ4PCW31XW", "N1GINQDOQ3LRCBGYNK5EL2CZX1KUBIWQFG3MNQXXZUWN4YAV", "http://localhost:8080/site/foursquare/auth");
 		try {
 			String code = req.getParameter("code");
@@ -53,6 +53,7 @@ public class FourSquareAuthenticationServlet extends HttpServlet{
 				contextVO.setMode(Mode.ALTERACAO);
 				facade.saveObject(contextVO, u);
 				resp.sendRedirect("http://localhost:8080/site/#foursquare?id="+u.getId());
+				//TODO IGOR Utilizar usuario da sessao
 			}
 
 		} catch (Exception e) {
