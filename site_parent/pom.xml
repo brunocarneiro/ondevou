@@ -17,6 +17,7 @@
 		<groupId>powerlogic.jaguar.jcompany</groupId>
 		<artifactId>projeto-plc</artifactId>
 		<version>6.0.1</version>
+		<relativePath>../../framework/jcompany_pom/pom.xml</relativePath>
 	</parent>
 
 	<!-- dados do projeto -->
@@ -103,6 +104,33 @@
 	<dependencies>
 		
 	</dependencies>
+	
+    <repositories>
+        <repository>
+            <id>mrepo-happyfern-snapshot</id>
+            <name>Facebook Java API Snapshot repository</name>
+            <url>http://mrepo.happyfern.com/maven2-snapshot/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>foursquareapijava</id>
+            <name>Foursquare V2 API for Java Repository</name>
+            <url>http://foursquare-api-java.googlecode.com/svn/repository</url>
+        </repository>
+        <repository>
+            <id>twitter4j.org</id>
+            <name>twitter4j.org Repository</name>
+            <url>http://twitter4j.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>        
+    </repositories>	
 	
 	<!-- Nome final do projeto -->
 	<properties>
