@@ -4,18 +4,22 @@ package com.plc.site.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,13 +28,10 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.ForeignKey;
+
 import com.powerlogic.jcompany.commons.config.stereotypes.SPlcEntity;
 import com.powerlogic.jcompany.domain.validation.PlcUnifiedValidation;
-import java.util.List;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import org.hibernate.annotations.ForeignKey;
 
 /**
  * @author Bruno Carneiro
@@ -49,9 +50,6 @@ import org.hibernate.annotations.ForeignKey;
 	@NamedQuery(name="Lugar.querySelLookup", query="select id as id, nome as nome, urlFoto as urlFoto from Lugar where id = ? order by id asc")
 })
 public class Lugar  implements Serializable {
-
-	
-
 
 	
 	@Id 
@@ -112,13 +110,6 @@ public class Lugar  implements Serializable {
 	
 	@ManyToOne
 	private Usuario proprietario;
-	
-//  private List<LugarUsuario>  myLugarAvaliado;
-//  private List<LugarVisitado>  myLugarVisitado;
-//  private List<LugarFavorito>  myLugarFavorito;
-//  private List<AgendaDia> myAgendaDia;
-//  private List<LugarDesejado>  myLugarDesejado;
-	
 	
 	@Column
 	private String tags;
@@ -263,7 +254,7 @@ public class Lugar  implements Serializable {
 	}
 	
 	
-	
+
 
 	
 }
