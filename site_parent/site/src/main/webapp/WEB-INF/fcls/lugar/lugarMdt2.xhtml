@@ -39,9 +39,17 @@
 				</plcf:celula> 
 			</plcf:linha>  
 			<plcf:linha> 
-				<plcf:celula columnSpan="3"> 
+				<plcf:celula> 
 					<plcf:titulo tituloChave="label.endereco.estado"/>  
 					<plcf:texto id="endereco_estado" value="#{lugar.endereco.estado}" ajudaChave="ajuda.endereco.estado"/> 
+				</plcf:celula> 
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.endereco.latitude"/>  
+					<plcf:texto id="endereco_latitude" value="#{lugar.endereco.latitude}" ajudaChave="ajuda.endereco.estado" tamanho="15"/> 
+				</plcf:celula>
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.endereco.longitude"/>  
+					<plcf:texto id="endereco_longitude" value="#{lugar.endereco.longitude}" ajudaChave="ajuda.endereco.estado" tamanho="15"/> 
 				</plcf:celula> 
 			</plcf:linha> 
 		</plcf:tabela> 

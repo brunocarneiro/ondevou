@@ -3,6 +3,7 @@ package com.griggy.rest.foursquare;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.DefaultValueProcessorMatcher;
+import net.sf.json.util.JavaIdentifierTransformer;
 
 import org.jboss.resteasy.annotations.cache.NoCache;
 
@@ -46,8 +50,14 @@ public class FourSquareImportRest{
 	public String doGet(@Context HttpServletRequest req, @Context HttpServletResponse resp, @QueryParam("id") String idUsuario ) {
 		Usuario u = getUsuario(idUsuario);
 		List<Lugar> lugares = getLugares(req, u);
+		//TODO BRUNO ID null está sendo parseado como 0. Tentei evitar isso aqui, mas nao deu certo...procurar uma maneira de resolver.
+		JsonConfig config = new JsonConfig();
+		config.setIgnoreDefaultExcludes(true);
+		config.setIgnoreJPATransient(true);
+		config.setIgnoreTransientFields(true);
+		config.findDefaultValueProcessor(Long.class);
 		
-		return "{\"lugares\":"+JSONArray.fromObject(lugares).toString()+"}";
+		return "{\"lugares\":"+JSONArray.fromObject(lugares,config).toString()+"}";
 		
 	}
 

@@ -7,6 +7,7 @@
 <script src="http://jqueryui.com/ui/jquery.ui.position.js"></script> 
 <script src="http://jqueryui.com/ui/jquery.ui.resizable.js"></script> 
 <script src="http://jqueryui.com/ui/jquery.ui.dialog.js"></script> 
+<link rel="stylesheet" href="http://jqueryui.com/demos/demos.css">
 <script src="foursquareTemplate.js"></script> 
 <script src="form2js/form2object.js"></script>
 <script src="form2js/jquery.toObject.js"></script>
@@ -33,7 +34,6 @@ $(function(){
 		for(var i=0;i<lugares.lugares.length;i++){
 			var lugar = lugares.lugares[i];
 			if(lugar.fourSquareId==fsId.val()){
-				alert(fsId.val());
 				selectedElements[cont]=lugar;
 			}
 		cont++;
@@ -58,9 +58,8 @@ $(function(){
 
 	$.ajax({
 		url:"http://localhost:8080/site/foursquare/verify?id="+getParam('id')[0],
+		dataType:"json",
 		success: function(result){
-			result=$.parseJSON(result);
-			bruno=result;
 			if(result && result.response){
 				$(".leftColWrapper").append("Vc esta autenicado<br/>");
 				$("#import").click(function(){

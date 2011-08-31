@@ -10,6 +10,18 @@ $(document).ready(function(){
 	aoClicarAba("desejado");
 	aoClicarAba("agenda");
 	
+	//escrevendo o rating
+	$("input[type=radio]",".notaGeral").each(function(){
+		for(i=1;i<6;i++){
+			if(this.value==i){continue;}
+			if(this.value>i)
+				$(this).parent().prepend('<input name="'+$(this).attr('name')+'" type="radio" value="'+(this.value-i)+'" />');
+			else
+				$(this).parent().append('<input name="'+$(this).attr('name')+'" type="radio" value="'+i+'" />');
+		}
+	});
+	$("input[type=radio]",".notaGeral").rating();
+	
 });
 
 function aoClicarAba(nomeAba){

@@ -1,5 +1,19 @@
+<link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css"> 
+<script src="http://jqueryui.com/external/jquery.bgiframe-2.1.2.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.core.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.widget.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.mouse.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.draggable.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.position.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.resizable.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.dialog.js"></script> 
+<script src="http://jqueryui.com/ui/jquery.ui.button.js"></script>
+<script src='static/js/jquery/star/documentation.js' ></script>
+<link href='static/js/jquery/star/documentation.css' type="text/css" rel="stylesheet"/>
+<script src='static/js/jquery/star/jquery.MetaData.js'></script>
+<script src='static/js/jquery/star/jquery.rating.js'></script>
 <script src='usuarioman.js' type="text/javascript" language="javascript"></script>
-
+<link href='static/js/jquery/star/jquery.rating.css' type="text/css" rel="stylesheet"/>
 <div><!-- This containing div fixes an IE bug where the absolutely positioned element disappears randomly. Don’t ask me why. -->
 <div id="libraryPagehead" class="pagehead clearit">
 <p><a href="/user/brunoac88"
@@ -68,14 +82,11 @@
 <!-- .ajaxpagination -->
 
 
-
-
 <link rel="stylesheet"
 	href="http://cdn.last.fm/css/css/197690/user/library.css" />
 <div id="pages">
 <div class="wrapper">
 <div id="page1" class="page">
-
 
 <ul class="    libraryItems artistsLarge">
 	{{#data}}{{#lugarUsuario}}
@@ -92,7 +103,12 @@
 	<a href="/user/brunoac88/library/music/Pepper?remove=1"
 		title="Excluir este artista da biblioteca" class="remove"><img
 		class="transparent_png dismiss_dark_icon" width="13" height="13"
-		src="{{#lugar}}{{urlFoto}}}{{/lugar}}" /></a></li>
+		src="{{#lugar}}{{urlFoto}}}{{/lugar}}" /></a>
+		
+		<div class="notaGeral">
+			<input name="notaGeral-{{id}}" type="radio" value="{{nota}}" checked="checked"/>
+		</div>	
+	</li>
 	{{/lugarUsuario}}{{/data}}
 </ul>
 
