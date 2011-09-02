@@ -23,6 +23,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -50,7 +51,7 @@ import com.powerlogic.jcompany.domain.validation.PlcUnifiedValidation;
 @NamedQueries({
 	
 	@NamedQuery(name="Usuario.queryMan", 			query="from Usuario"),
-	@NamedQuery(name="Usuario.querySel", 			query="select id as id, nome as nome, sobrenome as sobrenome, email as email, senha as senha, twitter as twitter, urlFoto as urlFoto, endereco.logradouro as endereco_logradouro, endereco.cep as endereco_cep, endereco.numero as endereco_numero, endereco.complemento as endereco_complemento, endereco.bairro as endereco_bairro, endereco.cidade as endereco_cidade, endereco.estado as endereco_estado, estadoCivil as estadoCivil, dataNascimento as dataNascimento, sexo as sexo, orientacaoSexual as orientacaoSexual, profissao as profissao from Usuario order by nome asc"),
+	@NamedQuery(name="Usuario.querySel", 			query="select id as id, nome as nome, sobrenome as sobrenome, email as email, senha as senha, urlFoto as urlFoto, endereco.logradouro as endereco_logradouro, endereco.cep as endereco_cep, endereco.numero as endereco_numero, endereco.complemento as endereco_complemento, endereco.bairro as endereco_bairro, endereco.cidade as endereco_cidade, endereco.estado as endereco_estado, estadoCivil as estadoCivil, dataNascimento as dataNascimento, sexo as sexo, orientacaoSexual as orientacaoSexual, profissao as profissao from Usuario order by nome asc"),
 	@NamedQuery(name="Usuario.querySelLookup", 		query="select id as id, nome as nome from Usuario where id = ? order by id asc"),
 	@NamedQuery(name="Usuario.querySelFacebook", 	query="from Usuario where usuarioFacebook.idFacebook = ?"),
 	@NamedQuery(name="Usuario.querySelAccessToken", query="from Usuario where usuarioFacebook.accessToken = ?"),
@@ -89,11 +90,6 @@ public class Usuario  implements Serializable {
 	private String senha;
 
 	@NotNull
-	@Size(max = 30)
-	@Column
-	private String twitter;
-
-	@NotNull
 	@Size(max = 2000)
 	@Column
 	private String urlFoto;
@@ -130,8 +126,8 @@ public class Usuario  implements Serializable {
 	@Column
 	private String foursquareId;
 	
-	@Column
-	private String twitterId;
+	private UsuarioTwitter usuarioTwitter;
+
 	
 	@OneToMany (targetEntity = AgendaDia.class, fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="usuario")
 	@ForeignKey(name="FK_AGENDADIA_USUARIO")
@@ -200,14 +196,6 @@ public class Usuario  implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha=senha;
-	}
-
-	public String getTwitter() {
-		return twitter;
-	}
-
-	public void setTwitter(String twitter) {
-		this.twitter=twitter;
 	}
 
 	public String getUrlFoto() {
@@ -343,14 +331,6 @@ public class Usuario  implements Serializable {
 		this.foursquareId = foursquareId;
 	}
 
-	public String getTwitterId() {
-		return twitterId;
-	}
-
-	public void setTwitterId(String twitterId) {
-		this.twitterId = twitterId;
-	}
-
 	public Date getFourSquareLastDate() {
 		return fourSquareLastDate;
 	}
@@ -367,6 +347,23 @@ public class Usuario  implements Serializable {
 		this.usuarioFacebook = usuarioFacebook;
 	}
 
+	public UsuarioTwitter getUsuarioTwitter() {
+		return usuarioTwitter;
+	}
+
+	public void setUsuarioTwitter(UsuarioTwitter usuarioTwitter) {
+		this.usuarioTwitter = usuarioTwitter;
+	}
+	
+	@Transient
+	public String getTwitter() {
+		return usuarioTwitter.getTwitter();
+	}
+	
+	@Transient
+	public void setTwitter(String twitter) {
+		usuarioTwitter.setTwitter(twitter);
+	}
 	
 
 }

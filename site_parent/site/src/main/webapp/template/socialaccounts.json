@@ -3,7 +3,8 @@
 			{
 				"nome":"Profile",
 				"url":"#usuario",
-				"s_class":"current"
+				"s_class":""
+				
 			},
 			{
 				"nome":"Lugares",
@@ -48,7 +49,7 @@
 			{
 				"nome":"Interligar Contas Social",
 				"url":"#socialaccounts",
-				"s_class":""
+				"s_class":"current"
 			}
 			
 		]
