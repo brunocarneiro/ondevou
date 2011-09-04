@@ -24,7 +24,7 @@
 	});
 
 	function ajaxBody(){
-		$.ajax({url:'http://localhost:8080/site/soa/service/api.'+getHash()[0] +'('+getParam('id')+')',
+		$.ajax({url:'http://localhost:8080/site/soa/service/api.'+getHash()[0] +'/self',
 			success: function(result){
 					$.ajax({
 						url:'http://localhost:8080/site/'+getHash()[0]+'Template.html',
@@ -97,7 +97,7 @@
 <div id="secondaryNavigation">
 <ul>
 	{{#template}}{{#menu_esquerdo}}
-	<li class=" {{s_class}}"><a href="{{url}}?id={{#data}}{{id}}{{/data}}" >{{nome}}</a></li>
+	<li class=" {{s_class}}"><a href="{{url}}" >{{nome}}</a></li>
 	{{/menu_esquerdo}}{{/template}}
 </ul>
 </div>

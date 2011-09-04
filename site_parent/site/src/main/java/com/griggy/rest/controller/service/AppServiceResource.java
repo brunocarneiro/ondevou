@@ -14,7 +14,7 @@ import com.powerlogic.jcompany.controller.rest.api.conversor.IPlcConversor;
 import com.powerlogic.jcompany.controller.rest.service.PlcServiceResource;
 import com.powerlogic.jcompany.controller.rest.service.PlcServiceConstants.PATH_PARAM;
 
-@Path("/rest")
+@Path("/service")
 public class AppServiceResource extends PlcServiceResource {
 	
 	@GET

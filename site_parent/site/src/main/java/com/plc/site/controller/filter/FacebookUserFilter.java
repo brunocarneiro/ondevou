@@ -100,6 +100,7 @@ public class FacebookUserFilter implements Filter {
 	                	try {
 	                		validFacebookUser = criaUsuarioFacebook(appUserProfile, accessToken);
 	                		validSystemUser = criaUsuarioAplicacao(appUserProfile, signedRequest);
+	                		//TODO IGOR COLOCAR UM POST VIA HTTP_CLIENT PARA J_SECURITY_CHECK, ASSIM O USUARIO VAI ESTAR LOGADO POR JAVA EE.
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
