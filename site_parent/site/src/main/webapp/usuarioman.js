@@ -22,6 +22,29 @@ $(document).ready(function(){
 	});
 	$("input[type=radio]",".notaGeral").rating();
 	
+	$("#cadastrar").click(function(){$(getLugarTemplate()).dialog({modal:true, height:500, width:600});});
+	
+	$("#cadastrar").live("click",function(){
+		$.ajax(
+				{
+					 url:'http://localhost:8080/site/soa/service/api.lugar',
+					 data:form2json($("#lugarUsuario")),
+					 type:'POST',
+					 dataType:'json',
+					 success: function(data){
+						 if(data.messages["erro"])
+							 $("#msg").append(data.messages["erro"]);
+						 if(data.messages["sucesso"]){
+							 alert(data.messages["sucesso"])
+							 $("#msg").append(data.messages["sucesso"]);
+							 if(data.messages["sucesso"].length>0){
+								 //fechando a janela
+								 $(getOpinionTemplate()).dialog().close();
+							 }
+						 }
+					 }
+				});
+	});
 });
 
 function aoClicarAba(nomeAba){
@@ -49,4 +72,14 @@ function getTemplate(){
 	+'<a href="" class="playbutton ">'
 	+'<img width="13" height="13" src="" alt="Tocar" class="transparent_png play_icon">'
 	+'</a><a class="remove" title="" href=""><img width="13" height="13" src="" class="transparent_png dismiss_dark_icon"></a></li>{{/lugar}}{{/data}}</ul>';
+}
+
+
+function getLugarTemplate(){
+	var html='';
+	$.ajax({url:'http://localhost:8080/site/novoLugar.html',async: false, success: function(data){
+		html=data;
+	}});
+	return html;
+	
 }
