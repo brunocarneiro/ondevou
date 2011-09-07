@@ -329,7 +329,7 @@ public class FacebookUserFilter implements Filter {
 	            usuario.setSobrenome(usuarioFacebook.getLastName());
 	            usuario.setEmail(usuarioFacebook.getEmailFacebook());
 	            usuario.setSenha(password);
-	            usuario.setTwitter(twitter);
+	            usuario.getUsuarioTwitter().setTwitter(twitter);
 	            usuario.setUrlFoto("");
 	            usuario.setDataNascimento(new Date(birthday));
 	            usuario.setSexo(Sexo.M);

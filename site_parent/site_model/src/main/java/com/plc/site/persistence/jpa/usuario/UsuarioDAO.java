@@ -33,8 +33,7 @@ public class UsuarioDAO extends AppJpaDAO  {
 			@PlcQueryParameter(name="nome", expression="nome like '%' || :nome ") String nome,
 			@PlcQueryParameter(name="sobrenome", expression="sobrenome like '%' || :sobrenome ") String sobrenome,
 			@PlcQueryParameter(name="email", expression="email like '%' || :email ") String email,
-			@PlcQueryParameter(name="senha", expression="senha like '%' || :senha ") String senha,
-			@PlcQueryParameter(name="twitter", expression="twitter like '%' || :twitter ") String twitter
+			@PlcQueryParameter(name="senha", expression="senha like '%' || :senha ") String senha
 	);
 
 	@PlcQuery("querySel")
@@ -44,8 +43,7 @@ public class UsuarioDAO extends AppJpaDAO  {
 			@PlcQueryParameter(name="nome", expression="nome like '%' || :nome ") String nome,
 			@PlcQueryParameter(name="sobrenome", expression="sobrenome like '%' || :sobrenome ") String sobrenome,
 			@PlcQueryParameter(name="email", expression="email like '%' || :email ") String email,
-			@PlcQueryParameter(name="senha", expression="senha like '%' || :senha ") String senha,
-			@PlcQueryParameter(name="twitter", expression="twitter like '%' || :twitter ") String twitter
+			@PlcQueryParameter(name="senha", expression="senha like '%' || :senha ") String senha
 	);
 	
 }

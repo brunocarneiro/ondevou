@@ -20,6 +20,7 @@ $(document).ready(function(){
 				$(this).parent().append('<input name="'+$(this).attr('name')+'" type="radio" value="'+i+'" />');
 		}
 	});
+	
 	$("input[type=radio]",".notaGeral").rating();
 	
 	$("#cadastrar").click(function(){$(getLugarTemplate()).dialog({modal:true, height:500, width:600});});
@@ -28,7 +29,7 @@ $(document).ready(function(){
 		$.ajax(
 				{
 					 url:'http://localhost:8080/site/soa/service/api.lugar',
-					 data:form2json($("#lugarUsuario")),
+					 data:form2json($("#lugar")),
 					 type:'POST',
 					 dataType:'json',
 					 success: function(data){

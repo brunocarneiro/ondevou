@@ -60,7 +60,9 @@ import com.powerlogic.jcompany.domain.validation.PlcUnifiedValidation;
 public class Usuario  implements Serializable {
 
 	public Usuario() {
-	
+		
+		usuarioFacebook = new UsuarioFacebook();
+		usuarioTwitter = new UsuarioTwitter();
 	}
 
 	@Id 
@@ -126,6 +128,7 @@ public class Usuario  implements Serializable {
 	@Column
 	private String foursquareId;
 	
+	@Embedded
 	private UsuarioTwitter usuarioTwitter;
 
 	
@@ -353,16 +356,6 @@ public class Usuario  implements Serializable {
 
 	public void setUsuarioTwitter(UsuarioTwitter usuarioTwitter) {
 		this.usuarioTwitter = usuarioTwitter;
-	}
-	
-	@Transient
-	public String getTwitter() {
-		return usuarioTwitter.getTwitter();
-	}
-	
-	@Transient
-	public void setTwitter(String twitter) {
-		usuarioTwitter.setTwitter(twitter);
 	}
 	
 

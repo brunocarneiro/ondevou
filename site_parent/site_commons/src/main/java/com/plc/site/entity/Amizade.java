@@ -24,6 +24,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.AccessType;
 import com.powerlogic.jcompany.commons.config.stereotypes.SPlcEntity;
+import com.powerlogic.jcompany.config.domain.PlcReference;
+
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
@@ -69,7 +71,7 @@ public class Amizade  implements Serializable {
 	@JoinColumn
 	private Usuario usuario1;
     
-    
+    @PlcReference
 	@ManyToOne (targetEntity = Usuario.class, fetch = FetchType.LAZY)
 	@ForeignKey(name="FK_AMIZADE_USUARIO2")
 	@JoinColumn

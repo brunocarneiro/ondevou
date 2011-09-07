@@ -43,9 +43,9 @@
 			<plcf:linha>   				
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.twitter"/>  
-					<plcf:texto id="twitter" value="#{usuario.twitter}" ajudaChave="ajuda.twitter"/> 
+					<plcf:texto id="twitter" value="#{usuario.usuarioTwitter.twitter}" ajudaChave="ajuda.twitter"/> 
 				</plcf:celula> 
-			</plcf:linha>  
+			</plcf:linha>
 			<plcf:linha> 
 				<plcf:celula columnSpan="3"> 
 					<plcf:titulo tituloChave="label.urlFoto"/>  
@@ -94,12 +94,6 @@
 					<plcf:texto id="profissao" value="#{usuario.foursquareId}" ajudaChave="ajuda.profissao"/> 
 				</plcf:celula> 
 			</plcf:linha>  
-			<plcf:linha> 
-				<plcf:celula> 
-					<plcf:titulo titulo="Twitter"/>  
-					<plcf:texto id="profissao" value="#{usuario.twitterId}" ajudaChave="ajuda.profissao"/> 
-				</plcf:celula> 
-			</plcf:linha>  			
 		</plcf:tabela> 
 	</ui:composition> 
 </html>
