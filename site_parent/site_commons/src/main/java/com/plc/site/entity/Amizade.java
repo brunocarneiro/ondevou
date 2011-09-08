@@ -41,7 +41,8 @@ import javax.persistence.Transient;
 
 @PlcUnifiedValidation
 @NamedQueries({
-	@NamedQuery(name="Amizade.querySelLookup", query="select id as id, usuario1 as usuario1 from Amizade where id = ? order by id asc")
+	@NamedQuery(name="Amizade.querySel", query="select a.id as id, a.usuario2 as usuario2, a.usuario1 as usuario1 from Amizade a"),
+	@NamedQuery(name="Amizade.querySelLookup", query="select a.id as id, a.usuario2 as usuario2, a.usuario1 as usuario1 from Amizade a where id = ? order by id asc")
 })
 public class Amizade  implements Serializable {
 
