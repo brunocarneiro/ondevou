@@ -21,6 +21,7 @@ import net.sf.json.util.JavaIdentifierTransformer;
 
 import org.jboss.resteasy.annotations.cache.NoCache;
 
+import com.plc.site.commons.AppUserProfileVO;
 import com.plc.site.entity.Endereco;
 import com.plc.site.entity.Lugar;
 import com.plc.site.entity.LugarUsuario;
@@ -47,8 +48,10 @@ public class FourSquareImportRest{
 	@GET
 	@Path("/import")
 	@NoCache
-	public String doGet(@Context HttpServletRequest req, @Context HttpServletResponse resp, @QueryParam("id") String idUsuario ) {
-		Usuario u = getUsuario(idUsuario);
+	public String doGet(@Context HttpServletRequest req, @Context HttpServletResponse resp ) {
+
+		AppUserProfileVO userProfileVO = PlcCDIUtil.getInstance().getInstanceByType(AppUserProfileVO.class, QPlcDefaultLiteral.INSTANCE);
+		Usuario u = getUsuario(userProfileVO.getUsuario().getId());
 		List<Lugar> lugares = getLugares(req, u);
 		//TODO BRUNO ID null está sendo parseado como 0. Tentei evitar isso aqui, mas nao deu certo...procurar uma maneira de resolver.
 		JsonConfig config = new JsonConfig();
@@ -62,13 +65,13 @@ public class FourSquareImportRest{
 	}
 
 
-	protected Usuario getUsuario(String idUsuario) {
+	protected Usuario getUsuario(Long idUsuario) {
 		IPlcFacade facade = PlcCDIUtil.getInstance().getInstanceByType(IPlcFacade.class, QPlcDefaultLiteral.INSTANCE);
 		PlcBaseContextVO contextVO = PlcCDIUtil.getInstance().getInstanceByType(PlcBaseContextVO.class, QPlcDefaultLiteral.INSTANCE);
 		contextVO.setApiQuerySel("querySelFourSquare");
 		Usuario u;
 		
-		u = (Usuario) facade.findObject(contextVO, Usuario.class, new Long((String)idUsuario))[0];
+		u = (Usuario) facade.findObject(contextVO, Usuario.class, idUsuario)[0];
 		return u;
 	}
 
@@ -85,7 +88,7 @@ public class FourSquareImportRest{
 			IPlcFacade facade = PlcCDIUtil.getInstance().getInstanceByType(IPlcFacade.class, QPlcDefaultLiteral.INSTANCE);
 			JSONArray array = JSONArray.fromObject(selectedPlaces);
 			List<Lugar> lugares = JSONArray.toList(array, Lugar.class);
-			Usuario u = getUsuario(idUsuario);
+			Usuario u = getUsuario(new Long(idUsuario));
 			u.setFourSquareLastDate(new Date());
 			facade.saveTabular(PlcCDIUtil.getInstance().getInstanceByType(PlcBaseContextVO.class, QPlcDefaultLiteral.INSTANCE), Lugar.class,lugares);
 			List<LugarUsuario> lugaresUsuarios = new ArrayList<LugarUsuario>();

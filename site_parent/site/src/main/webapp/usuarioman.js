@@ -23,28 +23,36 @@ $(document).ready(function(){
 	
 	$("input[type=radio]",".notaGeral").rating();
 	
-	$("#cadastrar").click(function(){$(getLugarTemplate()).dialog({modal:true, height:500, width:600});});
+	$("#newPlaceDialog").click(function(){$(getLugarTemplate()).dialog({modal:true, height:500, width:600});});
 	
 	$("#cadastrar").live("click",function(){
-		$.ajax(
-				{
-					 url:'http://localhost:8080/site/soa/service/api.lugar',
-					 data:form2json($("#lugar")),
-					 type:'POST',
-					 dataType:'json',
-					 success: function(data){
-						 if(data.messages["erro"])
-							 $("#msg").append(data.messages["erro"]);
-						 if(data.messages["sucesso"]){
-							 alert(data.messages["sucesso"])
-							 $("#msg").append(data.messages["sucesso"]);
-							 if(data.messages["sucesso"].length>0){
-								 //fechando a janela
-								 $(getOpinionTemplate()).dialog().close();
+		top.frames[0].pesquisaEndereco($("input[name='endereco']").val(),function(bool){
+			//if place exists
+			if(bool){
+				//save the place
+				$.ajax(
+						{
+							 url:'http://localhost:8080/site/soa/service/api.lugar',
+							 data:form2json($("#lugar")),
+							 type:'POST',
+							 dataType:'json',
+							 success: function(data){
+								 if(data.messages["erro"])
+									 $("#msg").append(data.messages["erro"]);
+								 if(data.messages["sucesso"]){
+									 alert(data.messages["sucesso"])
+									 $("#msg").append(data.messages["sucesso"]);
+									 if(data.messages["sucesso"].length>0){
+										 //fechando a janela
+										 $(getOpinionTemplate()).dialog().close();
+									 }
+								 }
 							 }
-						 }
-					 }
-				});
+						});
+			}
+			else
+				alert("erro");
+		});
 	});
 });
 

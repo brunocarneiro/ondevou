@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.plc.site.commons.AppUserProfileVO;
 import com.plc.site.entity.Usuario;
 import com.powerlogic.jcompany.commons.PlcBaseContextVO;
 import com.powerlogic.jcompany.commons.PlcBaseContextVO.Mode;
@@ -33,7 +34,8 @@ public class FourSquareAuthenticationServlet extends HttpServlet{
 		try {
 			String code = req.getParameter("code");
 			if (code == null) {
-				u = (Usuario) facade.findObject(contextVO, Usuario.class, new Long((String)req.getParameter("id")))[0];
+				AppUserProfileVO userProfile = PlcCDIUtil.getInstance().getInstanceByType(AppUserProfileVO.class, QPlcDefaultLiteral.INSTANCE);
+				u = userProfile.getUsuario();
 				req.getSession().setAttribute("usuario", u);
 				// First we need to redirect our user to authentication page.
 				resp.sendRedirect(foursquareApi.getAuthenticationUrl());
@@ -52,7 +54,7 @@ public class FourSquareAuthenticationServlet extends HttpServlet{
 				u.setUsuarioUltAlteracao("app_foursquare_integration");
 				contextVO.setMode(Mode.ALTERACAO);
 				facade.saveObject(contextVO, u);
-				resp.sendRedirect("http://localhost:8080/site/#foursquare?id="+u.getId());
+				resp.sendRedirect("http://localhost:8080/site/#foursquare");
 				//TODO IGOR Utilizar usuario da sessao
 			}
 

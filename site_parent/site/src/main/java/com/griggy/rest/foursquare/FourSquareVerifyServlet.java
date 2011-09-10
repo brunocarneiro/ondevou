@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.plc.site.commons.AppUserProfileVO;
 import com.plc.site.entity.Usuario;
 import com.powerlogic.jcompany.commons.PlcBaseContextVO;
 import com.powerlogic.jcompany.commons.config.qualifiers.QPlcDefaultLiteral;
@@ -30,7 +31,9 @@ public class FourSquareVerifyServlet extends HttpServlet{
 		
 		IPlcFacade facade = PlcCDIUtil.getInstance().getInstanceByType(IPlcFacade.class, QPlcDefaultLiteral.INSTANCE);
 		PlcBaseContextVO contextVO = PlcCDIUtil.getInstance().getInstanceByType(PlcBaseContextVO.class, QPlcDefaultLiteral.INSTANCE);
-		Usuario u = (Usuario) facade.findObject(contextVO, Usuario.class, new Long((String)req.getParameter("id")))[0];
+		AppUserProfileVO userProfileVO = PlcCDIUtil.getInstance().getInstanceByType(AppUserProfileVO.class, QPlcDefaultLiteral.INSTANCE);
+		
+		Usuario u = (Usuario) facade.findObject(contextVO, Usuario.class, userProfileVO.getUsuario().getId())[0];
 		
 		if(u!=null && StringUtils.isNotEmpty(u.getFoursquareId())){
 			resp.getWriter().println("{\"response\":true}");

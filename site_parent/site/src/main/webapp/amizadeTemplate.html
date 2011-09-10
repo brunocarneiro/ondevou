@@ -18,7 +18,7 @@ callback=function(result){
 
 	//fiz ficar so ate 10.
 	for(var i=0; i<10;i++){
-		$("#invite").append(result.data[i].name+"<br/><img src='https://graph.facebook.com/"+result.data[i].id+"/picture' /><br/><a>Convidar</a><br/>");
+		$("#invite").append(result.data[i].name+"<br/><img src='https://graph.facebook.com/"+result.data[i].id+"/picture?type=square' /><br/><a>Convidar</a><br/>");
 	}
 }
 //MELHORAR ACCESS TOKEN AQUI. CRIAR METODO UTIL PARA ADQUIRIR A PROPRIEDADE E SE NAO HOUVER BUSCA-LA POR REQUISICAO AO SERVICO
