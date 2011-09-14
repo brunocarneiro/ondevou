@@ -1,11 +1,19 @@
 
-<div id="newPlace">
+<div id="newPlace" title="Cadastrar novo lugar">
 	<div id="msg"></div>
 	<form id="lugar">
-		<input name="endereco" />
-		<input name="nome" />
-		<input name="cidade">
-		<input name="categoria" />
+		<span>Endereco</span><br/>
+		<input id="endereco" /><br/>
+		<span>Nome</span><br/>
+		<input name="nome" name="nome" /><br/>
+		<input style="visibility:hidden" id="numero" name="endereco_numero" />
+		<input style="visibility:hidden" id="address" name="endereco_logradouro"/>
+		<input style="visibility:hidden" id="cep" name="endereco_cep"/>
+		<input style="visibility:hidden" id="bairro" name="endereco_bairro"/>
+		<input style="visibility:hidden" id="cidade" name="endereco_cidade"/>
+		<input style="visibility:hidden" id="estado" name="endereco_estado"/>
+		<input style="visibility:hidden" id="latitude" name="endereco_latitude"/>
+		<input style="visibility:hidden" id="longitude" name="endereco_longitude"/>
 	</form>
 	<iframe src="googlemaps.html" />
 	<a href="#" id="cadastrar">Salvar</a>

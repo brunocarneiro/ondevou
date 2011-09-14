@@ -74,6 +74,10 @@
 		return retorno;
 	}
 
+	jQuery(document).ready(function(){
+		if(window.location.hash==="")
+			window.location.hash="usuario";
+	});
 </script>
 
 <div id="bodyInsert">

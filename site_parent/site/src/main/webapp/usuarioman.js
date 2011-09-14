@@ -25,26 +25,41 @@ $(document).ready(function(){
 	
 	$("#newPlaceDialog").click(function(){$(getLugarTemplate()).dialog({modal:true, height:500, width:600});});
 	
+	$("#endereco").live("change",function(){
+		
+		top.frames[0].pesquisaEndereco($("#endereco").val(),function(){});
+	});
+	
 	$("#cadastrar").live("click",function(){
-		top.frames[0].pesquisaEndereco($("input[name='endereco']").val(),function(bool){
+		top.frames[0].pesquisaEndereco($("#endereco").val(),function(bool, address_components, location){
+			//setting address data
+			jQuery("#numero").val(address_components[0].long_name);
+			jQuery("#address").val(address_components[1].long_name);
+			jQuery("#bairro").val(address_components[2].long_name);
+			jQuery("#cidade").val(address_components[3].long_name);
+			jQuery("#estado").val(address_components[4].long_name);
+			jQuery("#cep").val(address_components[6].long_name);
+			jQuery("#latitude").val(location.La);
+			jQuery("#longitude").val(location.Ka);
+			
 			//if place exists
 			if(bool){
 				//save the place
-				$.ajax(
+				jQuery.ajax(
 						{
 							 url:'http://localhost:8080/site/soa/service/api.lugar',
-							 data:form2json($("#lugar")),
+							 data:form2json(jQuery("#lugar")),
 							 type:'POST',
 							 dataType:'json',
 							 success: function(data){
 								 if(data.messages["erro"])
-									 $("#msg").append(data.messages["erro"]);
+									 jQuery("#msg").append(data.messages["erro"]);
 								 if(data.messages["sucesso"]){
 									 alert(data.messages["sucesso"])
-									 $("#msg").append(data.messages["sucesso"]);
+									 jQuery("#msg").append(data.messages["sucesso"]);
 									 if(data.messages["sucesso"].length>0){
 										 //fechando a janela
-										 $(getOpinionTemplate()).dialog().close();
+										 jQuery(getOpinionTemplate()).dialog().close();
 									 }
 								 }
 							 }

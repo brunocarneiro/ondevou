@@ -9,11 +9,10 @@
  */
 function form2json(form){
 	var array=form.serializeArray();
-	var parent={},json={};
+	var parent={},json={},innerObject={};
 	for(var i=0; i<array.length; i++){
 		if(array[i]["name"].indexOf('_')>0){
 			var split=array[i]["name"].split("_");
-			var innerObject={};
 			innerObject[split[1]]=array[i]["value"]
 			json[split[0]]=innerObject;
 		}
