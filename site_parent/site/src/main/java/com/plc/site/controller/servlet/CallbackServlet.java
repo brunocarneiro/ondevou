@@ -28,27 +28,69 @@ package com.plc.site.controller.servlet;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.plc.site.commons.AppUserProfileVO;
+import com.plc.site.facade.IAppFacade;
+import com.powerlogic.jcompany.commons.config.qualifiers.QPlcDefaultLiteral;
+import com.powerlogic.jcompany.commons.util.cdi.PlcCDIUtil;
+
 import java.io.IOException;
 
 public class CallbackServlet extends HttpServlet {
     private static final long serialVersionUID = 1657390011452788111L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
-        RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
-        String verifier = request.getParameter("oauth_verifier");
-        try {
-            twitter.getOAuthAccessToken(requestToken, verifier);
-            request.getSession().removeAttribute("requestToken");
-        } catch (TwitterException e) {
-            throw new ServletException(e);
+    	
+    	AppUserProfileVO appUserProfile = PlcCDIUtil.getInstance().getInstanceByType(AppUserProfileVO.class, QPlcDefaultLiteral.INSTANCE);
+    	
+        String token 		= appUserProfile.getUsuario().getTwitter();
+        String accessToken	= appUserProfile.getUsuario().getTwitterId();
+        
+        Twitter twitter = null;
+        
+        if(twitter == null){
+        	// token - tokenSecret
+        	IAppFacade facade = PlcCDIUtil.getInstance().getInstanceByType(IAppFacade.class, QPlcDefaultLiteral.INSTANCE);
+        	
+        	twitter = new TwitterFactory().getInstance();
+        	try {
+				twitter.setOAuthAccessToken(new AccessToken(token, accessToken));
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+        	
+        	if(!twitter.getAuthorization().isEnabled()) {
+            	String verifier = request.getParameter("oauth_verifier");
+            	RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
+            	try {
+            		twitter.getOAuthAccessToken(requestToken, verifier);
+            	} catch (TwitterException e) {
+            		throw new ServletException(e);
+            	}
+            	request.getSession().removeAttribute("requestToken");        		
+        	}
+        	response.sendRedirect(request.getContextPath() + "/");
         }
-        response.sendRedirect(request.getContextPath() + "/");
     }
 }
+
+/*
+Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
+RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
+String verifier = request.getParameter("oauth_verifier");
+try {
+    twitter.getOAuthAccessToken(requestToken, verifier);
+    request.getSession().removeAttribute("requestToken");
+} catch (TwitterException e) {
+    throw new ServletException(e);
+}
+response.sendRedirect(request.getContextPath() + "/");
+*/

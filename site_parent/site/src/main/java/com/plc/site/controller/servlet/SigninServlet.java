@@ -44,6 +44,10 @@ public class SigninServlet extends HttpServlet {
         Twitter twitter = new TwitterFactory().getInstance();
         request.getSession().setAttribute("twitter", twitter);
         try {
+        	if(request.getSession().getAttribute("accessToken")!=null){
+        		response.sendRedirect(request.getRequestURI()+"/post");
+        	}
+        	else{
             StringBuffer callbackURL = request.getRequestURL();
             int index = callbackURL.lastIndexOf("/");
             callbackURL.replace(index, callbackURL.length(), "").append("/callback");
@@ -51,7 +55,7 @@ public class SigninServlet extends HttpServlet {
             RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
             request.getSession().setAttribute("requestToken", requestToken);
             response.sendRedirect(requestToken.getAuthenticationURL());
-
+        	}
         } catch (TwitterException e) {
             throw new ServletException(e);
         }
