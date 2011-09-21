@@ -100,7 +100,9 @@ public class FacebookUserFilter implements Filter {
 	                	try {
 	                		validFacebookUser = criaUsuarioFacebook(appUserProfile, accessToken);
 	                		validSystemUser = criaUsuarioAplicacao(appUserProfile, signedRequest);
-	                		//TODO IGOR COLOCAR UM POST VIA HTTP_CLIENT PARA J_SECURITY_CHECK, ASSIM O USUARIO VAI ESTAR LOGADO POR JAVA EE.
+							AppHttpClientUtil httpClientUtil = PlcCDIUtil.getInstance().getInstanceByType(AppHttpClientUtil.class, QPlcDefaultLiteral.INSTANCE);
+							httpClientUtil.setUrlApp("http://localhost:8080/site/");
+							httpClientUtil.doLogin(req, res, "admin", "senha");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -110,10 +112,6 @@ public class FacebookUserFilter implements Filter {
 							if(validFacebookUser && !validSystemUser) {
 								res.sendRedirect("http://localhost:8080/site/cadastro.html");
 							} else {
-								AppHttpClientUtil httpClientUtil = PlcCDIUtil.getInstance().getInstanceByType(AppHttpClientUtil.class, QPlcDefaultLiteral.INSTANCE);
-								httpClientUtil.setUrlApp("http://localhost:8080/site/");
-								httpClientUtil.doLogin("usuario", "senha");
-								
 								res.sendRedirect("http://localhost:8080/site/#usuario?id=" + appUserProfile.getUsuario().getId());
 							}
 						}

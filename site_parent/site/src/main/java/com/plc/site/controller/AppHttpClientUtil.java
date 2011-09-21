@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.enterprise.inject.Specializes;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
@@ -13,8 +15,6 @@ import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
@@ -44,14 +44,16 @@ public class AppHttpClientUtil extends PlcHttpClientUtil{
 		
 	}
 
-	public boolean doLogin(String login, String senha) throws IOException {
+	public boolean doLogin(HttpServletRequest request, HttpServletResponse response, String login, String senha) throws IOException {
 
 		String url = adjustUrl("/j_security_check");
 		// Tenta Logar 5 vezes.
 		for (int i = 0; i < 3; i++) {
 		
 			// faz um get para obter e configurar cookies. Tenta jsf, se nulo, tenta struts.
-			String retorno = doGet( adjustUrl("/f/t/inicial") );
+
+			String retorno = doGet(adjustUrl("/f/t/inicial"));
+			
 			if (retorno == null) {
 				retorno = doGet( adjustUrl("/") );
 			}
@@ -63,11 +65,12 @@ public class AppHttpClientUtil extends PlcHttpClientUtil{
 				new NameValuePair("j_password", senha)
 			});
 			
-			int statusCode = execute(post);
 			
+			int statusCode = execute(post, request, response);
+		 
 			if (statusCode == HttpStatus.SC_MOVED_TEMPORARILY || statusCode == HttpStatus.SC_MOVED_PERMANENTLY) {
 				// Executa os Redirects para setar os Cookies!
-				if (isLoginPage(getRedirect(post))) {
+				if (isLoginPage(getRedirect(post, request, response))) {
 					continue;
 				} else {
 					return true;
@@ -79,6 +82,23 @@ public class AppHttpClientUtil extends PlcHttpClientUtil{
 			}
 		}
 		return false;
+	}
+	
+	public String doGet(String url, HttpServletRequest request, HttpServletResponse response) throws HttpException, IOException {
+		
+		GetMethod get = new GetMethod(adjustUrl(url));
+		// Vaz a verificação automatica de Login e Senha, utilizando o Credentials utilizado.
+		get.setDoAuthentication(this.autenticacaoAutomatica);
+		
+		int statusCode = execute(get, request, response);
+		
+		if (statusCode == HttpStatus.SC_OK) {
+			return get.getResponseBodyAsString();
+		} else if (statusCode == HttpStatus.SC_MOVED_TEMPORARILY || statusCode == HttpStatus.SC_MOVED_PERMANENTLY) {
+			return getRedirect(get);
+		} else {
+			return null;
+		}
 	}
 	
 	public String doGet(String url) throws HttpException, IOException {
@@ -192,12 +212,31 @@ public class AppHttpClientUtil extends PlcHttpClientUtil{
 		return null;
 	}
 	
-	protected int execute(HttpMethod method) throws IOException {
+	protected int execute(HttpMethod method, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
 		this.lastMethod = method;
-		return client.executeMethod(method);
+		client.getState().setCookiePolicy(org.apache.commons.httpclient.cookie.CookiePolicy.COMPATIBILITY);
+		
+		int retorno = client.executeMethod(method); 
+		Cookie[] cookies = client.getState().getCookies();
+		
+		for (Cookie cookie : cookies) {
+			javax.servlet.http.Cookie c = new javax.servlet.http.Cookie(cookie.getName(), cookie.getValue());
+			response.addCookie(c);
+		}
+		
+		return retorno;
+		
 	}
 	
-	protected String getRedirect(HttpMethod method) throws IOException {
+	protected int execute(HttpMethod method) throws IOException {
+		this.lastMethod = method;
+		int retorno = client.executeMethod(method); 
+		return retorno;
+		
+	}
+	
+	protected String getRedirect(HttpMethod method, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		Header location = method.getResponseHeader("location");
 		
@@ -207,7 +246,7 @@ public class AppHttpClientUtil extends PlcHttpClientUtil{
 				
 				GetMethod get = new GetMethod(adjustUrl(location.getValue()));
 				
-				int statusCode = execute(get);
+				int statusCode = execute(get, request, response);
 				
 				if (statusCode == HttpStatus.SC_OK) {
 					return get.getResponseBodyAsString();
@@ -256,4 +295,5 @@ public class AppHttpClientUtil extends PlcHttpClientUtil{
 	}
 	 
 
+   
 }
